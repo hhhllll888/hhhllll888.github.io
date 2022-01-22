@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="initial-scale=1.0,user-scalable=no,minimal-ui" />
+    <title>精日校园腾讯云自动打卡方法 | hhhlll888</title>
+<link rel='stylesheet' id='puma-css'  href='https://z4042346.tk/styles/main.css' type='text/css' media='screen' />
+<link rel='stylesheet' id='puma-css'  href='https://at.alicdn.com/t/font_1306644_jwtuc2zzbrd.css' media='screen' />
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<script type='text/javascript' src='https://z4042346.tk/media/scripts/jquery.js'></script>
+<script type='text/javascript' src='https://z4042346.tk/media/scripts/jquery-migrate.min.js'></script>
+        <script src="https://cdn.bootcss.com/highlight.js/9.15.10/highlight.min.js"></script>
+         <script >hljs.initHighlightingOnLoad();</script>
+         
+</head>
+<body class="single single-post postid-3788 single-format-standard">
+	<!--加入跟随滑动的顶部-->
+	<header id="masthead" class="site-header" role="banner">
+		<div class="site-branding">
+			<h1 class="site-title">
+				<a href="https://z4042346.tk" title="hhhlll888">hhhlll888</a>
+			</h1>
+		</div>
+
+		<a class="primary-nav-trigger" href="javascript:void(0)">
+			<span class="menu-icon"></span>
+		</a>
+		
+	</header>
+		<div class="site-navigation-wrapper">
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<ul class="primary-nav">
+                    
+				<li id="menu-item-30" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30"><a title="首页" href="/">首页</a></li>
+                
+				<li id="menu-item-30" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30"><a title="归档" href="/archives">归档</a></li>
+                
+				<li id="menu-item-30" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30"><a title="标签" href="/tags">标签</a></li>
+                
+				<li id="menu-item-30" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30"><a title="关于" href="/post/about">关于</a></li>
+                
+	
+			</ul>
+		</nav>			
+	</div>
+	<!--跟随滑动的顶部结束-->
+	<div class="surface-content">    <main class="main-content">
+        <section class="section-body">
+                            <header class="section-header u-textAlignCenter">
+                    <h2 class="grap--h2">精日校园腾讯云自动打卡方法</h2>
+                    <div class="block-postMetaWrap">
+                        <time>2022-01-22</time>
+                    </div>
+                </header>
+                <div class="grap">
+					
+					<h1 id="详情在这个大佬的代码里github使用的也是这个大佬的代码">详情在这个大佬的代码里<a href="https://github.com/CarltonHere/auto-cpdaily">github</a>,使用的也是这个大佬的代码</h1>
+<h1 id="腾讯云设置">腾讯云设置</h1>
+<p>点击<a href="https://cloud.tencent.com/register">这个</a>去腾讯云注册一个账号，然后实名认证，之后点击这个<a href="https://console.cloud.tencent.com/scf/list">这个</a>去往云函数<br>
+<img src="https://pic.imgdb.cn/item/61eb738d2ab3f51d91949c73.jpg" alt="" loading="lazy"><br>
+在新建处新建函数<br>
+<img src="https://pic.imgdb.cn/item/61eb741f2ab3f51d919550c2.jpg" alt="" loading="lazy"><br>
+函数名称可以随便选，在运行环境这一处可以选择python3.7，但是前提要在代码设置好的情况下，在打包好代码上传，有点麻烦，或者你是大佬可以用这个。我建议选择python3.6。<br>
+<img src="https://pic.imgdb.cn/item/61eb74cd2ab3f51d91960081.jpg" alt="" loading="lazy"><br>
+执行时间设置60秒左右<br>
+完成</p>
+<h1 id="代码设置">代码设置</h1>
+<p>点击函数代码进入控制台界面<br>
+点击终端-新终端<br>
+<img src="https://pic.imgdb.cn/item/61eb75fa2ab3f51d919746a9.jpg" alt="" loading="lazy"><br>
+输入<br>
+建议一行行复制输入</p>
+<pre><code class="language-shell">cd src
+rm -rf *
+git clone https://github.com/CarltonHere/auto-cpdaily.git
+cd auto-cpdaily
+mv * ..
+cd ..
+rm -rf auto-cqdaily
+pip3 install -r requirements.txt -t ./ -i https://mirrors.aliyun.com/pypi/simple
+</code></pre>
+<p>设置config.yml，下面这些要自己设置，yml里说的很清楚了，如果是我学校的直接点击<a href="#%E6%88%91%E8%87%AA%E5%B7%B1%E7%9A%84form%E8%A1%A8%E5%8D%95">这个</a>复制我的表单设置</p>
+<pre><code class="language-yml">    - user:
+        # 任务类型（收集：0、签到：1、查寝：2、政工签到：3、教师工作日志：4）
+        type: 3
+        # school 学校全称
+        schoolName: 
+        # username 学号或者工号
+        username: ''
+        # password 密码
+        password: ''
+        # 地址信息
+        address: ''
+        notifyOption: 
+            # method和顶部参数一致，不填默认按照顶部参数执行
+            # method: 0
+            # rcvAcc为接受消息的账号，可以为Email账号、QQ号、或者是企业微信ID(@all为全体)
+            rcvAcc: ''
+        # 附上经纬度查询地址（请自行选择自己的学校地址，address，lon，lat都要填查询到的）：http://api.map.baidu.com/lbsapi/getpoint/index.html
+        # lon 经度
+        lon: 104.616858
+        # lat 纬度
+        lat: 28.793022
+        # 是否检查表单的标题（1代表检查，0代表不检查）
+        checkTitle: 1
+</code></pre>
+<h1 id="我自己的form表单">我自己的form表单</h1>
+<pre><code class="language-yml">forms:
+            - form: #1
+                title: 你的健康状态
+                value: 健康
+            - form: #2 x
+                title: 如有发热、感冒、咳嗽、呼吸困难等症状，是否做了核酸检测及检测结果为 (如无相关症状的不填)
+                value: 
+                ignore: True
+            - form: #3 
+                title: 你当前是否被隔离
+                value: 否
+            - form: #4 x
+                title: 如果被隔离，填写目前被隔离的地址
+                value: 
+                ignore: True
+            - form: #5
+                title: 你目前是否在校 (必填)
+                value: 否
+            - form: #6
+                title: 如你不在校，你目前所在城市为(在校的不填)
+                value: 安徽省
+            - form: #7
+                title: 如你目前不在校，你是否确定了返回学校的时间 (在校的不填)
+                value: 未确定
+            - form: #8 x
+                title: 如果已确定，请选择你的返回时间（未确定的不填）
+                value: n
+                ignore: True
+            - form: #9
+                title: 近一个月，你是否有境外地区或疫情中高风险地区旅居史（中高风险地区以官方发布为准）
+                value: 否 
+            - form: #10 x
+                title: 什么时间旅居何地（中高风险地区以官方发布为准）
+                value: 
+                ignore: True
+            - form: #11
+                title: 近一个月，你是否与确诊人员或中高风险地区、境外入境人员密切接触
+                value: 否
+            - form: #12 x
+                title: 如果有密切接触、境外地区或疫情中高风险地区旅居史，是否做过核酸检测及检测结果为（没有接触的不填）
+                value: 
+                ignore: True
+</code></pre>
+<h2 id="贴士">贴士</h2>
+<ul>
+<li>中间的第6个表单是要写自己的位置，注意填写。</li>
+<li>中间的ignore: True值为忽略函数，不会管这个标题，但是这个标题他必须存在，因为在填写时，手机上看到的默是填写好的，自动隐藏</li>
+<li>看作者的原文档</li>
+<li>看作者的原文档</li>
+<li>看作者的原文档</li>
+</ul>
+
+                </div>
+
+                <div class="post--keywords" itemprop="keywords">
+					 <a href="https://z4042346.tk/tag/xF8FSZ0zT/" class="post--keyword" data-title="事件函数" data-type="post_tag" data-term-id="39">事件函数</a>           </div>
+
+
+
+                      </section>
+    </main>
+</div>
+	<footer class="site-footer u-textAlignCenter">
+    	<div class="footer-branding">
+            <a href="https://z4042346.tk" title="hhhlll888">hhhlll888</a>
+									<p class="site-description">这是签名</p>
+			         </div>
+		 <hr />
+		 <div class="social-links">
+		                       
+                            	
+			<span class="social-link"><a href="/atom.xml" target="_blank"><i class="iconfont icon-rss"></i></a></span>	
+			                         
+                           
+                            	
+			<span class="social-link"><a href="https://hhhllll888.github.com/twitter" target="_blank"><i class="iconfont icon-twitter"></i></a></span>	
+			                         
+                           
+                            	
+			<span class="social-link"><a href="https://hhhllll888.github.com/" target="_blank"><i class="iconfont icon-github"></i></a></span>	
+			                         
+                           
+                            	
+			<span class="social-link"><a href="https://hhhllll888.github.com/rss" target="_blank"><i class="iconfont icon-zhihu"></i></a></span>	
+			                         
+                           
+                            	
+			<span class="social-link"><a href="https://hhhllll888.github.com/rss" target="_blank"><i class="iconfont icon-facebook"></i></a></span>	
+			                         
+                           
+                            	
+			<span class="social-link"><a href="https://hhhllll888.github.com/rss" target="_blank"><i class="iconfont icon-linkedin"></i></a></span>	
+			                         
+                           
+                            	
+			<span class="social-link"><a href="https://hhhllll888.github.com/rss" target="_blank"><i class="iconfont icon-telegram"></i></a></span>	
+			                         
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+                            
+                           
+				</div>
+        <div class="footer-copy">
+                Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+        </div>
+
+    </footer>
+	<div class="back-to-top u-hide" onclick="backToTop();"><i class="iconfont icon-xiangshang"></i></div>
+
+<script type='text/javascript' src='https://z4042346.tk/media/scripts/main.js'></script>
+</body>
+</html>
