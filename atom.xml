@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://z4042346.tk</id>
     <title>心智魔方</title>
-    <updated>2022-02-05T16:15:33.605Z</updated>
+    <updated>2022-02-05T16:28:42.468Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://z4042346.tk"/>
     <link rel="self" href="https://z4042346.tk/atom.xml"/>
@@ -16,43 +16,47 @@
         <link href="https://z4042346.tk/post/fen-xiang-docker-ke-shi-hua-tu-xing-mian-ban/">
         </link>
         <updated>2022-02-05T16:08:43.000Z</updated>
-        <content type="html"><![CDATA[<p>Portainer<br>
+        <content type="html"><![CDATA[<h3 id="portainer">Portainer</h3>
+<p>--<br>
 算是知名度比较高的一款容器管理平台了。<br>
-官网：https://www.portainer.io/<br>
-汉化：https://www.quchao.net/Portainer-CN.html<br>
-演示： http://demo.portainer.io/<br>
+官网：<a href="https://www.portainer.io/">https://www.portainer.io/</a><br>
+汉化：<a href="https://www.quchao.net/Portainer-CN.html">https://www.quchao.net/Portainer-CN.html</a><br>
+演示： <a href="http://demo.portainer.io/">http://demo.portainer.io/</a><br>
 用户名: admin<br>
-密码: tryportainer<br>
-Rancher<br>
-支持 k8s/ks3 据说功能强大，也重量级，支持中文<br>
-官网： https://www.rancher.cn/<br>
-DockStation<br>
-一款桌面应用程序；支持Linux、Mac、Windows操作系统！<br>
-官网：https://dockstation.io/<br>
-Cockpit<br>
-主要管理Linux 主机 顺便 管理docker<br>
-地址：https://cockpit-project.org/<br>
-Kitematic<br>
-在Mac 和 Windows上简单易用的管理容器！<br>
-官网：https://kitematic.com/<br>
-EasyDockerWeb<br>
-某大佬整的一个简单管理Docker容器的面板！记住是简单！<br>
-地址：https://github.com/qfdk/EasyDockerWeb<br>
-Fast Os Docker<br>
-Docker的图形化管理工具，基本能满足中小型单位对容器管理的需求。<br>
-地址：https://hub.docker.com/r/wangbinxingkong/fast<br>
-Crane<br>
-Crane是基于swarmkit的容器管理平台！已经开源！<br>
-地址：https://michaelsauter.github.io/crane/<br>
-shipyard<br>
-作者已经停止维护该项目！<br>
-地址：https://github.com/shipyard/shipyard<br>
-dockerUI<br>
-作者已经停止维护该项目！<br>
-地址：https://github.com/kevana/ui-for-docker<br>
-Docker Compose UI<br>
-作者已经停止维护该项目！<br>
-地址：https://github.com/francescou/docker-compose-ui</p>
+密码: tryportainer</p>
+<h3 id="rancher">Rancher</h3>
+<p>支持 k8s/ks3 据说功能强大，也重量级，支持中文<br>
+官网： <a href="https://www.rancher.cn/">https://www.rancher.cn/</a></p>
+<h3 id="dockstation">DockStation</h3>
+<p>一款桌面应用程序；支持Linux、Mac、Windows操作系统！<br>
+官网：<a href="https://dockstation.io/">https://dockstation.io/</a></p>
+<h3 id="cockpit">Cockpit</h3>
+<p>主要管理Linux 主机 顺便 管理docker<br>
+地址：<a href="https://cockpit-project.org/">https://cockpit-project.org/</a></p>
+<h3 id="kitematic">Kitematic</h3>
+<p>在Mac 和 Windows上简单易用的管理容器！<br>
+官网：<a href="https://kitematic.com/">https://kitematic.com/</a></p>
+<h3 id="easydockerweb">EasyDockerWeb</h3>
+<p>某大佬整的一个简单管理Docker容器的面板！记住是简单！<br>
+地址：<a href="https://github.com/qfdk/EasyDockerWeb">https://github.com/qfdk/EasyDockerWeb</a></p>
+<h3 id="fast-os-docker">Fast Os Docker</h3>
+<p>Docker的图形化管理工具，基本能满足中小型单位对容器管理的需求。<br>
+地址：<a href="https://hub.docker.com/r/wangbinxingkong/fast">https://hub.docker.com/r/wangbinxingkong/fast</a></p>
+<h3 id="crane">Crane</h3>
+<p>Crane是基于swarmkit的容器管理平台！已经开源！<br>
+地址：<a href="https://michaelsauter.github.io/crane/">https://michaelsauter.github.io/crane/</a></p>
+<h3 id="shipyard"><s>shipyard</s></h3>
+<p>作者已经停止维护该项目！<br>
+地址：<a href="https://github.com/shipyard/shipyard">https://github.com/shipyard/shipyard</a></p>
+<h3 id="dockerui"><s>dockerUI</s></h3>
+<p>作者已经停止维护该项目！<br>
+地址：<a href="https://github.com/kevana/ui-for-docker">https://github.com/kevana/ui-for-docker</a></p>
+<h3 id="docker-compose-ui"><s>Docker Compose UI</s></h3>
+<p>作者已经停止维护该项目！<br>
+地址：<a href="https://github.com/francescou/docker-compose-ui">https://github.com/francescou/docker-compose-ui</a></p>
+<blockquote>
+<p>原文链接：<a href="https://51.ruyo.net/16564.html">https://51.ruyo.net/16564.html</a></p>
+</blockquote>
 ]]></content>
     </entry>
     <entry>
