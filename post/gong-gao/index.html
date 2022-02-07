@@ -66,6 +66,32 @@
 
 
 
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: '55d738353a47aa981c47',
+    clientSecret: '25d5edcdebbb282a1bc5814376f9fcf20829f0a9',
+    repo: 'hhhllll888.github.io',
+    owner: 'hhhllll888',
+    admin: ['hhhllll888'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
                       </section>
     </main>
 </div>
