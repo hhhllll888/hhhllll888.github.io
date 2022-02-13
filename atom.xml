@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://z4042346.tk</id>
     <title>心智魔方</title>
-    <updated>2022-02-08T03:29:13.323Z</updated>
+    <updated>2022-02-13T04:26:17.454Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://z4042346.tk"/>
     <link rel="self" href="https://z4042346.tk/atom.xml"/>
@@ -16,103 +16,22 @@
         <link href="https://z4042346.tk/post/docker-an-zhuang-portainer-mian-ban-bing-han-hua/">
         </link>
         <updated>2022-02-08T02:58:51.000Z</updated>
-        <content type="html"><![CDATA[<blockquote>
-<p>摘录：<a href="https://blog.csdn.net/stlinax/article/details/120579415">https://blog.csdn.net/stlinax/article/details/120579415</a><br>
-摘录：<a href="https://www.jianshu.com/p/db13ab95e624">https://www.jianshu.com/p/db13ab95e624</a><br>
-摘录：<a href="https://blog.csdn.net/weixin_30271335/article/details/98959414">https://blog.csdn.net/weixin_30271335/article/details/98959414</a></p>
-</blockquote>
-<h3 id="安装portainer">安装portainer</h3>
-<ol>
-<li><code>docker pull portainer/portainer</code> 拉镜像</li>
-<li>下载汉化包：目前有两种，一种是我博客里的那个，一个是<a href="https://github.com/tbc0309/Portainer-CN2021">https://github.com/tbc0309/Portainer-CN2021</a></li>
-<li><code>sudo mkdir -p /home/portainer/data /home/portainer/public</code>在home目录下建portainer目录，并在其下建两个目录，将用于启动镜像时映射，data目录用于存取数据，public目录用于存放汉化文件</li>
-<li><code>sudo chmod -R 777 /home/portainer</code>把所有读写权限打开</li>
-<li>创建运行容器</li>
-</ol>
-<pre><code>sudo docker run -d -p 9000:9000 --restart=always --privileged=true -v /var/run/docker.sock:/var/run/docker.sock -v /home/portainer/data:/data -v /home/portainer/public:/public --name portainer2021  portainer/portainer
-</code></pre>
-<p>解释：<br>
-<code>-p 9000:9000</code>：把主机的9000端口映射到容器的9000端口<br>
-<code>--restart=always</code>：主机重启后自动运行该容器<br>
-<code>--privileged=true</code>：容器获取root权限（也可以不要，有root权限的可以考虑添加）<br>
-<code>-v /var/run/docker.sock:/var/run/docker.sock</code>：运行Docker的目录映射，必须要有才能用Portainer操作Docker命令<br>
-<code>-v /home/portainer/data:/data</code>：把主机/home/portainer/data映射给容器作为/data<br>
-<code>-v /home/portainer/public:/public</code>：把主机/home/portainer/public映射给容器作为/public<br>
-<code>--name portainer2021</code>：自定义容器名称<br>
-<code>portainer/portainer</code>：镜像名称<br>
-桌面解压Portainer-CN2021-main.zip，把Portainer-CN2021-main目录下的内容全部内容（包括css等目录和文件）复制到/home/portainer/public下<br>
-6. 打开浏览器，登录操作Portainer<br>
-浏览器登录 http://IP:9000<br>
-比如http://192.168.1.123:9000</p>
-<h3 id="docker相关命令">docker相关命令</h3>
-<p><code>docker ps [-a]</code>查看当前运行的容器，加a查看已经停止运行的容器<br>
-<code>docker container ls -all</code>查看所有容器<br>
-<code>docker rm &lt;容器名/容器id&gt;</code><br>
-<code>docker pull &lt;镜像名称&gt;</code>安装镜像<br>
-<code>docker images</code>查看已经下载的镜像<br>
-<code>docker inspect container_name/container id</code> 查看容器信息<br>
-<code>docker volume ls</code>查看所有卷</p>
+        <summary type="html"><![CDATA[<p>Portainer 是一个轻量级的管理 UI ，可让你轻松管理不同的 Docker 环境（Docker 主机或 Swarm 群集）。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>Portainer 是一个轻量级的管理 UI ，可让你轻松管理不同的 Docker 环境（Docker 主机或 Swarm 群集）。</p>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[[分享]docker 可视化图形面板]]></title>
+        <title type="html"><![CDATA[docker 可视化图形面板]]></title>
         <id>https://z4042346.tk/post/fen-xiang-docker-ke-shi-hua-tu-xing-mian-ban/</id>
         <link href="https://z4042346.tk/post/fen-xiang-docker-ke-shi-hua-tu-xing-mian-ban/">
         </link>
         <updated>2022-02-05T16:08:43.000Z</updated>
-        <content type="html"><![CDATA[<blockquote>
-<p>原文链接：<a href="https://51.ruyo.net/16564.html">https://51.ruyo.net/16564.html</a></p>
-</blockquote>
-<h3 id="portainer">Portainer</h3>
-<p>--<br>
-算是知名度比较高的一款容器管理平台了。<br>
-官网：<a href="https://www.portainer.io/">https://www.portainer.io/</a><br>
-汉化：<a href="https://www.quchao.net/Portainer-CN.html">https://www.quchao.net/Portainer-CN.html</a><br>
-演示： <a href="http://demo.portainer.io/">http://demo.portainer.io/</a><br>
-用户名: admin<br>
-密码: tryportainer</p>
-<h3 id="rancher">Rancher</h3>
-<p>支持 k8s/ks3 据说功能强大，也重量级，支持中文<br>
-官网： <a href="https://www.rancher.cn/">https://www.rancher.cn/</a></p>
-<h3 id="dockstation">DockStation</h3>
-<p>一款桌面应用程序；支持Linux、Mac、Windows操作系统！<br>
-官网：<a href="https://dockstation.io/">https://dockstation.io/</a></p>
-<h3 id="cockpit">Cockpit</h3>
-<p>主要管理Linux 主机 顺便 管理docker<br>
-地址：<a href="https://cockpit-project.org/">https://cockpit-project.org/</a></p>
-<h3 id="kitematic">Kitematic</h3>
-<p>在Mac 和 Windows上简单易用的管理容器！<br>
-官网：<a href="https://kitematic.com/">https://kitematic.com/</a></p>
-<h3 id="easydockerweb">EasyDockerWeb</h3>
-<p>某大佬整的一个简单管理Docker容器的面板！记住是简单！<br>
-地址：<a href="https://github.com/qfdk/EasyDockerWeb">https://github.com/qfdk/EasyDockerWeb</a></p>
-<h3 id="fast-os-docker">Fast Os Docker</h3>
-<p>Docker的图形化管理工具，基本能满足中小型单位对容器管理的需求。<br>
-地址：<a href="https://hub.docker.com/r/wangbinxingkong/fast">https://hub.docker.com/r/wangbinxingkong/fast</a></p>
-<h3 id="crane">Crane</h3>
-<p>Crane是基于swarmkit的容器管理平台！已经开源！<br>
-地址：<a href="https://michaelsauter.github.io/crane/">https://michaelsauter.github.io/crane/</a></p>
-<h3 id="shipyard"><s>shipyard</s></h3>
-<p>作者已经停止维护该项目！<br>
-地址：<a href="https://github.com/shipyard/shipyard">https://github.com/shipyard/shipyard</a></p>
-<h3 id="dockerui"><s>dockerUI</s></h3>
-<p>作者已经停止维护该项目！<br>
-地址：<a href="https://github.com/kevana/ui-for-docker">https://github.com/kevana/ui-for-docker</a></p>
-<h3 id="docker-compose-ui"><s>Docker Compose UI</s></h3>
-<p>作者已经停止维护该项目！<br>
-地址：<a href="https://github.com/francescou/docker-compose-ui">https://github.com/francescou/docker-compose-ui</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[公告]]></title>
-        <id>https://z4042346.tk/post/gong-gao/</id>
-        <link href="https://z4042346.tk/post/gong-gao/">
-        </link>
-        <updated>2022-01-21T10:46:59.000Z</updated>
-        <content type="html"><![CDATA[<p>暂无公告</p>
-<ul>
-<li><a href="/post/cp">特此公告</a></li>
-</ul>
+        <summary type="html"><![CDATA[<p>在学习和运用Docker时，总是使用命令行管理略显麻烦！有些童鞋更喜欢图形化管理Docker的面板！<br>
+这里就为大家整理了一些免费的Docker容器管理面板！</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>在学习和运用Docker时，总是使用命令行管理略显麻烦！有些童鞋更喜欢图形化管理Docker的面板！<br>
+这里就为大家整理了一些免费的Docker容器管理面板！</p>
 ]]></content>
     </entry>
     <entry>
@@ -126,25 +45,6 @@
 ]]></summary>
         <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
 ✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
 ]]></content>
     </entry>
 </feed>
