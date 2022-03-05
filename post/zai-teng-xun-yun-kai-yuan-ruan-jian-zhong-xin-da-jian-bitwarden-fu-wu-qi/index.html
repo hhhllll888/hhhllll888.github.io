@@ -8,7 +8,7 @@
 <meta name="keywords" content="Gridea静态个人博客">
 <meta name="description" content="小站，没啥看的">
 <meta name="theme-color" content="#000">
-<title>心智魔方</title>
+<title>在腾讯云开源软件中心搭建bitwarden服务器 | 心智魔方</title>
 <link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/hhhllll888/hhhllll888.github.io//favicon.ico?v=1646451300452">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/hhhllll888/hhhllll888.github.io//styles/main.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/hhhllll888/hhhllll888.github.io//media/css/pisces.css">
@@ -39,6 +39,8 @@
   })();
 </script>
 
+  <meta name="description" content="在腾讯云开源软件中心搭建bitwarden服务器" />
+  <meta name="keywords" content="" />
 </head>
 
 <body>
@@ -164,10 +166,25 @@
   <div class="main-continer">
     
     <div
-      class="section-layout  pisces">
+      class="section-layout pisces ">
       <div class="section-layout-wrapper">
-        <div id="sidebarMeta" class="sidebar">
-    
+        
+
+<div class="sidebar">
+  
+    <div class="sidebar-box box-shadow-wrapper bg-color right-motion" id="sidebar">
+      
+        <div class="post-list-sidebar">
+          <div class="sidebar-title">
+            <span id="tocSideBar" class="sidebar-title-item sidebar-title-active">文章目录</span>
+            <span id="metaSideBar" class="sidebar-title-item">站点概览</span>
+          </div>
+        </div>
+      
+      <div class="sidebar-body pisces" id="sidebar_body">
+        
+          
+            
 <div class="sidebar-wrapper box-shadow-wrapper bg-color">
   <div class="sidebar-item">
     <img class="site-author-image right-motion" src="https://cdn.jsdelivr.net/gh/hhhllll888/hhhllll888.github.io//images/avatar.png"/>
@@ -218,68 +235,203 @@
 
 
 </div>
+          
+        
+      </div>
+    </div>
+  
 </div>
 <script>
-  let sidebarMeta = document.querySelector('#sidebarMeta');
-  let scheme = 'pisces';
-  let sidebarWrapper = document.querySelector('.sidebar-wrapper');
-  if (sidebarMeta && (scheme === 'pisces' || scheme === 'gemini')) {
-    document.addEventListener('scroll', function(e) {
-      if (document.scrollingElement.scrollTop > parseInt(sidebarMeta.style.marginTop) + 10) {
-        sidebarWrapper.classList.add('home-sidebar-fixed')
-      } else {
-        sidebarWrapper.classList.remove('home-sidebar-fixed')
+  const SIDEBAR_TITLE_ACTIVE = 'sidebar-title-active';
+  const SIDEBAR_BODY_ACTIVE = 'sidebar-body-active';
+  const SLIDE_UP_IN = 'slide-up-in';
+
+  let sidebar = document.querySelector('#sidebar'),
+  tocSideBar = document.querySelector('#tocSideBar'),
+  metaSideBar = document.querySelector('#metaSideBar'),
+  postToc = document.querySelector('#post_toc'),
+  postSiteMeta = document.querySelector('#post_side_meta'),
+  sidebarTitle = document.querySelector('.sidebar-title'),
+  sidebarBody = document.querySelector('#sidebar_body');
+
+  tocSideBar && tocSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  metaSideBar && metaSideBar.addEventListener('click', (e) => {
+    toggleSidebar(e);
+  });
+
+  function toggleSidebar(e) {
+    let currentTitle = document.querySelector("."+SIDEBAR_TITLE_ACTIVE);
+    if (currentTitle == e.srcElement) {
+      return ;
+    }
+    let current, showElement, hideElement;
+    if (e.srcElement == metaSideBar) {
+      showElement = postSiteMeta;
+      hideElement = postToc;
+    } else if (e.srcElement == tocSideBar){
+      showElement = postToc;
+      hideElement = postSiteMeta;
+    }
+    currentTitle.classList.remove(SIDEBAR_TITLE_ACTIVE);
+    e.srcElement.classList.add(SIDEBAR_TITLE_ACTIVE);
+
+    window.Velocity(hideElement, 'stop');
+    window.Velocity(hideElement, 'transition.slideUpOut', {
+      display: 'none',
+      duration: 200,
+      complete: function () {
+        window.Velocity(showElement, 'transition.slideDownIn', {
+          duration: 200
+        });
       }
-    });
+    })
+    hideElement.classList.remove(SIDEBAR_BODY_ACTIVE);
+    showElement.classList.add(SIDEBAR_BODY_ACTIVE);
   }
-  </script>
-        <div class="section-box tag-line box-shadow-wrapper">
-          <section class="section tags-section posts-expand bg-color">
-            <div class="padding-wrapper">
-  <div class="tag-timeline-box">
-    <div class="tag-timeline-wrapper">
-      <div class="tag-timeline-title">
-        <h2>
-          Gridea
-          <small>标签</small>
-        </h2>
-      </div>
+
+  postToc && postToc.addEventListener('transitionend', function() {
+    this.classList.remove(SLIDE_UP_IN);
+  });
+
+  if (sidebarBody) {
+    if (sidebarBody.classList.contains('pisces') || sidebarBody.classList.contains('gemini')) {
+      let hasFix = false;
+      let scrollEl = document.querySelector('.main-continer');
+      let limitTop = document.querySelector('#nav_ul').children.length * 42 + 162;
+      window.addEventListener('scroll', function(e) {
+        if (document.scrollingElement.scrollTop >= limitTop) {
+          if (!hasFix) {
+            sidebar.classList.add('sidebar-fixed');
+            hasFix = true;
+          }
+        } else {
+          if (hasFix) {
+            sidebar.classList.remove('sidebar-fixed');
+            hasFix = false;
+          }
+        }
+      });
+    }
+  }
+  
+</script>
+        <div class="section-box box-shadow-wrapper">
+          <div class="section bg-color post post-page">
+            <header class="post-header">
+  <h1 class="post-title">
+    <a class="post-title-link" href="https://z4042346.tk/post/zai-teng-xun-yun-kai-yuan-ruan-jian-zhong-xin-da-jian-bitwarden-fu-wu-qi/">
+      在腾讯云开源软件中心搭建bitwarden服务器
+    </a>
+  </h1>
+  <div class="post-meta">
+    
+    <span class="meta-item pc-show">
+      <i class="fa fa-calendar-o"></i>
+      <span>发布于</span>
+      <span>2022-03-05</span>
+      <span class="post-meta-divider pc-show">|</span>
+    </span>
+    
+    <span class="meta-item">
+      <i class="fa fa-clock-o"></i>
+      <span>3分钟</span>
+    </span>
+    <span class="meta-item">
+      <span class="post-meta-divider">|</span>
+      <i class="fa fa-file-word-o"></i>
+      <span>614<span class="pc-show">字数</span></span>
+    </span>
+    
+  </div>
+</header>
+            <div class="post-body next-md-body" id="post_body">
+              <p>bitwarden是一款非常方便的开源密码管理软件（前端加上后端），在mac、ios、安卓、windows都有涉及，可以在全平台使用，如果自己拥有nas或者一台vps即可搭建自己的bitwarden密码服务器。<br>
+它的官方网址是&lt;bitwarden.com/&gt;，但是在百度上会搜索到一个叫www.bitwarden.pro的介绍界面，点击登录会进入另一个域名，不清楚是否是官方的，要自己注意。</p>
+<!-- more -->
+<p>之前在腾讯云开发CloudBase中上架过bitwarden的一个应用，听说bug太多然后下架了，现在也没有重新上架回去，但是现在可以在腾讯云开源软件中心能找到<a href="https://app.cloud.tencent.com/">https://app.cloud.tencent.com/</a>，所以我们直接开箱即用即可，费用大概是每天0.35元左右，一个月就是10块左右（几个密码能占多少空间，多少流量）<br>
+<img src="https://z4042346.tk/post-images/1646450639457.png" alt="" loading="lazy"><br>
+完成后点击使用就可以打开界面了，然后在里面创建账号啥的都可以了，浏览器端插件和手机端软件要在登录时的左上角设置中设置服务器rul，不设置默认使用的是官方的密码存储库。</p>
+<p>维护<br>
+在使用bitwarden时，我们可以看到服务器链接，但是如果有人知道你的服务器链接来搞破坏，我们就必须设置一些方法应对。这是环境变量就得使用上了，但是在开源软件中心里是没有设置这些的，我们需要去资源里进行设置<br>
+<img src="https://z4042346.tk/post-images/1646451044925.png" alt="" loading="lazy"><br>
+点击进入容器详情，编辑实例<br>
+<img src="https://z4042346.tk/post-images/1646451138734.png" alt="" loading="lazy"><br>
+<img src="https://z4042346.tk/post-images/1646451174866.png" alt="" loading="lazy"><br>
+在环境变量设置自己的设置即可，环境变量表在下方有<br>
+<code>SIGNUP_ALLOWED</code>：是否允许注册<br>
+<code>INVITATIONS_ALLOWED</code>: 是否允许组织邀请注册<br>
+<code>ADMIN_TOKEN</code>：用户管理界面 (/admin)，可用于删除用户及邀请用户注册<br>
+<code>ROCKET_TLS</code>：ssl 证书信息，同时需要配置 -v /path/to/host/ssl/:/path/to/docker/ssl/卷，前者为宿主机ssl证书的位置，后者为容器证书位置<br>
+<code>DOMAIN</code>：域名<br>
+<code>LOG_FILE、LOG_LEVEL、EXTENDED_LOGGING</code>：日志保存文件路径以及日志等级定义<br>
+<code>DATA_FOLDER</code>：docker容器数据保存文件夹（默认为 /data），除了定义这个文件夹之外，还可以定义附件、图标缓存、数据库等参数<br>
+<code>DATABASE_URL</code>：数据库路径<br>
+<code>ATTACHMENT_FOLDER</code>：附件路径<br>
+<code>ICON_CACHE_FOLDER</code>：图标缓存路径</p>
+<blockquote>
+<p>引用：<a href="https://www.10101.io/2019/11/24/self-hosted-bitwarden">https://www.10101.io/2019/11/24/self-hosted-bitwarden</a></p>
+</blockquote>
+
+            </div>
+            <div class="post-footer">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      心智魔方
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://z4042346.tk/post/zai-teng-xun-yun-kai-yuan-ruan-jian-zhong-xin-da-jian-bitwarden-fu-wu-qi/" title="在腾讯云开源软件中心搭建bitwarden服务器">https://z4042346.tk/post/zai-teng-xun-yun-kai-yuan-ruan-jian-zhong-xin-da-jian-bitwarden-fu-wu-qi/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i> BY-NC-SA</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+  <div class="tags">
+    
+  </div>
+  <div class="nav">
+    <div class="nav-prev">
       
+    </div>
+    <div class="nav-next">
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <a href="https://z4042346.tk/post/hello-gridea/">
-        <div class="motion-warpper">
-          <div class="tag-post-node">
-            <h1>
-              12-12
-              <small>Hello Gridea</small>
-            </h1>
-          </div>
-        </div>
-      </a>
-      
-      
+        <a class="nav-pc-next" title="docker安装portainer面板，并汉化" href="https://z4042346.tk/post/docker-an-zhuang-portainer-mian-ban-bing-han-hua/">docker安装portainer面板，并汉化</a>
+        <a class="nav-mobile-next" title="docker安装portainer面板，并汉化" href="https://z4042346.tk/post/docker-an-zhuang-portainer-mian-ban-bing-han-hua/">下一篇</a>
+        <i class="fa fa-chevron-right"></i>
       
     </div>
   </div>
 </div>
-          </section>
+            
+  
+    
+      <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '55d738353a47aa981c47',
+    clientSecret: '25d5edcdebbb282a1bc5814376f9fcf20829f0a9',
+    repo: 'hhhllll888.github.io',
+    owner: 'hhhllll888',
+    admin: ['hhhllll888'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  gitalk.render('gitalk-container')
+</script>
+    
+    
+  
+
+          </div>
         </div>
       </div>
     </div>
@@ -495,6 +647,36 @@
   // 代码高亮
   hljs.initHighlightingOnLoad();
 
+</script>
+    <div class="light-box" id="light_box"></div>
+<script>
+  let imgs = document.querySelectorAll('.post-body img');
+  let lightBox = document.querySelector('#light_box');
+  lightBox.addEventListener('mousedown', (e) => {
+    e.preventDefault()
+  })
+  lightBox.addEventListener('mousewheel', (e) => {
+    e.preventDefault()
+  })
+  let width = window.innerWidth * 0.8;
+  lightBox.onclick = () => {
+    let img = lightBox.querySelector('img');
+    lightBox.style = '';
+    img && img.remove();
+  }
+  imgs.forEach(item => {
+    item.onclick = function (e) {
+      let lightImg = document.createElement('img');
+      lightImg.src = this.src;
+      lightBox.style = `height: 100%; opacity: 1; background-color: rgba(0, 0, 0, 0.5);cursor: zoom-out;`;
+      lightImg.style = `width: ${width}px; border: 1px solid #fff; border-radius: 2px;`;
+      lightImg.onclick = function () {
+        lightBox.style = '';
+        this.remove();
+      }
+      lightBox.append(lightImg);
+    }
+  })
 </script>
   </div>
 </body>
@@ -1265,7 +1447,6 @@ pip3 install -r requirements.txt -t ./ -i https://mirrors.aliyun.com/pypi/simple
 </script> -->
 
 <script src="/media/js/mouse/love.js"></script>
-
 
 
 </html>

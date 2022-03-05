@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://z4042346.tk</id>
     <title>心智魔方</title>
-    <updated>2022-02-17T04:14:15.144Z</updated>
+    <updated>2022-03-05T03:35:05.369Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://z4042346.tk"/>
     <link rel="self" href="https://z4042346.tk/atom.xml"/>
@@ -10,6 +10,19 @@
     <logo>https://z4042346.tk/images/avatar.png</logo>
     <icon>https://z4042346.tk/favicon.ico</icon>
     <rights>All rights reserved 2022, 心智魔方</rights>
+    <entry>
+        <title type="html"><![CDATA[在腾讯云开源软件中心搭建bitwarden服务器]]></title>
+        <id>https://z4042346.tk/post/zai-teng-xun-yun-kai-yuan-ruan-jian-zhong-xin-da-jian-bitwarden-fu-wu-qi/</id>
+        <link href="https://z4042346.tk/post/zai-teng-xun-yun-kai-yuan-ruan-jian-zhong-xin-da-jian-bitwarden-fu-wu-qi/">
+        </link>
+        <updated>2022-03-05T03:09:08.000Z</updated>
+        <summary type="html"><![CDATA[<p>bitwarden是一款非常方便的开源密码管理软件（前端加上后端），在mac、ios、安卓、windows都有涉及，可以在全平台使用，如果自己拥有nas或者一台vps即可搭建自己的bitwarden密码服务器。<br>
+它的官方网址是&lt;bitwarden.com/&gt;，但是在百度上会搜索到一个叫www.bitwarden.pro的介绍界面，点击登录会进入另一个域名，不清楚是否是官方的，要自己注意。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>bitwarden是一款非常方便的开源密码管理软件（前端加上后端），在mac、ios、安卓、windows都有涉及，可以在全平台使用，如果自己拥有nas或者一台vps即可搭建自己的bitwarden密码服务器。<br>
+它的官方网址是&lt;bitwarden.com/&gt;，但是在百度上会搜索到一个叫www.bitwarden.pro的介绍界面，点击登录会进入另一个域名，不清楚是否是官方的，要自己注意。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[docker安装portainer面板，并汉化]]></title>
         <id>https://z4042346.tk/post/docker-an-zhuang-portainer-mian-ban-bing-han-hua/</id>
