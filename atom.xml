@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://z4042346.tk</id>
     <title>心智魔方</title>
-    <updated>2022-03-11T13:37:41.219Z</updated>
+    <updated>2022-03-14T05:19:14.425Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://z4042346.tk"/>
     <link rel="self" href="https://z4042346.tk/atom.xml"/>
@@ -10,6 +10,20 @@
     <logo>https://z4042346.tk/images/avatar.png</logo>
     <icon>https://z4042346.tk/favicon.ico</icon>
     <rights>All rights reserved 2022, 心智魔方</rights>
+    <entry>
+        <title type="html"><![CDATA[学习通无人值守刷课脚本（可答题）]]></title>
+        <id>https://z4042346.tk/post/xue-xi-tong-wu-ren-zhi-shou-shua-ke-jiao-ben-ke-da-ti/</id>
+        <link href="https://z4042346.tk/post/xue-xi-tong-wu-ren-zhi-shou-shua-ke-jiao-ben-ke-da-ti/">
+        </link>
+        <updated>2022-03-14T05:11:20.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[VSCode 的一些小技巧]]></title>
+        <id>https://z4042346.tk/post/vscode-ru-he-shan-chu-duo-yu-de-kong-xing-huan-xing/</id>
+        <link href="https://z4042346.tk/post/vscode-ru-he-shan-chu-duo-yu-de-kong-xing-huan-xing/">
+        </link>
+        <updated>2022-03-14T04:40:54.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[在腾讯云开源软件中心搭建bitwarden服务器]]></title>
         <id>https://z4042346.tk/post/zai-teng-xun-yun-kai-yuan-ruan-jian-zhong-xin-da-jian-bitwarden-fu-wu-qi/</id>
@@ -22,6 +36,20 @@
         <content type="html"><![CDATA[<p>bitwarden是一款非常方便的开源密码管理软件（前端加上后端），在mac、ios、安卓、windows都有涉及，可以在全平台使用，如果自己拥有nas或者一台vps即可搭建自己的bitwarden密码服务器。<br>
 它的官方网址是&lt;bitwarden.com/&gt;，但是在百度上会搜索到一个叫www.bitwarden.pro的介绍界面，点击登录会进入另一个域名，不清楚是否是官方的，要自己注意。</p>
 ]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[git常用命令]]></title>
+        <id>https://z4042346.tk/post/git-chang-yong-ming-ling/</id>
+        <link href="https://z4042346.tk/post/git-chang-yong-ming-ling/">
+        </link>
+        <updated>2022-02-21T00:46:35.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[git自动提交命令]]></title>
+        <id>https://z4042346.tk/post/git-zi-dong-ti-jiao-ming-ling/</id>
+        <link href="https://z4042346.tk/post/git-zi-dong-ti-jiao-ming-ling/">
+        </link>
+        <updated>2022-02-13T11:10:58.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[docker安装portainer面板，并汉化]]></title>
