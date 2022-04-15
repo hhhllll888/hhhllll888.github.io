@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://z4042346.tk</id>
     <title>心智魔方</title>
-    <updated>2022-03-20T06:09:16.804Z</updated>
+    <updated>2022-04-15T00:34:16.930Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://z4042346.tk"/>
     <link rel="self" href="https://z4042346.tk/atom.xml"/>
@@ -18,7 +18,7 @@
         <updated>2022-03-14T05:11:20.000Z</updated>
     </entry>
     <entry>
-        <title type="html"><![CDATA[VSCode 的一些小技巧]]></title>
+        <title type="html"><![CDATA[VSCode 的一些小技巧和快捷键]]></title>
         <id>https://z4042346.tk/post/vscode-ru-he-shan-chu-duo-yu-de-kong-xing-huan-xing/</id>
         <link href="https://z4042346.tk/post/vscode-ru-he-shan-chu-duo-yu-de-kong-xing-huan-xing/">
         </link>
