@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <meta name="author" content="hhhllll888">
+
+
+  <meta name="subtitle" content="没什么可写的">
+
+
+  <meta name="description" content="没什么可写的">
+
+
+
+<title>VSCode 的一些小技巧和快捷键 | 一个小站啦</title>
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/nprogress/nprogress.css">
+
+
+
+<script src="/lib/jquery.min.js"></script>
+
+
+<script src="/lib/iconify-icon.min.js"></script>
+
+
+<script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+  };
+</script>
+
+
+<script src="/lib/nprogress/nprogress.js"></script>
+
+<script>
+  $(document).ready(() => {
+    NProgress.configure({
+      showSpinner: false,
+    });
+    NProgress.start();
+    $("#nprogress .bar").css({
+      background: "#de7441",
+    });
+    $("#nprogress .peg").css({
+      "box-shadow": "0 0 2px #de7441, 0 0 4px #de7441",
+    });
+    $("#nprogress .spinner-icon").css({
+      "border-top-color": "#de7441",
+      "border-left-color": "#de7441",
+    });
+    setTimeout(function () {
+      NProgress.done();
+      $(".fade").removeClass("out");
+    }, 800);
+  });
+</script>
+
+<script>
+  (function () {
+    const prefersDark =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const setting = localStorage.getItem("hexo-color-scheme") || "auto";
+    if (setting === "dark" || (prefersDark && setting !== "light"))
+      document.documentElement.classList.toggle("dark", true);
+    let isDark = document.documentElement.classList.contains("dark");
+  })();
+
+  $(document).ready(function () {
+    // init icon
+    const prefersDark =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const isDark = document.documentElement.classList.contains("dark");
+    $("#theme-icon").attr("icon", isDark ? "ri:moon-line" : "ri:sun-line");
+
+    function toggleGiscusTheme() {
+      const isDark = document.documentElement.classList.contains("dark");
+      const giscusFrame = document.querySelector("iframe.giscus-frame");
+      if (giscusFrame) {
+        giscusFrame.contentWindow.postMessage(
+          {
+            giscus: {
+              setConfig: {
+                theme: isDark ? "dark" : "light",
+              },
+            },
+          },
+          "https://giscus.app"
+        );
+      }
+    }
+
+
+    // toggle dark mode
+    function toggleDark() {
+      let isDark = document.documentElement.classList.contains("dark");
+      const setting = localStorage.getItem("hexo-color-scheme") || "auto";
+      isDark = !isDark;
+      document.documentElement.classList.toggle("dark", isDark);
+      $("#theme-icon").attr("icon", isDark ? "ri:moon-line" : "ri:sun-line");
+      if (prefersDark === isDark) {
+        localStorage.setItem("hexo-color-scheme", "auto");
+      } else {
+        localStorage.setItem("hexo-color-scheme", isDark ? "dark" : "light");
+      }
+      toggleGiscusTheme();
+    }
+    $("#toggle-dark").click(toggleDark);
+
+    // listen dark mode change
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (e) => {
+        const setting = localStorage.getItem("hexo-color-scheme") || "auto";
+        if (setting === "auto") {
+          document.documentElement.classList.toggle("dark", e.matches);
+          $("#theme-icon").attr(
+            "icon",
+            e.matches ? "ri:moon-line" : "ri:sun-line"
+          );
+          toggleGiscusTheme();
+        }
+      });
+  });
+</script>
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body class="font-sans bg-white dark:bg-zinc-900 text-gray-700 dark:text-gray-200 relative">
+  <header class="fixed w-full px-5 py-1 z-10 backdrop-blur-xl backdrop-saturate-150 border-b border-black/5">
+  <div class="max-auto">
+    <nav class="flex items-center text-base">
+      <a href="/" class="group">
+        <h2 class="font-medium tracking-tighterp text-l p-2">
+          <img class="w-5 mr-2 inline-block transition-transform group-hover:rotate-[30deg]" id="logo" src="/images/logo.svg" alt="一个小站啦" />
+          一个小站啦
+        </h2>
+      </a>
+      <div id="header-title" class="opacity-0 md:ml-2 md:mt-[0.1rem] text-xs font-medium whitespace-nowrap overflow-hidden overflow-ellipsis">
+        VSCode 的一些小技巧和快捷键
+      </div>
+      <div class="flex-1"></div>
+      <div class="flex items-center gap-3">
+        
+          <a class="hidden sm:flex" href="/archives">Posts</a>
+        
+        
+          
+            <a class="w-5 h-5 hidden sm:flex" title="Github" target="_blank" rel="noopener" href="https://github.com/hhhllll888">
+              <iconify-icon width="20" icon="ri:github-line"></iconify-icon>
+            </a>
+          
+        
+        <a class="w-5 h-5 hidden sm:flex" title="Github" href="rss2.xml">
+          <iconify-icon width="20" icon="ri:rss-line"></iconify-icon>
+        </a>
+        <a class="w-5 h-5" title="toggle theme" id="toggle-dark">
+          <iconify-icon width="20" icon="" id="theme-icon"></iconify-icon>
+        </a>
+      </div>
+      <div class="flex items-center justify-center gap-3 ml-3 sm:hidden">
+        <span class="w-5 h-5" aria-hidden="true" role="img" id="open-menu">
+          <iconify-icon width="20" icon="carbon:menu" ></iconify-icon>
+        </span>
+        <span class="w-5 h-5 hidden" aria-hidden="true" role="img" id="close-menu">
+          <iconify-icon  width="20" icon="carbon:close" ></iconify-icon>
+        </span>
+      </div>
+    </nav>
+  </div>
+</header>
+<div id="menu-panel" class="h-0 overflow-hidden sm:hidden fixed left-0 right-0 top-12 bottom-0 z-10">
+  <div id="menu-content" class="relative z-20 bg-white/80 px-6 sm:px-8 py-2 backdrop-blur-xl -translate-y-full transition-transform duration-300">
+    <ul class="nav flex flex-col sm:flex-row text-sm font-medium">
+      
+        <li class="nav-portfolio sm:mx-2 border-b sm:border-0 border-black/5 last:border-0 hover:text-main">
+          <a href="/archives" class="flex h-12 sm:h-auto items-center">Posts</a>
+        </li>
+      
+    </ul>
+  </div>
+  <div class="mask bg-black/20 absolute inset-0"></div>
+</div>
+
+  <main class="pt-14">
+    <!-- css -->
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.min.css">
+
+
+<link rel="stylesheet" href="/lib/tocbot/tocbot.min.css">
+
+<!-- toc -->
+
+  <!-- tocbot -->
+<nav class="post-toc toc text-sm w-48 relative top-32 right-0 opacity-70 hidden lg:block" style="position: fixed !important;"></nav>
+
+
+<section class="px-6 max-w-prose mx-auto md:px-0">
+  <!-- header -->
+  <header class="overflow-hidden pt-6 pb-6 md:pt-12">
+    <div class="pt-4 md:pt-6">
+      <h1 id="article-title" class="text-[2rem] font-bold leading-snug mb-4 md:mb-6 md:text-[2.6rem]">
+        VSCode 的一些小技巧和快捷键
+      </h1>
+      <div>
+        <section class="flex items-center gap-3 text-sm">
+          <span class="flex items-center gap-1">
+            <iconify-icon width="18" icon="carbon-calendar" ></iconify-icon>
+            <time>2023-10-27</time>
+          </span>
+          <span class="text-gray-400">·</span>
+          <span class="flex items-center gap-1">
+            <iconify-icon width="18" icon="ic:round-access-alarm" ></iconify-icon>
+            <span>8 min</span>
+          </span>
+          <span class="text-gray-400">·</span>
+          <span class="flex items-center gap-1">
+            <iconify-icon width="18" icon="icon-park-outline:font-search" ></iconify-icon>
+            <span>1.9k words</span>
+          </span>
+          
+        </section>
+      </div>
+    </div>
+  </header>
+  <!-- content -->
+  <article class="post-content prose m-auto slide-enter-content dark:prose-invert">
+    <p>删除多余的空行正则表达式<br><code>^\s*$\n</code><br>首尾空白字符的正则表达式<br><code>^\s*|\s*$</code></p>
+<h2 id="vscode-如何批量选中相同内容更改"><a href="#vscode-如何批量选中相同内容更改" class="headerlink" title="vscode 如何批量选中相同内容更改"></a>vscode 如何批量选中相同内容更改</h2><p>局部选中的方法是先选中待修改变量，用Ctrl+D逐个添加从选中位置开始的相同字符。<br><img src="https://img-blog.csdnimg.cn/20210513100957871.png"><br>同时选择多个单词: Alt + Click</p>
+<ul>
+<li>alt+鼠标左键 选中多行同时编辑</li>
+<li>ctrl+shift+L 选中编辑代码中相同的内容</li>
+<li>选中多行,按tab键可统一向右移动</li>
+<li>选中文本后,Ctrl + [ 和 Ctrl + ] 可实现文本的向左移动 和 向右移动</li>
+<li>按住Ctrl + Alt，再按键盘上的上或下键，可以使一列上出现多个光标</li>
+<li>按shift+alt，再使用鼠标拖动，也可以出现竖直的列光标，同时可以选中多列。</li>
+</ul>
+<h2 id="vscode快捷键"><a href="#vscode快捷键" class="headerlink" title="vscode快捷键"></a>vscode快捷键</h2><table>
+<thead>
+<tr>
+<th>按 Press</th>
+<th>功能 Function</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl + Shift + P，F1</td>
+<td>显示命令面板 Show Command Palette</td>
+</tr>
+<tr>
+<td>Ctrl + P</td>
+<td>快速打开 Quick Open</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + N</td>
+<td>新窗口&#x2F;实例 New window&#x2F;instance</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + W</td>
+<td>关闭窗口&#x2F;实例 Close window&#x2F;instance</td>
+</tr>
+</tbody></table>
+<h2 id="基础编辑-Basic-editing"><a href="#基础编辑-Basic-editing" class="headerlink" title="基础编辑 Basic editing"></a>基础编辑 Basic editing</h2><table>
+<thead>
+<tr>
+<th>按 Press</th>
+<th>功能 Function</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl+X 剪切行（空选定）</td>
+<td>Cut line (empty selection)</td>
+</tr>
+<tr>
+<td>Ctrl+C 复制行（空选定）</td>
+<td>Copy line (empty selection)</td>
+</tr>
+<tr>
+<td>Alt+ ↑ &#x2F; ↓</td>
+<td>向上&#x2F;向下移动行 Move line up&#x2F;down</td>
+</tr>
+<tr>
+<td>Shift+Alt + ↓ &#x2F; ↑</td>
+<td>向上&#x2F;向下复制行 Copy line up&#x2F;down</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+K</td>
+<td>删除行 Delete line</td>
+</tr>
+<tr>
+<td>Ctrl+Enter</td>
+<td>在下面插入行 Insert line below</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+Enter</td>
+<td>在上面插入行 Insert line above</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+\</td>
+<td>跳到匹配的括号 Jump to matching bracket</td>
+</tr>
+<tr>
+<td>Ctrl+] &#x2F; [</td>
+<td>缩进&#x2F;缩进行 Indent&#x2F;outdent line</td>
+</tr>
+<tr>
+<td>Home</td>
+<td>转到行首 Go to beginning of line</td>
+</tr>
+<tr>
+<td>End</td>
+<td>转到行尾 Go to end of line</td>
+</tr>
+<tr>
+<td>Ctrl+Home</td>
+<td>转到文件开头 Go to beginning of file</td>
+</tr>
+<tr>
+<td>Ctrl+End</td>
+<td>转到文件末尾 Go to end of file</td>
+</tr>
+<tr>
+<td>Ctrl+↑ &#x2F; ↓</td>
+<td>向上&#x2F;向下滚动行 Scroll line up&#x2F;down</td>
+</tr>
+<tr>
+<td>Alt+PgUp &#x2F; PgDown</td>
+<td>向上&#x2F;向下滚动页面 Scroll page up&#x2F;down</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+[</td>
+<td>折叠（折叠）区域 Fold (collapse) region</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+]</td>
+<td>展开（未折叠）区域 Unfold (uncollapse) region</td>
+</tr>
+<tr>
+<td>Ctrl+K Ctrl+[</td>
+<td>折叠（未折叠）所有子区域 Fold (collapse) all subregions</td>
+</tr>
+<tr>
+<td>Ctrl+K Ctrl+]</td>
+<td>展开（未折叠）所有子区域 Unfold (uncollapse) all subregions</td>
+</tr>
+<tr>
+<td>Ctrl+K Ctrl+0</td>
+<td>折叠（折叠）所有区域 Fold (collapse) all regions</td>
+</tr>
+<tr>
+<td>Ctrl+K Ctrl+J</td>
+<td>展开（未折叠）所有区域 Unfold (uncollapse) all regions</td>
+</tr>
+<tr>
+<td>Ctrl+K Ctrl+C</td>
+<td>添加行注释 Add line comment</td>
+</tr>
+<tr>
+<td>Ctrl+K Ctrl+U</td>
+<td>删除行注释 Remove line comment</td>
+</tr>
+<tr>
+<td>Ctrl+&#x2F;</td>
+<td>切换行注释 Toggle line comment</td>
+</tr>
+<tr>
+<td>Shift+Alt+A</td>
+<td>切换块注释 Toggle block comment</td>
+</tr>
+<tr>
+<td>Alt+Z</td>
+<td>切换换行 Toggle word wrap</td>
+</tr>
+</tbody></table>
+<h2 id="导航-Navigation"><a href="#导航-Navigation" class="headerlink" title="导航 Navigation"></a>导航 Navigation</h2><table>
+<thead>
+<tr>
+<th>按 Press</th>
+<th>功能 Function</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl + T</td>
+<td>显示所有符号 Show all Symbols</td>
+</tr>
+<tr>
+<td>Ctrl + G</td>
+<td>转到行… Go to Line…</td>
+</tr>
+<tr>
+<td>Ctrl + P</td>
+<td>转到文件… Go to File…</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + O</td>
+<td>转到符号… Go to Symbol…</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + M</td>
+<td>显示问题面板 Show Problems panel</td>
+</tr>
+<tr>
+<td>F8</td>
+<td>转到下一个错误或警告 Go to next error or warning</td>
+</tr>
+<tr>
+<td>Shift + F8</td>
+<td>转到上一个错误或警告 Go to previous error or warning</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + Tab</td>
+<td>导航编辑器组历史记录 Navigate editor group history</td>
+</tr>
+<tr>
+<td>Alt + ←&#x2F;→</td>
+<td>返回&#x2F;前进 Go back &#x2F; forward</td>
+</tr>
+<tr>
+<td>Ctrl + M</td>
+<td>切换选项卡移动焦点 Toggle Tab moves focus</td>
+</tr>
+</tbody></table>
+<h2 id="搜索和替换-Search-and-replace"><a href="#搜索和替换-Search-and-replace" class="headerlink" title="搜索和替换 Search and replace"></a>搜索和替换 Search and replace</h2><table>
+<thead>
+<tr>
+<th>按 Press</th>
+<th>功能 Function</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl + F</td>
+<td>查找 Find</td>
+</tr>
+<tr>
+<td>Ctrl + H</td>
+<td>替换 Replace</td>
+</tr>
+<tr>
+<td>F3 &#x2F; Shift + F3</td>
+<td>查找下一个&#x2F;上一个 Find next&#x2F;previous</td>
+</tr>
+<tr>
+<td>Alt + Enter</td>
+<td>选择查找匹配的所有出现 Select all occurences of Find match</td>
+</tr>
+<tr>
+<td>Ctrl + D</td>
+<td>将选择添加到下一个查找匹配 Add selection to next Find match</td>
+</tr>
+<tr>
+<td>Ctrl + K Ctrl + D</td>
+<td>将最后一个选择移至下一个查找匹配项 Move last selection to next Find match</td>
+</tr>
+<tr>
+<td>Alt + C &#x2F; R &#x2F; W</td>
+<td>切换区分大小写&#x2F;正则表达式&#x2F;整个词 Toggle case-sensitive &#x2F; regex whole word</td>
+</tr>
+</tbody></table>
+<h2 id="多光标和选择-Multi-cursor-and-selection"><a href="#多光标和选择-Multi-cursor-and-selection" class="headerlink" title="多光标和选择 Multi-cursor and selection"></a>多光标和选择 Multi-cursor and selection</h2><table>
+<thead>
+<tr>
+<th>按 Press</th>
+<th>功能 Function</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Alt +单击</td>
+<td>插入光标 Insert cursor</td>
+</tr>
+<tr>
+<td>Ctrl + Alt +↑&#x2F;↓</td>
+<td>在上&#x2F;下插入光标 Insert cursor above &#x2F; below</td>
+</tr>
+<tr>
+<td>Ctrl + U</td>
+<td>撤消上一个光标操作 Undo last cursor operation</td>
+</tr>
+<tr>
+<td>Shift + Alt + I</td>
+<td>在选定的每一行的末尾插入光标 Insert cursor at end of each line selected</td>
+</tr>
+<tr>
+<td>Ctrl + I</td>
+<td>选择当前行 Select current line</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + L</td>
+<td>选择当前选择的所有出现 Select all occurrences of current selection</td>
+</tr>
+<tr>
+<td>Ctrl + F2</td>
+<td>选择当前字的所有出现 Select all occurrences of current word</td>
+</tr>
+<tr>
+<td>Shift + Alt + →</td>
+<td>展开选择 Expand selection</td>
+</tr>
+<tr>
+<td>Shift + Alt + ←</td>
+<td>缩小选择 Shrink selection</td>
+</tr>
+<tr>
+<td>Shift + Alt + （拖动鼠标）</td>
+<td>列（框）选择 Column (box) selection</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + Alt +（箭头键）</td>
+<td>列（框）选择 Column (box) selection</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + Alt + PgUp &#x2F; PgDown</td>
+<td>列（框）选择页上&#x2F;下 Column (box) selection page up&#x2F;down</td>
+</tr>
+</tbody></table>
+<h2 id="丰富的语言编辑-Rich-languages-editing"><a href="#丰富的语言编辑-Rich-languages-editing" class="headerlink" title="丰富的语言编辑 Rich languages editing"></a>丰富的语言编辑 Rich languages editing</h2><table>
+<thead>
+<tr>
+<th>按 Press</th>
+<th>功能 Function</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl + 空格</td>
+<td>触发建议 Trigger suggestion</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + Space</td>
+<td>触发器参数提示 Trigger parameter hints</td>
+</tr>
+<tr>
+<td>Tab Emmet</td>
+<td>展开缩写 Emmet expand abbreviation</td>
+</tr>
+<tr>
+<td>Shift + Alt + F</td>
+<td>格式化文档 Format document</td>
+</tr>
+<tr>
+<td>Ctrl + K Ctrl + F</td>
+<td>格式选定区域 Format selection</td>
+</tr>
+<tr>
+<td>F12</td>
+<td>转到定义 Go to Definition</td>
+</tr>
+<tr>
+<td>Alt + F12</td>
+<td>Peek定义 Peek Definition</td>
+</tr>
+<tr>
+<td>Ctrl + K F12</td>
+<td>打开定义到边 Open Definition to the side</td>
+</tr>
+<tr>
+<td>Ctrl + .</td>
+<td>快速解决 Quick Fix</td>
+</tr>
+<tr>
+<td>Shift + F12</td>
+<td>显示引用 Show References</td>
+</tr>
+<tr>
+<td>F2</td>
+<td>重命名符号 Rename Symbol</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + . &#x2F;，</td>
+<td>替换为下一个&#x2F;上一个值 Replace with next&#x2F;previous value</td>
+</tr>
+<tr>
+<td>Ctrl + K Ctrl + X</td>
+<td>修剪尾随空格 Trim trailing whitespace</td>
+</tr>
+<tr>
+<td>Ctrl + K M</td>
+<td>更改文件语言 Change file language</td>
+</tr>
+</tbody></table>
+<h2 id="编辑器管理-Editor-management"><a href="#编辑器管理-Editor-management" class="headerlink" title="编辑器管理 Editor management"></a>编辑器管理 Editor management</h2><table>
+<thead>
+<tr>
+<th>按 Press</th>
+<th>功能 Function</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl+F4, Ctrl+W</td>
+<td>关闭编辑器 Close editor</td>
+</tr>
+<tr>
+<td>Ctrl+K F</td>
+<td>关闭文件夹 Close folder</td>
+</tr>
+<tr>
+<td>Ctrl+\</td>
+<td>拆分编辑器 Split editor</td>
+</tr>
+<tr>
+<td>Ctrl+ 1 &#x2F; 2 &#x2F; 3</td>
+<td>聚焦到第1，第2或第3编辑器组 Focus into 1st, 2nd or 3rd editor group</td>
+</tr>
+<tr>
+<td>Ctrl+K Ctrl+ ←&#x2F;→</td>
+<td>聚焦到上一个&#x2F;下一个编辑器组 Focus into previous&#x2F;next editor group</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+PgUp &#x2F; PgDown</td>
+<td>向左&#x2F;向右移动编辑器 Move editor left&#x2F;right</td>
+</tr>
+<tr>
+<td>Ctrl+K ← &#x2F; →</td>
+<td>移动活动编辑器组 Move active editor group</td>
+</tr>
+</tbody></table>
+<h2 id="文件管理-File-management"><a href="#文件管理-File-management" class="headerlink" title="文件管理 File management"></a>文件管理 File management</h2><table>
+<thead>
+<tr>
+<th>按 Press</th>
+<th>功能 Function</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl+N</td>
+<td>新文件 New File</td>
+</tr>
+<tr>
+<td>Ctrl+O</td>
+<td>打开文件… Open File…</td>
+</tr>
+<tr>
+<td>Ctrl+S</td>
+<td>保存 Save</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+S</td>
+<td>另存为… Save As…</td>
+</tr>
+<tr>
+<td>Ctrl+K S</td>
+<td>全部保存 Save All</td>
+</tr>
+<tr>
+<td>Ctrl+F4</td>
+<td>关闭 Close</td>
+</tr>
+<tr>
+<td>Ctrl+K Ctrl+W</td>
+<td>关闭所有 Close All</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+T</td>
+<td>重新打开关闭的编辑器 Reopen closed editor</td>
+</tr>
+<tr>
+<td>Ctrl+K</td>
+<td>输入保持打开 Enter Keep Open</td>
+</tr>
+<tr>
+<td>Ctrl+Tab</td>
+<td>打开下一个 Open next</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+Tab</td>
+<td>打开上一个 Open previous</td>
+</tr>
+<tr>
+<td>Ctrl+K P</td>
+<td>复制活动文件的路径 Copy path of active file</td>
+</tr>
+<tr>
+<td>Ctrl+K R</td>
+<td>显示资源管理器中的活动文件 Reveal active file in Explorer</td>
+</tr>
+<tr>
+<td>Ctrl+K O</td>
+<td>显示新窗口&#x2F;实例中的活动文件 Show active file in new window&#x2F;instance</td>
+</tr>
+</tbody></table>
+<h2 id="显示-Display"><a href="#显示-Display" class="headerlink" title="显示 Display"></a>显示 Display</h2><table>
+<thead>
+<tr>
+<th>按 Press</th>
+<th>功能 Function</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>F11</td>
+<td>切换全屏 Toggle full screen</td>
+</tr>
+<tr>
+<td>Shift+Alt+1</td>
+<td>切换编辑器布局 Toggle editor layout</td>
+</tr>
+<tr>
+<td>Ctrl+ &#x3D; &#x2F; -</td>
+<td>放大&#x2F;缩小 Zoom in&#x2F;out</td>
+</tr>
+<tr>
+<td>Ctrl+B</td>
+<td>切换侧栏可见性 Toggle Sidebar visibility</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+E</td>
+<td>显示浏览器&#x2F;切换焦点 Show Explorer &#x2F; Toggle focus</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+F</td>
+<td>显示搜索 Show Search</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+G</td>
+<td>显示Git Show Git</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+D</td>
+<td>显示调试 Show Debug</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+X</td>
+<td>显示扩展 Show Extensions</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+H</td>
+<td>替换文件 Replace in files</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+J</td>
+<td>切换搜索详细信息 Toggle Search details</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+C</td>
+<td>打开新命令提示符&#x2F;终端 Open new command prompt&#x2F;terminal</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+U</td>
+<td>显示输出面板 Show Output panel</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+V</td>
+<td>切换Markdown预览 Toggle Markdown preview</td>
+</tr>
+<tr>
+<td>Ctrl+K V</td>
+<td>从旁边打开Markdown预览 Open Markdown preview to the side</td>
+</tr>
+</tbody></table>
+<h2 id="调试-Debug"><a href="#调试-Debug" class="headerlink" title="调试 Debug"></a>调试 Debug</h2><table>
+<thead>
+<tr>
+<th>按 Press</th>
+<th>功能 Function</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>F9</td>
+<td>切换断点 Toggle breakpoint</td>
+</tr>
+<tr>
+<td>F5</td>
+<td>开始&#x2F;继续 Start&#x2F;Continue</td>
+</tr>
+<tr>
+<td>Shift+F5</td>
+<td>停止 Stop</td>
+</tr>
+<tr>
+<td>F11 &#x2F; Shift+F11</td>
+<td>下一步&#x2F;上一步 Step into&#x2F;out</td>
+</tr>
+<tr>
+<td>F10</td>
+<td>跳过 Step over</td>
+</tr>
+<tr>
+<td>Ctrl+K Ctrl+I</td>
+<td>显示悬停 Show hover</td>
+</tr>
+</tbody></table>
+<h2 id="集成终端-Integrated-terminal"><a href="#集成终端-Integrated-terminal" class="headerlink" title="集成终端 Integrated terminal"></a>集成终端 Integrated terminal</h2><table>
+<thead>
+<tr>
+<th>按 Press</th>
+<th>功能 Function</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl+`</td>
+<td>显示集成终端 Show integrated terminal</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+`</td>
+<td>创建新终端 Create new terminal</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+C</td>
+<td>复制选定 Copy selection</td>
+</tr>
+<tr>
+<td>Ctrl+Shift+V</td>
+<td>粘贴到活动端子 Paste into active terminal</td>
+</tr>
+<tr>
+<td>Ctrl+↑ &#x2F; ↓</td>
+<td>向上&#x2F;向下滚动 Scroll up&#x2F;down</td>
+</tr>
+<tr>
+<td>Shift+PgUp &#x2F; PgDown</td>
+<td>向上&#x2F;向下滚动页面 Scroll page up&#x2F;down</td>
+</tr>
+<tr>
+<td>Ctrl+Home &#x2F; End</td>
+<td>滚动到顶部&#x2F;底部 Scroll to top&#x2F;bottom</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>引用：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/jpfss/p/10956650.html">https://www.cnblogs.com/jpfss/p/10956650.html</a><br>引用：<a target="_blank" rel="noopener" href="https://blog.csdn.net/liurunjiang/article/details/106290310">https://blog.csdn.net/liurunjiang/article/details/106290310</a><br>引用：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin/_45811256/article/details/116738803">https://blog.csdn.net/weixin\_45811256/article/details/116738803</a></p>
+</blockquote>
+
+  </article>
+  <!-- tag -->
+  <div class="mt-12 pt-6 border-t border-gray-200">
+    
+      
+        <span class="bg-gray-100 dark:bg-gray-700 px-2 py-1 m-1 text-sm rounded-md transition-colors hover:bg-gray-200">
+          <a href="/tags/vscode/">vscode</a>
+        </span>
+      
+    
+  </div>
+  <!-- prev and next -->
+  <div class="flex justify-between mt-12 pt-6 border-t border-gray-200">
+    <div>
+      
+        <a href="/blog/%E6%95%B0%E5%AD%A6.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
+          <iconify-icon width="20" icon="ri:arrow-left-s-line" data-inline="false"></iconify-icon>
+          数学
+        </a>
+      
+    </div>
+    <div>
+      
+        <a href="/blog/bilibili%E7%9F%AD%E9%93%BE%E6%8E%A5%E5%8E%BB%E9%99%A4%E8%B7%9F%E8%B8%AA%E9%93%BE%E6%8E%A5.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
+          bilibili短链接去除跟踪链接
+          <iconify-icon width="20" icon="ri:arrow-right-s-line" data-inline="false"></iconify-icon>
+        </a>
+      
+    </div>
+  </div>
+  <!-- comment -->
+  <div class="article-comments mt-12">
+    
+
+  </div>
+</section>
+<!-- js inspect -->
+
+<script src="/lib/clipboard.min.js"></script>
+
+
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+  $(document).ready(() => {
+    const maraidConfig = {
+      theme: "default",
+      logLevel: 3,
+      flowchart: { curve: "linear" },
+      gantt: { axisFormat: "%m/%d/%Y" },
+      sequence: { actorMargin: 50 },
+    };
+    mermaid.initialize(maraidConfig);
+  });
+</script>
+
+
+
+<script src="/lib/fancybox/fancybox.umd.min.js"></script>
+
+<script>
+  $(document).ready(() => {
+    $('.post-content').each(function(i){
+      $(this).find('img').each(function(){
+        if ($(this).parent().hasClass('fancybox') || $(this).parent().is('a')) return;
+        var alt = this.alt;
+        if (alt) $(this).after('<span class="fancybox-alt">' + alt + '</span>');
+        $(this).wrap('<a class="fancybox-img" href="' + this.src + '" data-fancybox=\"gallery\" data-caption="' + alt + '"></a>')
+      });
+      $(this).find('.fancybox').each(function(){
+        $(this).attr('rel', 'article' + i);
+      });
+    });
+
+    Fancybox.bind('[data-fancybox="gallery"]', {
+        // options
+    })
+  })
+</script>
+
+<!-- tocbot begin -->
+
+<script src="/lib/tocbot/tocbot.min.js"></script>
+
+<script>
+  $(document).ready(() => {
+      tocbot.init({
+        // Where to render the table of contents.
+        tocSelector: '.post-toc',
+        // Where to grab the headings to build the table of contents.
+        contentSelector: '.post-content',
+        // Which headings to grab inside of the contentSelector element.
+        headingSelector: 'h1, h2, h3',
+        // For headings inside relative or absolute positioned containers within content.
+        hasInnerContainers: true,
+    });
+  })
+</script>
+<!-- tocbot end -->
+
+
+  </main>
+  <footer class="flex flex-col h-40 items-center justify-center text-gray-400 text-sm">
+  <!-- busuanzi -->
+  
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- Busuanzi Analytics -->
+<div class="flex items-center gap-2">
+  <span>Visitors</span>
+  <span id="busuanzi_value_site_uv"></span>
+  <span>Page Views</span>
+  <span id="busuanzi_value_site_pv"></span>
+</div>
+<!-- End Busuanzi Analytics -->
+
+
+  <!-- copyright -->
+  <div class="flex items-center gap-2">
+    <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="color: inherit;">CC BY-NC-SA 4.0</a>
+    <span>© 2022</span>
+    <iconify-icon width="18" icon="emojione-monotone:maple-leaf" ></iconify-icon>
+    <a href="https://github.com/xbmlz" target="_blank" rel="noopener noreferrer">xbmlz</a>
+  </div>
+  <!-- powered by -->
+  <div class="flex items-center gap-2">
+    <span>Powered by</span>
+    <a href="https://hexo.io/" target="_blank" rel="noopener noreferrer">Hexo</a>
+    <span>&</span>
+    <a href="https://github.com/xbmlz/hexo-theme-maple" target="_blank" rel="noopener noreferrer">Maple</a>
+  </div>
+
+</footer>
+
+  <div class="back-to-top box-border fixed right-6 z-1024 -bottom-20 rounded py-1 px-1 bg-slate-900 opacity-60 text-white cursor-pointer text-center dark:bg-slate-600">
+    <span class="flex justify-center items-center text-sm">
+      <iconify-icon width="18" icon="ion:arrow-up-c" id="go-top"></iconify-icon>
+      <span id="scrollpercent"><span>0</span> %</span>
+    </span>
+  </div>
+  
+<script src="/js/main.js"></script>
+
+
+  <script>
+    $(document).ready(function () {
+      const mapleCount = "10";
+      const speed = "0.5";
+      const mapleEl = document.getElementById("maple");
+      const maples = Array.from({ length: mapleCount }).map(() => {
+        const maple = document.createElement("div");
+        const scale = Math.random() * 0.5 + 0.5;
+        const offset = Math.random() * 2 - 1;
+        const x = Math.random() * mapleEl.clientWidth;
+        const y = -Math.random() * mapleEl.clientHeight;
+        const duration = 10 / speed;
+        const delay = -duration;
+        maple.className = "maple";
+        maple.style.width = `${24 * scale}px`;
+        maple.style.height = `${24 * scale}px`;
+        maple.style.left = `${x}px`;
+        maple.style.top = `${y}px`;
+        maple.style.setProperty("--maple-fall-offset", offset);
+        maple.style.setProperty("--maple-fall-height", `${Math.abs(y) + mapleEl.clientHeight}px`);
+        maple.style.animation = `fall ${duration}s linear infinite`;
+        maple.style.animationDelay = `${delay}s`;
+        mapleEl.appendChild(maple)
+        return maple
+      })
+    });
+  </script>
+  
+
+
+  <div class="fixed top-0 bottom-0 left-0 right-0 pointer-events-none print:hidden" id="maple"></div>
+</body>
+
+</html>

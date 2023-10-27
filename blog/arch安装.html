@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <meta name="author" content="hhhllll888">
+
+
+  <meta name="subtitle" content="没什么可写的">
+
+
+  <meta name="description" content="没什么可写的">
+
+
+
+<title>arch安装 | 一个小站啦</title>
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/nprogress/nprogress.css">
+
+
+
+<script src="/lib/jquery.min.js"></script>
+
+
+<script src="/lib/iconify-icon.min.js"></script>
+
+
+<script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+  };
+</script>
+
+
+<script src="/lib/nprogress/nprogress.js"></script>
+
+<script>
+  $(document).ready(() => {
+    NProgress.configure({
+      showSpinner: false,
+    });
+    NProgress.start();
+    $("#nprogress .bar").css({
+      background: "#de7441",
+    });
+    $("#nprogress .peg").css({
+      "box-shadow": "0 0 2px #de7441, 0 0 4px #de7441",
+    });
+    $("#nprogress .spinner-icon").css({
+      "border-top-color": "#de7441",
+      "border-left-color": "#de7441",
+    });
+    setTimeout(function () {
+      NProgress.done();
+      $(".fade").removeClass("out");
+    }, 800);
+  });
+</script>
+
+<script>
+  (function () {
+    const prefersDark =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const setting = localStorage.getItem("hexo-color-scheme") || "auto";
+    if (setting === "dark" || (prefersDark && setting !== "light"))
+      document.documentElement.classList.toggle("dark", true);
+    let isDark = document.documentElement.classList.contains("dark");
+  })();
+
+  $(document).ready(function () {
+    // init icon
+    const prefersDark =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const isDark = document.documentElement.classList.contains("dark");
+    $("#theme-icon").attr("icon", isDark ? "ri:moon-line" : "ri:sun-line");
+
+    function toggleGiscusTheme() {
+      const isDark = document.documentElement.classList.contains("dark");
+      const giscusFrame = document.querySelector("iframe.giscus-frame");
+      if (giscusFrame) {
+        giscusFrame.contentWindow.postMessage(
+          {
+            giscus: {
+              setConfig: {
+                theme: isDark ? "dark" : "light",
+              },
+            },
+          },
+          "https://giscus.app"
+        );
+      }
+    }
+
+
+    // toggle dark mode
+    function toggleDark() {
+      let isDark = document.documentElement.classList.contains("dark");
+      const setting = localStorage.getItem("hexo-color-scheme") || "auto";
+      isDark = !isDark;
+      document.documentElement.classList.toggle("dark", isDark);
+      $("#theme-icon").attr("icon", isDark ? "ri:moon-line" : "ri:sun-line");
+      if (prefersDark === isDark) {
+        localStorage.setItem("hexo-color-scheme", "auto");
+      } else {
+        localStorage.setItem("hexo-color-scheme", isDark ? "dark" : "light");
+      }
+      toggleGiscusTheme();
+    }
+    $("#toggle-dark").click(toggleDark);
+
+    // listen dark mode change
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (e) => {
+        const setting = localStorage.getItem("hexo-color-scheme") || "auto";
+        if (setting === "auto") {
+          document.documentElement.classList.toggle("dark", e.matches);
+          $("#theme-icon").attr(
+            "icon",
+            e.matches ? "ri:moon-line" : "ri:sun-line"
+          );
+          toggleGiscusTheme();
+        }
+      });
+  });
+</script>
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body class="font-sans bg-white dark:bg-zinc-900 text-gray-700 dark:text-gray-200 relative">
+  <header class="fixed w-full px-5 py-1 z-10 backdrop-blur-xl backdrop-saturate-150 border-b border-black/5">
+  <div class="max-auto">
+    <nav class="flex items-center text-base">
+      <a href="/" class="group">
+        <h2 class="font-medium tracking-tighterp text-l p-2">
+          <img class="w-5 mr-2 inline-block transition-transform group-hover:rotate-[30deg]" id="logo" src="/images/logo.svg" alt="一个小站啦" />
+          一个小站啦
+        </h2>
+      </a>
+      <div id="header-title" class="opacity-0 md:ml-2 md:mt-[0.1rem] text-xs font-medium whitespace-nowrap overflow-hidden overflow-ellipsis">
+        arch安装
+      </div>
+      <div class="flex-1"></div>
+      <div class="flex items-center gap-3">
+        
+          <a class="hidden sm:flex" href="/archives">Posts</a>
+        
+        
+          
+            <a class="w-5 h-5 hidden sm:flex" title="Github" target="_blank" rel="noopener" href="https://github.com/hhhllll888">
+              <iconify-icon width="20" icon="ri:github-line"></iconify-icon>
+            </a>
+          
+        
+        <a class="w-5 h-5 hidden sm:flex" title="Github" href="rss2.xml">
+          <iconify-icon width="20" icon="ri:rss-line"></iconify-icon>
+        </a>
+        <a class="w-5 h-5" title="toggle theme" id="toggle-dark">
+          <iconify-icon width="20" icon="" id="theme-icon"></iconify-icon>
+        </a>
+      </div>
+      <div class="flex items-center justify-center gap-3 ml-3 sm:hidden">
+        <span class="w-5 h-5" aria-hidden="true" role="img" id="open-menu">
+          <iconify-icon width="20" icon="carbon:menu" ></iconify-icon>
+        </span>
+        <span class="w-5 h-5 hidden" aria-hidden="true" role="img" id="close-menu">
+          <iconify-icon  width="20" icon="carbon:close" ></iconify-icon>
+        </span>
+      </div>
+    </nav>
+  </div>
+</header>
+<div id="menu-panel" class="h-0 overflow-hidden sm:hidden fixed left-0 right-0 top-12 bottom-0 z-10">
+  <div id="menu-content" class="relative z-20 bg-white/80 px-6 sm:px-8 py-2 backdrop-blur-xl -translate-y-full transition-transform duration-300">
+    <ul class="nav flex flex-col sm:flex-row text-sm font-medium">
+      
+        <li class="nav-portfolio sm:mx-2 border-b sm:border-0 border-black/5 last:border-0 hover:text-main">
+          <a href="/archives" class="flex h-12 sm:h-auto items-center">Posts</a>
+        </li>
+      
+    </ul>
+  </div>
+  <div class="mask bg-black/20 absolute inset-0"></div>
+</div>
+
+  <main class="pt-14">
+    <!-- css -->
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.min.css">
+
+
+<link rel="stylesheet" href="/lib/tocbot/tocbot.min.css">
+
+<!-- toc -->
+
+<section class="px-6 max-w-prose mx-auto md:px-0">
+  <!-- header -->
+  <header class="overflow-hidden pt-6 pb-6 md:pt-12">
+    <div class="pt-4 md:pt-6">
+      <h1 id="article-title" class="text-[2rem] font-bold leading-snug mb-4 md:mb-6 md:text-[2.6rem]">
+        arch安装
+      </h1>
+      <div>
+        <section class="flex items-center gap-3 text-sm">
+          <span class="flex items-center gap-1">
+            <iconify-icon width="18" icon="carbon-calendar" ></iconify-icon>
+            <time>2023-10-27</time>
+          </span>
+          <span class="text-gray-400">·</span>
+          <span class="flex items-center gap-1">
+            <iconify-icon width="18" icon="ic:round-access-alarm" ></iconify-icon>
+            <span>4 min</span>
+          </span>
+          <span class="text-gray-400">·</span>
+          <span class="flex items-center gap-1">
+            <iconify-icon width="18" icon="icon-park-outline:font-search" ></iconify-icon>
+            <span>950 words</span>
+          </span>
+          
+        </section>
+      </div>
+    </div>
+  </header>
+  <!-- content -->
+  <article class="post-content prose m-auto slide-enter-content dark:prose-invert">
+    <p><code>timedatectl set-ntp true #确保系统时间是准确</code><br>图形界面 cfdisk 后如果是 UEFI 启动选择 gpt，如果是 BIOS 启动选择 dos<br><code>cfdisk</code><br>UEFI 启动需要分三个区，boot 分区，用于存储启动信息，类型为 efi system,swap 分区，也就是交换分区，类型为 linux swap ,系统分区 用于安装系统和软件的分区</p>
+<table>
+<thead>
+<tr>
+<th>挂载点</th>
+<th>分区类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x2F;mnt&#x2F;boot</td>
+<td>EFI系统分区</td>
+</tr>
+<tr>
+<td>swap</td>
+<td>Linux swap分区</td>
+</tr>
+<tr>
+<td>&#x2F;mnt</td>
+<td>linux系统分区</td>
+</tr>
+<tr>
+<td>BIOS 启动只需要俩个分区,系统分区和 swap 分区</td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>挂载点</th>
+<th>分区类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\mnt</td>
+<td>linux 系统分区</td>
+</tr>
+<tr>
+<td>swap</td>
+<td>Linux swap 分区</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">mkfs.ext4 /dev/sda2         #格式化主分区  </span><br><span class="line">mkfs.fat -F32 /dev/sda1        #格式化EFI分区#在bios里是激活boot分区  </span><br><span class="line">mkswap /dev/sda1                                  #格式化swap分区  </span><br><span class="line">swapon /dev/sda1            #激活swap分区  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">bios只要挂载主分区即可，也就是第一条</span>  </span><br><span class="line">mount /dev/sda2 /mnt        #挂载主分区到/mnt  </span><br><span class="line">mkdir /mnt/boot            #创建/mnt/boot  </span><br><span class="line">mount /dev/sda1 /mnt/boot        #挂载EFI分区到 /mnt/boot  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">新版archlinux无需调整源</span>  </span><br><span class="line">pacstrap /mnt base base-devel linux-headers linux linux-firmware nano networkmanager dhcpcd iwd net-tools     #安装必需的软件包  </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">一些其他包</span>  </span><br><span class="line">vim 命令行编辑工具  </span><br><span class="line">bash-completion 命令行补全工具  </span><br><span class="line">iwd 无线管理工具  </span><br><span class="line">dhcpcd 有线管理工具  </span><br><span class="line">ntfs-3g NTFS硬盘格式识别工具  </span><br><span class="line">net-tools 网络工具  </span><br><span class="line">  </span><br><span class="line">genfstab -U /mnt &gt;&gt; /mnt/etc/fstab         #Fstab生成文件系统表  </span><br><span class="line">  </span><br><span class="line">检查fstab文件是否正确  </span><br><span class="line">cat /mnt/etc/fstab  </span><br><span class="line">  </span><br><span class="line">arch-chroot /mnt                #到新安装的系统  </span><br><span class="line">  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">配置系统</span></span><br><span class="line">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime     #时区(上海时区)  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">同步硬件时钟</span>  </span><br><span class="line">hwclock --systohc  </span><br><span class="line">  </span><br><span class="line">nano /etc/locale.gen             #编辑locale 取消掉 en_US.UTF-8 UTF-8 和其他需要的 地区 前的注释  </span><br><span class="line">  </span><br><span class="line">locale-gen                #以生成 locale 信息  </span><br><span class="line"></span><br><span class="line">nano /etc/locale.conf            #添加LANG=en_US.UTF-8（推荐英文）  </span><br><span class="line">echo LANG=en_US.UTF-8 &gt; /etc/locale.conf    #也可用这个代替  </span><br><span class="line">  </span><br><span class="line">nano /etc/hostname                #添加myhostname        （主机名）主机名随意但要和hosts中的一样（相当于用户名）  </span><br><span class="line">  </span><br><span class="line">nano /etc/hosts  </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加：</span>              </span><br><span class="line">127.0.0.1    localhost  </span><br><span class="line">::1        localhost  </span><br><span class="line">127.0.1.1    myhostname.localdomain    myhostname # 主机名.本地域名 主机名  </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果hostname中添加的是123 那么：</span>  </span><br><span class="line">127.0.0.1        localhost  </span><br><span class="line">::1            localhost  </span><br><span class="line">127.0.1.1        123.localdomain 123  </span><br><span class="line">mkinitcpio -P                #虚拟机可有可无  </span><br><span class="line">passwd                    设置 Root 密码</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">安装引导程序：  </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"> uefi安装</span>  </span><br><span class="line">pacman -S grub efibootmgr            #安装引导  </span><br><span class="line">mkdir /boot/grub  </span><br><span class="line">grub-mkconfig &gt; /boot/grub/grub.cfg  </span><br><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot  </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"> bios安装</span>  </span><br><span class="line">pacman -S grub  </span><br><span class="line">grub-install /dev/sda  </span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg  </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果出现Warning:os-prober will not be executed to detect .........Check GRUB_DISABLE_OS_PROBER documentation entry.</span>  </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">在 nano /etc/default/grub中GRUB_DISABLE_OS_PROBER=<span class="literal">false</span> 再次运行</span>  </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">退出系统重启</span>  </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">依次输入</span>  </span><br><span class="line">exit  </span><br><span class="line">umount -R /mnt  </span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<p>安装之后没有网络解决办法 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">#解决方案一：</span></span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编辑/etc/dhcpcd.conf， 注释掉classless_static_routes 和 interface_mtu即可:</span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">option classless_static_routes</span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Respect the network MTU.</span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">option interface_mtu</span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">而后我们可以用systemd在每次启动的时候自动调用dhcpcd绑定地址:</span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">systemctl <span class="built_in">enable</span> dhcpcd@enp0s25</span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">systemctl start dhcpcd@enp0s25</span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash"><span class="comment">#解决方案二：</span></span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装dhclient:</span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">pacman -S dhclient</span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">dhclient enp0s25</span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">这种方法需要每次手动输入，不过我们可以使用netctl包来自动管理网络接口信息：</span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cp</span> /etc/netctl/examples/ethernet-dhcp /etc/netctl/ethernet-dhcp</span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">由netctl.profile查到指定dhcp客户端的字段，而后在/etc/netctl/ethernet-dhcp文件中添加：</span>  </span><br><span class="line">  </span><br><span class="line">DHCPClient=dhclient  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">!!! 别忘了修改dhcp侦听的设备地址：</span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Interface=eth0</span>  </span><br><span class="line">  </span><br><span class="line">Interface=enp0s25  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">把ethernet-dhcp作为netctl的默认启动配置文件：</span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">netctl <span class="built_in">enable</span> ethernet-dhcp</span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">立即开启netctl:</span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">netctl start ethernet-dhcp</span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看netctl服务运行情况，我的网络是桥接的，和依据上面步骤配出来的字段会有所不同</span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">systemctl list-units -t service | grep netctl</span>  </span><br><span class="line">  </span><br><span class="line">netctl@bridge.service loaded active exited Example Bridge connection  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">如果切换了网络环境，例如如果在待机唤醒时处于另一网络中，则需要用下列命令重新配置网络:</span>  </span><br><span class="line"><span class="meta prompt_">  </span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">netctl restart ethernet-dhcp</span></span><br></pre></td></tr></table></figure>
+  </article>
+  <!-- tag -->
+  <div class="mt-12 pt-6 border-t border-gray-200">
+    
+      
+        <span class="bg-gray-100 dark:bg-gray-700 px-2 py-1 m-1 text-sm rounded-md transition-colors hover:bg-gray-200">
+          <a href="/tags/arch/">arch</a>
+        </span>
+      
+    
+  </div>
+  <!-- prev and next -->
+  <div class="flex justify-between mt-12 pt-6 border-t border-gray-200">
+    <div>
+      
+        <a href="/blog/%E5%9C%A8%E8%85%BE%E8%AE%AF%E4%BA%91%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%E4%B8%AD%E5%BF%83%E6%90%AD%E5%BB%BAbitwarden%E6%9C%8D%E5%8A%A1%E5%99%A8.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
+          <iconify-icon width="20" icon="ri:arrow-left-s-line" data-inline="false"></iconify-icon>
+          在腾讯云开源软件中心搭建bitwarden服务器
+        </a>
+      
+    </div>
+    <div>
+      
+    </div>
+  </div>
+  <!-- comment -->
+  <div class="article-comments mt-12">
+    
+
+  </div>
+</section>
+<!-- js inspect -->
+
+<script src="/lib/clipboard.min.js"></script>
+
+
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+  $(document).ready(() => {
+    const maraidConfig = {
+      theme: "default",
+      logLevel: 3,
+      flowchart: { curve: "linear" },
+      gantt: { axisFormat: "%m/%d/%Y" },
+      sequence: { actorMargin: 50 },
+    };
+    mermaid.initialize(maraidConfig);
+  });
+</script>
+
+
+
+<script src="/lib/fancybox/fancybox.umd.min.js"></script>
+
+<script>
+  $(document).ready(() => {
+    $('.post-content').each(function(i){
+      $(this).find('img').each(function(){
+        if ($(this).parent().hasClass('fancybox') || $(this).parent().is('a')) return;
+        var alt = this.alt;
+        if (alt) $(this).after('<span class="fancybox-alt">' + alt + '</span>');
+        $(this).wrap('<a class="fancybox-img" href="' + this.src + '" data-fancybox=\"gallery\" data-caption="' + alt + '"></a>')
+      });
+      $(this).find('.fancybox').each(function(){
+        $(this).attr('rel', 'article' + i);
+      });
+    });
+
+    Fancybox.bind('[data-fancybox="gallery"]', {
+        // options
+    })
+  })
+</script>
+
+<!-- tocbot begin -->
+
+<script src="/lib/tocbot/tocbot.min.js"></script>
+
+<script>
+  $(document).ready(() => {
+      tocbot.init({
+        // Where to render the table of contents.
+        tocSelector: '.post-toc',
+        // Where to grab the headings to build the table of contents.
+        contentSelector: '.post-content',
+        // Which headings to grab inside of the contentSelector element.
+        headingSelector: 'h1, h2, h3',
+        // For headings inside relative or absolute positioned containers within content.
+        hasInnerContainers: true,
+    });
+  })
+</script>
+<!-- tocbot end -->
+
+
+  </main>
+  <footer class="flex flex-col h-40 items-center justify-center text-gray-400 text-sm">
+  <!-- busuanzi -->
+  
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- Busuanzi Analytics -->
+<div class="flex items-center gap-2">
+  <span>Visitors</span>
+  <span id="busuanzi_value_site_uv"></span>
+  <span>Page Views</span>
+  <span id="busuanzi_value_site_pv"></span>
+</div>
+<!-- End Busuanzi Analytics -->
+
+
+  <!-- copyright -->
+  <div class="flex items-center gap-2">
+    <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="color: inherit;">CC BY-NC-SA 4.0</a>
+    <span>© 2022</span>
+    <iconify-icon width="18" icon="emojione-monotone:maple-leaf" ></iconify-icon>
+    <a href="https://github.com/xbmlz" target="_blank" rel="noopener noreferrer">xbmlz</a>
+  </div>
+  <!-- powered by -->
+  <div class="flex items-center gap-2">
+    <span>Powered by</span>
+    <a href="https://hexo.io/" target="_blank" rel="noopener noreferrer">Hexo</a>
+    <span>&</span>
+    <a href="https://github.com/xbmlz/hexo-theme-maple" target="_blank" rel="noopener noreferrer">Maple</a>
+  </div>
+
+</footer>
+
+  <div class="back-to-top box-border fixed right-6 z-1024 -bottom-20 rounded py-1 px-1 bg-slate-900 opacity-60 text-white cursor-pointer text-center dark:bg-slate-600">
+    <span class="flex justify-center items-center text-sm">
+      <iconify-icon width="18" icon="ion:arrow-up-c" id="go-top"></iconify-icon>
+      <span id="scrollpercent"><span>0</span> %</span>
+    </span>
+  </div>
+  
+<script src="/js/main.js"></script>
+
+
+  <script>
+    $(document).ready(function () {
+      const mapleCount = "10";
+      const speed = "0.5";
+      const mapleEl = document.getElementById("maple");
+      const maples = Array.from({ length: mapleCount }).map(() => {
+        const maple = document.createElement("div");
+        const scale = Math.random() * 0.5 + 0.5;
+        const offset = Math.random() * 2 - 1;
+        const x = Math.random() * mapleEl.clientWidth;
+        const y = -Math.random() * mapleEl.clientHeight;
+        const duration = 10 / speed;
+        const delay = -duration;
+        maple.className = "maple";
+        maple.style.width = `${24 * scale}px`;
+        maple.style.height = `${24 * scale}px`;
+        maple.style.left = `${x}px`;
+        maple.style.top = `${y}px`;
+        maple.style.setProperty("--maple-fall-offset", offset);
+        maple.style.setProperty("--maple-fall-height", `${Math.abs(y) + mapleEl.clientHeight}px`);
+        maple.style.animation = `fall ${duration}s linear infinite`;
+        maple.style.animationDelay = `${delay}s`;
+        mapleEl.appendChild(maple)
+        return maple
+      })
+    });
+  </script>
+  
+
+
+  <div class="fixed top-0 bottom-0 left-0 right-0 pointer-events-none print:hidden" id="maple"></div>
+</body>
+
+</html>
