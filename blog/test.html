@@ -19,7 +19,7 @@
 
 
 
-<title>docker安装portainer面板，并汉化 | 一个小站啦</title>
+<title>test | 一个小站啦</title>
 
 
 
@@ -158,7 +158,7 @@
         </h2>
       </a>
       <div id="header-title" class="opacity-0 md:ml-2 md:mt-[0.1rem] text-xs font-medium whitespace-nowrap overflow-hidden overflow-ellipsis">
-        docker安装portainer面板，并汉化
+        test
       </div>
       <div class="flex-1"></div>
       <div class="flex items-center gap-3">
@@ -219,32 +219,28 @@
 
 <!-- toc -->
 
-  <!-- tocbot -->
-<nav class="post-toc toc text-sm w-48 relative top-32 right-0 opacity-70 hidden lg:block" style="position: fixed !important;"></nav>
-
-
 <section class="px-6 max-w-prose mx-auto md:px-0">
   <!-- header -->
   <header class="overflow-hidden pt-6 pb-6 md:pt-12">
     <div class="pt-4 md:pt-6">
       <h1 id="article-title" class="text-[2rem] font-bold leading-snug mb-4 md:mb-6 md:text-[2.6rem]">
-        docker安装portainer面板，并汉化
+        test
       </h1>
       <div>
         <section class="flex items-center gap-3 text-sm">
           <span class="flex items-center gap-1">
             <iconify-icon width="18" icon="carbon-calendar" ></iconify-icon>
-            <time>2023-10-27</time>
+            <time>2023-11-02</time>
           </span>
           <span class="text-gray-400">·</span>
           <span class="flex items-center gap-1">
             <iconify-icon width="18" icon="ic:round-access-alarm" ></iconify-icon>
-            <span>2 min</span>
+            <span>1 min</span>
           </span>
           <span class="text-gray-400">·</span>
           <span class="flex items-center gap-1">
             <iconify-icon width="18" icon="icon-park-outline:font-search" ></iconify-icon>
-            <span>514 words</span>
+            <span>0 words</span>
           </span>
           
         </section>
@@ -253,47 +249,26 @@
   </header>
   <!-- content -->
   <article class="post-content prose m-auto slide-enter-content dark:prose-invert">
-    <p>Portainer 是一个轻量级的管理 UI ，可让你轻松管理不同的 Docker 环境（Docker 主机或 Swarm 群集）。</p>
-<h3 id="安装portainer"><a href="#安装portainer" class="headerlink" title="安装portainer"></a>安装portainer</h3><ol>
-<li><code>docker pull portainer/portainer</code> 拉镜像</li>
-<li>下载汉化包：目前有两种，一种是我博客里的那个，一个是<a target="_blank" rel="noopener" href="https://github.com/tbc0309/Portainer-CN2021">https://github.com/tbc0309/Portainer-CN2021</a></li>
-<li><code>sudo mkdir -p /home/portainer/data /home/portainer/public</code>在home目录下建portainer目录，并在其下建两个目录，将用于启动镜像时映射，data目录用于存取数据，public目录用于存放汉化文件</li>
-<li><code>sudo chmod -R 777 /home/portainer</code>把所有读写权限打开</li>
-<li>创建运行容器</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -d -p 9000:9000 --restart=always --privileged=true -v /var/run/docker.sock:/var/run/docker.sock -v /home/portainer/data:/data -v /home/portainer/public:/public --name portainer2021  portainer/portainer</span><br></pre></td></tr></table></figure>
-
-<p>解释：<br><code>-p 9000:9000</code>：把主机的9000端口映射到容器的9000端口<br><code>--restart=always</code>：主机重启后自动运行该容器<br><code>--privileged=true</code>：容器获取root权限（也可以不要，有root权限的可以考虑添加）<br><code>-v /var/run/docker.sock:/var/run/docker.sock</code>：运行Docker的目录映射，必须要有才能用Portainer操作Docker命令<br><code>-v /home/portainer/data:/data</code>：把主机&#x2F;home&#x2F;portainer&#x2F;data映射给容器作为&#x2F;data<br><code>-v /home/portainer/public:/public</code>：把主机&#x2F;home&#x2F;portainer&#x2F;public映射给容器作为&#x2F;public<br><code>--name portainer2021</code>：自定义容器名称<br><code>portainer/portainer</code>：镜像名称<br>桌面解压Portainer-CN2021-main.zip，把Portainer-CN2021-main目录下的内容全部内容（包括css等目录和文件）复制到&#x2F;home&#x2F;portainer&#x2F;public下<br>6. 打开浏览器，登录操作Portainer<br>浏览器登录 <a target="_blank" rel="noopener" href="http://ip:9000/">http://IP:9000</a><br>比如<a target="_blank" rel="noopener" href="http://192.168.1.123:9000/">http://192.168.1.123:9000</a></p>
-<h3 id="docker相关命令"><a href="#docker相关命令" class="headerlink" title="docker相关命令"></a>docker相关命令</h3><p><code>docker ps [-a]</code>查看当前运行的容器，加a查看已经停止运行的容器<br><code>docker container ls -all</code>查看所有容器<br><code>docker rm &lt;容器名/容器id&gt;</code><br><code>docker pull &lt;镜像名称&gt;</code>安装镜像<br><code>docker images</code>查看已经下载的镜像<br><code>docker inspect container_name/container id</code> 查看容器信息<br><code>docker volume ls</code>查看所有卷</p>
-<blockquote>
-<p>引用：<a target="_blank" rel="noopener" href="https://blog.csdn.net/stlinax/article/details/120579415">https://blog.csdn.net/stlinax/article/details/120579415</a><br>引用：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/db13ab95e624">https://www.jianshu.com/p/db13ab95e624</a><br>引用：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_30271335/article/details/98959414">https://blog.csdn.net/weixin_30271335&#x2F;article&#x2F;details&#x2F;98959414</a></p>
-</blockquote>
-
+    
   </article>
   <!-- tag -->
   <div class="mt-12 pt-6 border-t border-gray-200">
-    
-      
-        <span class="bg-gray-100 dark:bg-gray-700 px-2 py-1 m-1 text-sm rounded-md transition-colors hover:bg-gray-200">
-          <a href="/tags/docker/">docker</a>
-        </span>
-      
     
   </div>
   <!-- prev and next -->
   <div class="flex justify-between mt-12 pt-6 border-t border-gray-200">
     <div>
       
-        <a href="/blog/docker%20%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E5%BD%A2%E9%9D%A2%E6%9D%BF.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
+        <a href="/blog/tampers/test.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
           <iconify-icon width="20" icon="ri:arrow-left-s-line" data-inline="false"></iconify-icon>
-          docker 可视化图形面板
+          
         </a>
       
     </div>
     <div>
       
-        <a href="/blog/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
-          git常用命令
+        <a href="/blog/%E4%B8%80%E4%BA%9B%E5%9C%A8termux%E4%B8%AD%E5%8F%AF%E4%BB%A5%E7%94%A8%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
+          
           <iconify-icon width="20" icon="ri:arrow-right-s-line" data-inline="false"></iconify-icon>
         </a>
       
