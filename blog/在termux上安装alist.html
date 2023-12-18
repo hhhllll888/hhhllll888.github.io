@@ -234,17 +234,17 @@
         <section class="flex items-center gap-3 text-sm">
           <span class="flex items-center gap-1">
             <iconify-icon width="18" icon="carbon-calendar" ></iconify-icon>
-            <time>2023-12-17</time>
+            <time>2023-12-18</time>
           </span>
           <span class="text-gray-400">·</span>
           <span class="flex items-center gap-1">
             <iconify-icon width="18" icon="ic:round-access-alarm" ></iconify-icon>
-            <span>20 min</span>
+            <span>21 min</span>
           </span>
           <span class="text-gray-400">·</span>
           <span class="flex items-center gap-1">
             <iconify-icon width="18" icon="icon-park-outline:font-search" ></iconify-icon>
-            <span>5k words</span>
+            <span>5.3k words</span>
           </span>
           
         </section>
@@ -284,6 +284,21 @@
 <p>设置完成后 <code>sv up alist</code> 查看是否正常，不正常关闭 termux 后台，重启，然后使用 <code>sv up alist</code> 查看服务应该就正常了<br>PS:请务必在.config&#x2F;alist 下使用 <code>alist server</code> 命令看看能不能进然后使用 <code>alist admin set 你的密码 </code> 设置好密码然后再使用 <code>sv up alist</code> 开启服务，不然密码不对进不去</p>
 <p>PPS: <code>alist server</code> 命令中–data 输入的 string 为你脚本<strong>运行目录</strong>的<strong>文件夹名称</strong>，不是 data 配置文件夹位置</p>
 <p>完成后在手机浏览器中输入 127.0.0.1:5244，输入刚才 <code>alist admin set</code> 设置的密码，用户名为 admin 即可打开配置面板</p>
+<h2 id="配置qBittorrent下载服务器"><a href="#配置qBittorrent下载服务器" class="headerlink" title="配置qBittorrent下载服务器"></a>配置qBittorrent下载服务器</h2><p>原生的termux中没有这个下载服务器，我们需要安装一个proot服务器才可配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pkg install proot proot-distro</span><br><span class="line">proot-distro install ubuntu</span><br></pre></td></tr></table></figure>
+<p>然后进入容器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">proot-distroo login ubuntu</span><br></pre></td></tr></table></figure>
+<p>先更新一下软件包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br></pre></td></tr></table></figure>
+<p>下载qBittorrent-nox</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install qBittorrent-nox</span><br></pre></td></tr></table></figure>
+<p>安装完成后输入qBittorrent-nox<br>即可看见法律声明，输入y</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">*** Legal Notice ***</span><br><span class="line">qBittorrent is a file sharing program. When you run a torrent, its data will be made available to others by means of upload. Any content you share is your sole responsibility.</span><br><span class="line"></span><br><span class="line">No further notices will be issued.</span><br><span class="line"></span><br><span class="line">Press &#x27;y&#x27; key to accept and continue...</span><br></pre></td></tr></table></figure>
+<p>然后显示webUI的账号密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">******** Information ********</span><br><span class="line">To control qBittorrent, access the Web UI at http://localhost:8080</span><br><span class="line">The Web UI administrator user name is: admin</span><br><span class="line">The Web UI administrator password is still the default one: adminadmin</span><br><span class="line">This is a security risk, please consider changing your password from program preferences</span><br></pre></td></tr></table></figure>
+<p>打开8080端口就能看到一下登陆页面<br><img src="/images/16318000491656.jpeg"><br>设置语言<br><img src="/images/16318003262714.jpeg"><br>选择 <code>Web UI</code> ，在 <code>Language</code> 的下拉菜单就可以看到 <code>简体中文</code> ：<br><img src="/images/Pasted%20image%2020231218105817.png"><br>选择 <code>中文</code> 后继续往下滚动，点击 <code>Save</code> 保存设置。<br>如果需要让 qBittorrent 启动后在后台运行可以输入：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qbittorrent-nox -d</span><br></pre></td></tr></table></figure>
+<p>如果想查看alist是否能连接到qBittorrent可以在alist里，设置-其他，点击你要设置的aria2或者qBittorrent，如果右上角显示ok，就是可以连接到。<br><img src="/images/Pasted%20image%2020231218110139.png"></p>
 
   </article>
   <!-- tag -->
@@ -302,6 +317,10 @@
           <a href="/tags/Alist/">Alist</a>
         </span>
       
+        <span class="bg-gray-100 dark:bg-gray-700 px-2 py-1 m-1 text-sm rounded-md transition-colors hover:bg-gray-200">
+          <a href="/tags/qBittorrent/">qBittorrent</a>
+        </span>
+      
     
   </div>
   <!-- prev and next -->
@@ -311,8 +330,8 @@
     </div>
     <div>
       
-        <a href="/blog/VSCode%20%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7%E5%92%8C%E5%BF%AB%E6%8D%B7%E9%94%AE.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
-          VSCode 的一些小技巧和快捷键
+        <a href="/blog/bilibili%E7%9F%AD%E9%93%BE%E6%8E%A5%E5%8E%BB%E9%99%A4%E8%B7%9F%E8%B8%AA%E9%93%BE%E6%8E%A5.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
+          bilibili短链接去除跟踪链接
           <iconify-icon width="20" icon="ri:arrow-right-s-line" data-inline="false"></iconify-icon>
         </a>
       
