@@ -19,7 +19,7 @@
 
 
 
-<title>在腾讯云开源软件中心搭建bitwarden服务器 | 一个小站啦</title>
+<title>linux配置usb网卡相关命令 | 一个小站啦</title>
 
 
 
@@ -158,7 +158,7 @@
         </h2>
       </a>
       <div id="header-title" class="opacity-0 md:ml-2 md:mt-[0.1rem] text-xs font-medium whitespace-nowrap overflow-hidden overflow-ellipsis">
-        在腾讯云开源软件中心搭建bitwarden服务器
+        linux配置usb网卡相关命令
       </div>
       <div class="flex-1"></div>
       <div class="flex items-center gap-3">
@@ -224,7 +224,7 @@
   <header class="overflow-hidden pt-6 pb-6 md:pt-12">
     <div class="pt-4 md:pt-6">
       <h1 id="article-title" class="text-[2rem] font-bold leading-snug mb-4 md:mb-6 md:text-[2.6rem]">
-        在腾讯云开源软件中心搭建bitwarden服务器
+        linux配置usb网卡相关命令
       </h1>
       <div>
         <section class="flex items-center gap-3 text-sm">
@@ -235,12 +235,12 @@
           <span class="text-gray-400">·</span>
           <span class="flex items-center gap-1">
             <iconify-icon width="18" icon="ic:round-access-alarm" ></iconify-icon>
-            <span>2 min</span>
+            <span>1 min</span>
           </span>
           <span class="text-gray-400">·</span>
           <span class="flex items-center gap-1">
             <iconify-icon width="18" icon="icon-park-outline:font-search" ></iconify-icon>
-            <span>629 words</span>
+            <span>216 words</span>
           </span>
           
         </section>
@@ -249,11 +249,11 @@
   </header>
   <!-- content -->
   <article class="post-content prose m-auto slide-enter-content dark:prose-invert">
-    <p>bitwarden是一款非常方便的开源密码管理软件（前端加上后端），在mac、ios、安卓、windows都有涉及，可以在全平台使用，如果自己拥有nas或者一台vps即可搭建自己的bitwarden密码服务器。<br>它的官方网址是<img src="http://bitwarden.com/" alt="bitwarden.com">，但是在百度上会搜索到一个叫<a target="_blank" rel="noopener" href="http://www.bitwarden.pro的介绍界面,点击登录会进入另一个域名,不清楚是否是官方的,要自己注意./">www.bitwarden.pro的介绍界面，点击登录会进入另一个域名，不清楚是否是官方的，要自己注意。</a></p>
-<p>之前在腾讯云开发CloudBase中上架过bitwarden的一个应用，听说bug太多然后下架了，现在也没有重新上架回去，但是现在可以在腾讯云开源软件中心能找到<a target="_blank" rel="noopener" href="https://app.cloud.tencent.com/">https://app.cloud.tencent.com/</a>，所以我们直接开箱即用即可，费用大概是每天0.75元左右，一个月就是10块左右大概（几个密码能占多少空间，多少流量，主要收费项是弹性容器，按每小时0.03元）<br>完成后点击使用就可以打开界面了，然后在里面创建账号啥的都可以了，浏览器端插件和手机端软件要在登录时的左上角设置中设置服务器rul，不设置默认使用的是官方的密码存储库。</p>
-<p>维护<br>在使用bitwarden时，我们可以看到服务器链接，但是如果有人知道你的服务器链接来搞破坏，我们就必须设置一些方法应对。这是环境变量就得使用上了，但是在开源软件中心里是没有设置这些的，我们需要去资源里进行设置<br>在环境变量设置自己的设置即可，环境变量表在下方有<br><code>SIGNUP_ALLOWED</code>：是否允许注册<br><code>INVITATIONS_ALLOWED</code>: 是否允许组织邀请注册<br><code>ADMIN_TOKEN</code>：用户管理界面 (&#x2F;admin)，可用于删除用户及邀请用户注册<br><code>ROCKET_TLS</code>：ssl 证书信息，同时需要配置 -v &#x2F;path&#x2F;to&#x2F;host&#x2F;ssl&#x2F;:&#x2F;path&#x2F;to&#x2F;docker&#x2F;ssl&#x2F;卷，前者为宿主机ssl证书的位置，后者为容器证书位置<br><code>DOMAIN</code>：域名<br><code>LOG_FILE、LOG_LEVEL、EXTENDED_LOGGING</code>：日志保存文件路径以及日志等级定义<br><code>DATA_FOLDER</code>：docker容器数据保存文件夹（默认为 &#x2F;data），除了定义这个文件夹之外，还可以定义附件、图标缓存、数据库等参数<br><code>DATABASE_URL</code>：数据库路径<br><code>ATTACHMENT_FOLDER</code>：附件路径<br><code>ICON_CACHE_FOLDER</code>：图标缓存路径</p>
+    <p>查看所有usb <code>lsusb</code><br>查看所有接口 <code>ip a</code><br>查看wifi网卡扫描到的wifi <code>sudo iw dev wlan0 scan | grep SSID</code><br>安装networkmanager包 <code>sudo pacman -S networkmanager</code><br>使用networkmanager连接wifi <code>sudo  nmcli device wifi connect wifi名称 password wifi密码</code><br>打开无线网驱动 <code>ip link set wlp3s0 up</code><br>如果网络管理器 (NetworkManager) 中禁用了 wifi radio，请启用此功能：<br><code>nmcli radio wifi on</code></p>
+<p>如果出现<code>Error: Connection activation failed: Secrets were required, but not provided.</code><br>或 <code>Error: Connection activation failed: 没有</code><br>使用 <code>nmcli c</code> 查看配置<br>使用 <code>nmcli c delete OpenWrt</code> 删除你的配置名</p>
+<p>如果要配置静态ip登录wifi<br><code>nmcli connection modify Office ipv4.method manual ipv4.addresses 192.0.2.1/24 ipv4.gateway 192.0.2.254 ipv4.dns 192.0.2.200 ipv4.dns-search example.com</code><br>重新激活连接 <code>nmcli connection up _Office_</code></p>
 <blockquote>
-<p>引用：<a target="_blank" rel="noopener" href="https://www.10101.io/2019/11/24/self-hosted-bitwarden">https://www.10101.io/2019/11/24/self-hosted-bitwarden</a></p>
+<p>引用： <a target="_blank" rel="noopener" href="https://docs.redhat.com/zh_hans/documentation/red_hat_enterprise_linux/8/html/configuring_and_managing_networking/proc_connecting-to-a-wifi-network-by-using-nmcli_assembly_managing-wifi-connections">https://docs.redhat.com/zh_hans/documentation/red_hat_enterprise_linux/8/html/configuring_and_managing_networking/proc_connecting-to-a-wifi-network-by-using-nmcli_assembly_managing-wifi-connections</a><br>引用：usb网卡的设置： <a target="_blank" rel="noopener" href="https://www.wyr.me/post/623">https://www.wyr.me/post/623</a></p>
 </blockquote>
 
   </article>
@@ -262,7 +262,7 @@
     
       
         <span class="bg-gray-100 dark:bg-gray-700 px-2 py-1 m-1 text-sm rounded-md transition-colors hover:bg-gray-200">
-          <a href="/tags/%E8%85%BE%E8%AE%AF%E4%BA%91/">腾讯云</a>
+          <a href="/tags/linux/">linux</a>
         </span>
       
     
@@ -271,16 +271,11 @@
   <div class="flex justify-between mt-12 pt-6 border-t border-gray-200">
     <div>
       
-        <a href="/blog/mysql%E4%BE%BF%E6%90%BA%E7%89%88%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
-          <iconify-icon width="20" icon="ri:arrow-left-s-line" data-inline="false"></iconify-icon>
-          mysql便携版使用方式
-        </a>
-      
     </div>
     <div>
       
-        <a href="/blog/%E5%9C%A8termux%E4%B8%8A%E5%AE%89%E8%A3%85alist.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
-          在termux上安装alist并配置aria2下载
+        <a href="/blog/%E5%AE%89%E8%A3%85%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%9C%89%E6%84%9F.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
+          启发
           <iconify-icon width="20" icon="ri:arrow-right-s-line" data-inline="false"></iconify-icon>
         </a>
       
