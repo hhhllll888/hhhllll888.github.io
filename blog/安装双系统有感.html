@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <meta name="author" content="hhhllll888">
+
+
+  <meta name="subtitle" content="没什么可写的">
+
+
+  <meta name="description" content="没什么可写的">
+
+
+
+<title>安装双系统有感 | 一个小站啦</title>
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/nprogress/nprogress.css">
+
+
+
+<script src="/lib/jquery.min.js"></script>
+
+
+<script src="/lib/iconify-icon.min.js"></script>
+
+
+<script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+  };
+</script>
+
+
+<script src="/lib/nprogress/nprogress.js"></script>
+
+<script>
+  $(document).ready(() => {
+    NProgress.configure({
+      showSpinner: false,
+    });
+    NProgress.start();
+    $("#nprogress .bar").css({
+      background: "#de7441",
+    });
+    $("#nprogress .peg").css({
+      "box-shadow": "0 0 2px #de7441, 0 0 4px #de7441",
+    });
+    $("#nprogress .spinner-icon").css({
+      "border-top-color": "#de7441",
+      "border-left-color": "#de7441",
+    });
+    setTimeout(function () {
+      NProgress.done();
+      $(".fade").removeClass("out");
+    }, 800);
+  });
+</script>
+
+<script>
+  (function () {
+    const prefersDark =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const setting = localStorage.getItem("hexo-color-scheme") || "auto";
+    if (setting === "dark" || (prefersDark && setting !== "light"))
+      document.documentElement.classList.toggle("dark", true);
+    let isDark = document.documentElement.classList.contains("dark");
+  })();
+
+  $(document).ready(function () {
+    // init icon
+    const prefersDark =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const isDark = document.documentElement.classList.contains("dark");
+    $("#theme-icon").attr("icon", isDark ? "ri:moon-line" : "ri:sun-line");
+
+    function toggleGiscusTheme() {
+      const isDark = document.documentElement.classList.contains("dark");
+      const giscusFrame = document.querySelector("iframe.giscus-frame");
+      if (giscusFrame) {
+        giscusFrame.contentWindow.postMessage(
+          {
+            giscus: {
+              setConfig: {
+                theme: isDark ? "dark" : "light",
+              },
+            },
+          },
+          "https://giscus.app"
+        );
+      }
+    }
+
+
+    // toggle dark mode
+    function toggleDark() {
+      let isDark = document.documentElement.classList.contains("dark");
+      const setting = localStorage.getItem("hexo-color-scheme") || "auto";
+      isDark = !isDark;
+      document.documentElement.classList.toggle("dark", isDark);
+      $("#theme-icon").attr("icon", isDark ? "ri:moon-line" : "ri:sun-line");
+      if (prefersDark === isDark) {
+        localStorage.setItem("hexo-color-scheme", "auto");
+      } else {
+        localStorage.setItem("hexo-color-scheme", isDark ? "dark" : "light");
+      }
+      toggleGiscusTheme();
+    }
+    $("#toggle-dark").click(toggleDark);
+
+    // listen dark mode change
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (e) => {
+        const setting = localStorage.getItem("hexo-color-scheme") || "auto";
+        if (setting === "auto") {
+          document.documentElement.classList.toggle("dark", e.matches);
+          $("#theme-icon").attr(
+            "icon",
+            e.matches ? "ri:moon-line" : "ri:sun-line"
+          );
+          toggleGiscusTheme();
+        }
+      });
+  });
+</script>
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body class="font-sans bg-white dark:bg-zinc-900 text-gray-700 dark:text-gray-200 relative">
+  <header class="fixed w-full px-5 py-1 z-10 backdrop-blur-xl backdrop-saturate-150 border-b border-black/5">
+  <div class="max-auto">
+    <nav class="flex items-center text-base">
+      <a href="/" class="group">
+        <h2 class="font-medium tracking-tighterp text-l p-2">
+          <img class="w-5 mr-2 inline-block transition-transform group-hover:rotate-[30deg]" id="logo" src="/images/logo.svg" alt="一个小站啦" />
+          一个小站啦
+        </h2>
+      </a>
+      <div id="header-title" class="opacity-0 md:ml-2 md:mt-[0.1rem] text-xs font-medium whitespace-nowrap overflow-hidden overflow-ellipsis">
+        安装双系统有感
+      </div>
+      <div class="flex-1"></div>
+      <div class="flex items-center gap-3">
+        
+          <a class="hidden sm:flex" href="/archives">Posts</a>
+        
+          <a class="hidden sm:flex" href="/tag">Tags</a>
+        
+        
+          
+            <a class="w-5 h-5 hidden sm:flex" title="Github" target="_blank" rel="noopener" href="https://github.com/hhhllll888">
+              <iconify-icon width="20" icon="ri:github-line"></iconify-icon>
+            </a>
+          
+        
+        <a class="w-5 h-5 hidden sm:flex" title="Github" href="rss2.xml">
+          <iconify-icon width="20" icon="ri:rss-line"></iconify-icon>
+        </a>
+        <a class="w-5 h-5" title="toggle theme" id="toggle-dark">
+          <iconify-icon width="20" icon="" id="theme-icon"></iconify-icon>
+        </a>
+      </div>
+      <div class="flex items-center justify-center gap-3 ml-3 sm:hidden">
+        <span class="w-5 h-5" aria-hidden="true" role="img" id="open-menu">
+          <iconify-icon width="20" icon="carbon:menu" ></iconify-icon>
+        </span>
+        <span class="w-5 h-5 hidden" aria-hidden="true" role="img" id="close-menu">
+          <iconify-icon  width="20" icon="carbon:close" ></iconify-icon>
+        </span>
+      </div>
+    </nav>
+  </div>
+</header>
+<div id="menu-panel" class="h-0 overflow-hidden sm:hidden fixed left-0 right-0 top-12 bottom-0 z-10">
+  <div id="menu-content" class="relative z-20 bg-white/80 px-6 sm:px-8 py-2 backdrop-blur-xl -translate-y-full transition-transform duration-300">
+    <ul class="nav flex flex-col sm:flex-row text-sm font-medium">
+      
+        <li class="nav-portfolio sm:mx-2 border-b sm:border-0 border-black/5 last:border-0 hover:text-main">
+          <a href="/archives" class="flex h-12 sm:h-auto items-center">Posts</a>
+        </li>
+      
+        <li class="nav-portfolio sm:mx-2 border-b sm:border-0 border-black/5 last:border-0 hover:text-main">
+          <a href="/tag" class="flex h-12 sm:h-auto items-center">Tags</a>
+        </li>
+      
+    </ul>
+  </div>
+  <div class="mask bg-black/20 absolute inset-0"></div>
+</div>
+
+  <main class="pt-14">
+    <!-- css -->
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.min.css">
+
+
+<link rel="stylesheet" href="/lib/tocbot/tocbot.min.css">
+
+<!-- toc -->
+
+  <!-- tocbot -->
+<nav class="post-toc toc text-sm w-48 relative top-32 right-0 opacity-70 hidden lg:block" style="position: fixed !important;"></nav>
+
+
+<section class="px-6 max-w-prose mx-auto md:px-0">
+  <!-- header -->
+  <header class="overflow-hidden pt-6 pb-6 md:pt-12">
+    <div class="pt-4 md:pt-6">
+      <h1 id="article-title" class="text-[2rem] font-bold leading-snug mb-4 md:mb-6 md:text-[2.6rem]">
+        安装双系统有感
+      </h1>
+      <div>
+        <section class="flex items-center gap-3 text-sm">
+          <span class="flex items-center gap-1">
+            <iconify-icon width="18" icon="carbon-calendar" ></iconify-icon>
+            <time>2024-07-28</time>
+          </span>
+          <span class="text-gray-400">·</span>
+          <span class="flex items-center gap-1">
+            <iconify-icon width="18" icon="ic:round-access-alarm" ></iconify-icon>
+            <span>5 min</span>
+          </span>
+          <span class="text-gray-400">·</span>
+          <span class="flex items-center gap-1">
+            <iconify-icon width="18" icon="icon-park-outline:font-search" ></iconify-icon>
+            <span>1.4k words</span>
+          </span>
+          
+        </section>
+      </div>
+    </div>
+  </header>
+  <!-- content -->
+  <article class="post-content prose m-auto slide-enter-content dark:prose-invert">
+    <h1 id="启发"><a href="#启发" class="headerlink" title="启发"></a>启发</h1><p>我家有个老机子，一直没用上，但是我想能在这个老机子上能不能装一个双系统，毕竟要用win就用win，用linux还能学习，之后整个远程桌面还能学点linux的软件</p>
+<h1 id="开始整"><a href="#开始整" class="headerlink" title="开始整"></a>开始整</h1><p>先开始要了解Legacy引导和UEFI引导<br>先来了解一些基础知识。Legacy（传统）启动是基于MBR（主引导记录）的，引导盘和系统盘是一个盘符，而UEFI则是有专门的引导分区（EFI分区），通过读取EFI分区的efi文件来引导系统启动。知道这些就可以开干了。<br>目前不怎么使用Legacy引导了，虽然linux应该可以整但是我不会。<br>看下电脑是使用什么引导的，使用msinfo32看下Bios模式，如果是传统就是Legacy，如果写了Uefi那你就可以直接看下面了</p>
+<h1 id="Legacy-MBR和UEFI-GPT-GUID"><a href="#Legacy-MBR和UEFI-GPT-GUID" class="headerlink" title="Legacy+MBR和UEFI+GPT(GUID)"></a>Legacy+MBR和UEFI+GPT(GUID)</h1><h2 id="Legacy-MBR"><a href="#Legacy-MBR" class="headerlink" title="Legacy+MBR"></a>Legacy+MBR</h2><p>先看下两个都怎么引导的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">LegacyBIOS→</span><br><span class="line">MBR→</span><br><span class="line">“活动的主分区”→</span><br><span class="line">\bootmgr→</span><br><span class="line">\Boot\BCD→</span><br><span class="line">\Windows\system32\winload.exe</span><br></pre></td></tr></table></figure>
+<p>传统Legacy BIOS引导windows操作系统时，是通过一个活动的主分区下的bootmgr（启动管理器）文件导入根目录下boot文件夹里的BCD（启动设置数据）文件，然后BCD文件根据自身的配置内容加载系统启动文件winload.exe（位置：根目录\Windows\system32\winload.exe）来启动系统。<br>一个BCD文件可以加载多个系统启动文件从而实现引导多个系统的启动,通过EasyBCD工具看以看到BCD文件的内容<br>需要注意的是：MBR磁盘格式下，windows系统的启动文件（bootmgr、BCD）必须存放在活动的主分区内，这样才能正常引导系统启动（MBR磁盘分区格式下，只允许有一个分区是活动的）。<br>如果是使用微软原版操作系统按照windows安装程序来进行系统安装，系统会自动创建一个隐藏的活动主分区MSR（win7貌似是100M，win8貌似是350M）用来存放启动文件；<br>如果采用其他安装方式来安装系统，由于系统默认并不会自动创建这个活动的主分区，启动文件将会存放我们的系统盘里，所以我们在采用其它安装方式安装第一个系统时，需要确保安装系统的分区是活动的、而且是主分区，而安装第二个、第三个…系统时，就不必要求必须是主分区了，逻辑分区也可以，因为安装第二个、第三个…系统时，我们已经有了一个活动的主分区了（第一个系统所在的分区），这个活动的主分区下的BCD文件里已经包含了我们的第二个、第三个…系统的启动信息用来启动第二个、第三个…系统。</p>
+<h2 id="UEFI-GPT"><a href="#UEFI-GPT" class="headerlink" title="UEFI+GPT"></a>UEFI+GPT</h2><p>UEFI引导可以是GPT硬盘也可以是MBR，所以从优势上来讲最好使用UEFI引导，虽然大多数老旧主板不支持，这个可以去bios中看下引导方式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">UEFIBIOS→</span><br><span class="line">EFI系统分区（FAT格式的分区）→</span><br><span class="line">\efi\Microsoft\boot\bootmgfw.efi→</span><br><span class="line">\efi\Microsoft\BCD→\Windows\system32\winload.efi</span><br></pre></td></tr></table></figure>
+<p>UEFI BIOS引导windows系统时，是通过一个FAT格式分区下的bootmgfw.efi文件来导入BCD文件，然后BCD文件根据自身的配置内容加载系统引导文件winload.efi<br>(对比legacy引导发现，UEFI的引导文件为winload.efi，而Legacy的引导文件为winload.exe)<br>就目前情况而言，GPT分区表磁盘不支持32位的win7以及win7之前的系统，支持64位的XP、win7、win8、win10和32位的win8、win10。一般地，GPT磁盘多与64位windows系统组合搭配。</p>
+<h1 id="引导转换方法"><a href="#引导转换方法" class="headerlink" title="引导转换方法"></a>引导转换方法</h1><p>先将你系统的硬盘转换成GPT硬盘，使用diskG工具一键就可以<br>建立完后系统不会认这个系统了，需要建立一个EFI(ESP)分区，建立完成后使用你自己的启动盘中的引导建立工具建立UEFI引导，我使用的是UEfix工具，先挂载ESP分区，然后选择这个分区，然后选择你要引导的系统的Windows文件夹就引导成功</p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>如果安装单硬盘双系统，可以先分一个分区给manjaro系统，分区类型无所谓，然后进live系统给这个区域给root分区，然后设置swap分区（可选），如果你的windows系统可以引导，那么直接在安装时选择<strong>取代一个分区</strong>，然后选择你创建的这个分区，选择你的ESP分区位置，那么之后的安装阶段可以自动将grub引导加载到你的esp分区里，esp分区会自动挂载到 <code>/boot/efi</code> 这个位置。</p>
+<p><strong>不要视图将官方的grub配置写到里面</strong>，官方的grub配置了很多东西<br><strong>一般系统安装好后都会有ssh</strong>，如果你配置的是服务器请多使用命令行控制，减少生命消耗<br>manjaro的boot目录下结构为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">├── efi         </span><br><span class="line">│   ├── EFI                           </span><br><span class="line">│   │   ├── Boot                      </span><br><span class="line">│   │   ├── Manjaro                   </span><br><span class="line">│   │   └── Microsoft                 </span><br><span class="line">│   │       └── Boot                  </span><br><span class="line">│   │           ├── bg-BG             </span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">│   │           └── zh-TW                           </span><br><span class="line">├── grub                              </span><br><span class="line">│   ├── fonts                         </span><br><span class="line">│   ├── locale                        </span><br><span class="line">│   ├── themes                        </span><br><span class="line">│   │   └── starfield                 </span><br><span class="line">│   └── x86_64-efi                    </span><br><span class="line">└── memtest86+</span><br></pre></td></tr></table></figure>
+<h1 id="零碎的linux命令写在下面吧"><a href="#零碎的linux命令写在下面吧" class="headerlink" title="零碎的linux命令写在下面吧"></a>零碎的linux命令写在下面吧</h1><ul>
+<li>将系统语言设置回英文 <code>localectl set-locale LANG=en_US.UTF-8</code></li>
+</ul>
+<blockquote>
+<p>引用： <a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv8134039/">https://www.bilibili.com/read/cv8134039/</a><br>引用： <a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv30193707/">https://www.bilibili.com/read/cv30193707/</a><br>引用： <a target="_blank" rel="noopener" href="https://blog.csdn.net/codeHonghu/article/details/111940656">https://blog.csdn.net/codeHonghu/article/details/111940656</a><br>引用： <a target="_blank" rel="noopener" href="https://blog.csdn.net/sman19999/article/details/112722950">https://blog.csdn.net/sman19999/article/details/112722950</a><br>引用： <a target="_blank" rel="noopener" href="https://www.cnblogs.com/walk1314/p/9018919.html">https://www.cnblogs.com/walk1314/p/9018919.html</a></p>
+</blockquote>
+<hr>
+<p>一些可能用得上的链接（时不时更新）</p>
+<blockquote>
+<p>usb网卡的设置： <a target="_blank" rel="noopener" href="https://www.wyr.me/post/623">https://www.wyr.me/post/623</a></p>
+</blockquote>
+
+  </article>
+  <!-- tag -->
+  <div class="mt-12 pt-6 border-t border-gray-200">
+    
+      
+        <span class="bg-gray-100 dark:bg-gray-700 px-2 py-1 m-1 text-sm rounded-md transition-colors hover:bg-gray-200">
+          <a href="/tags/linux/">linux</a>
+        </span>
+      
+    
+  </div>
+  <!-- prev and next -->
+  <div class="flex justify-between mt-12 pt-6 border-t border-gray-200">
+    <div>
+      
+        <a href="/blog/linux%E9%85%8D%E7%BD%AEusb%E7%BD%91%E5%8D%A1%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
+          <iconify-icon width="20" icon="ri:arrow-left-s-line" data-inline="false"></iconify-icon>
+          linux配置usb网卡相关命令
+        </a>
+      
+    </div>
+    <div>
+      
+        <a href="/blog/mysql%E4%BE%BF%E6%90%BA%E7%89%88%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
+          mysql便携版使用方式
+          <iconify-icon width="20" icon="ri:arrow-right-s-line" data-inline="false"></iconify-icon>
+        </a>
+      
+    </div>
+  </div>
+  <!-- comment -->
+  <div class="article-comments mt-12">
+    
+
+  </div>
+</section>
+<!-- js inspect -->
+
+<script src="/lib/clipboard.min.js"></script>
+
+
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+  $(document).ready(() => {
+    const maraidConfig = {
+      theme: "default",
+      logLevel: 3,
+      flowchart: { curve: "linear" },
+      gantt: { axisFormat: "%m/%d/%Y" },
+      sequence: { actorMargin: 50 },
+    };
+    mermaid.initialize(maraidConfig);
+  });
+</script>
+
+
+
+<script src="/lib/fancybox/fancybox.umd.min.js"></script>
+
+<script>
+  $(document).ready(() => {
+    $('.post-content').each(function(i){
+      $(this).find('img').each(function(){
+        if ($(this).parent().hasClass('fancybox') || $(this).parent().is('a')) return;
+        var alt = this.alt;
+        if (alt) $(this).after('<span class="fancybox-alt">' + alt + '</span>');
+        $(this).wrap('<a class="fancybox-img" href="' + this.src + '" data-fancybox=\"gallery\" data-caption="' + alt + '"></a>')
+      });
+      $(this).find('.fancybox').each(function(){
+        $(this).attr('rel', 'article' + i);
+      });
+    });
+
+    Fancybox.bind('[data-fancybox="gallery"]', {
+        // options
+    })
+  })
+</script>
+
+<!-- tocbot begin -->
+
+<script src="/lib/tocbot/tocbot.min.js"></script>
+
+<script>
+  $(document).ready(() => {
+      tocbot.init({
+        // Where to render the table of contents.
+        tocSelector: '.post-toc',
+        // Where to grab the headings to build the table of contents.
+        contentSelector: '.post-content',
+        // Which headings to grab inside of the contentSelector element.
+        headingSelector: 'h1, h2, h3',
+        // For headings inside relative or absolute positioned containers within content.
+        hasInnerContainers: true,
+    });
+  })
+</script>
+<!-- tocbot end -->
+
+
+  </main>
+  <footer class="flex flex-col h-40 items-center justify-center text-gray-400 text-sm">
+  <!-- busuanzi -->
+  
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<!-- Busuanzi Analytics -->
+<div class="flex items-center gap-2">
+  <span>Visitors</span>
+  <span id="busuanzi_value_site_uv"></span>
+  <span>Page Views</span>
+  <span id="busuanzi_value_site_pv"></span>
+</div>
+<!-- End Busuanzi Analytics -->
+
+
+  <!-- copyright -->
+  <div class="flex items-center gap-2">
+    <a target="_blank" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="color: inherit;">CC BY-NC-SA 4.0</a>
+    <span>© 2022</span>
+    <iconify-icon width="18" icon="emojione-monotone:maple-leaf" ></iconify-icon>
+    <a href="https://github.com/xbmlz" target="_blank" rel="noopener noreferrer">xbmlz</a>
+  </div>
+  <!-- powered by -->
+  <div class="flex items-center gap-2">
+    <span>Powered by</span>
+    <a href="https://hexo.io/" target="_blank" rel="noopener noreferrer">Hexo</a>
+    <span>&</span>
+    <a href="https://github.com/xbmlz/hexo-theme-maple" target="_blank" rel="noopener noreferrer">Maple</a>
+  </div>
+
+</footer>
+
+  <div class="back-to-top box-border fixed right-6 z-1024 -bottom-20 rounded py-1 px-1 bg-slate-900 opacity-60 text-white cursor-pointer text-center dark:bg-slate-600">
+    <span class="flex justify-center items-center text-sm">
+      <iconify-icon width="18" icon="ion:arrow-up-c" id="go-top"></iconify-icon>
+      <span id="scrollpercent"><span>0</span> %</span>
+    </span>
+  </div>
+  
+<script src="/js/main.js"></script>
+
+
+  <script>
+    $(document).ready(function () {
+      const mapleCount = "10";
+      const speed = "0.5";
+      const mapleEl = document.getElementById("maple");
+      const maples = Array.from({ length: mapleCount }).map(() => {
+        const maple = document.createElement("div");
+        const scale = Math.random() * 0.5 + 0.5;
+        const offset = Math.random() * 2 - 1;
+        const x = Math.random() * mapleEl.clientWidth;
+        const y = -Math.random() * mapleEl.clientHeight;
+        const duration = 10 / speed;
+        const delay = -duration;
+        maple.className = "maple";
+        maple.style.width = `${24 * scale}px`;
+        maple.style.height = `${24 * scale}px`;
+        maple.style.left = `${x}px`;
+        maple.style.top = `${y}px`;
+        maple.style.setProperty("--maple-fall-offset", offset);
+        maple.style.setProperty("--maple-fall-height", `${Math.abs(y) + mapleEl.clientHeight}px`);
+        maple.style.animation = `fall ${duration}s linear infinite`;
+        maple.style.animationDelay = `${delay}s`;
+        mapleEl.appendChild(maple)
+        return maple
+      })
+    });
+  </script>
+  
+
+
+  <div class="fixed top-0 bottom-0 left-0 right-0 pointer-events-none print:hidden" id="maple"></div>
+</body>
+
+</html>

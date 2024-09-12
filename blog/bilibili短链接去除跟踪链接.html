@@ -19,7 +19,7 @@
 
 
 
-<title>在腾讯云开源软件中心搭建bitwarden服务器 | 一个小站啦</title>
+<title>bilibili短链接去除跟踪链接 | 一个小站啦</title>
 
 
 
@@ -158,7 +158,7 @@
         </h2>
       </a>
       <div id="header-title" class="opacity-0 md:ml-2 md:mt-[0.1rem] text-xs font-medium whitespace-nowrap overflow-hidden overflow-ellipsis">
-        在腾讯云开源软件中心搭建bitwarden服务器
+        bilibili短链接去除跟踪链接
       </div>
       <div class="flex-1"></div>
       <div class="flex items-center gap-3">
@@ -224,23 +224,23 @@
   <header class="overflow-hidden pt-6 pb-6 md:pt-12">
     <div class="pt-4 md:pt-6">
       <h1 id="article-title" class="text-[2rem] font-bold leading-snug mb-4 md:mb-6 md:text-[2.6rem]">
-        在腾讯云开源软件中心搭建bitwarden服务器
+        bilibili短链接去除跟踪链接
       </h1>
       <div>
         <section class="flex items-center gap-3 text-sm">
           <span class="flex items-center gap-1">
             <iconify-icon width="18" icon="carbon-calendar" ></iconify-icon>
-            <time>2024-07-28</time>
+            <time>2023-12-17</time>
           </span>
           <span class="text-gray-400">·</span>
           <span class="flex items-center gap-1">
             <iconify-icon width="18" icon="ic:round-access-alarm" ></iconify-icon>
-            <span>2 min</span>
+            <span>1 min</span>
           </span>
           <span class="text-gray-400">·</span>
           <span class="flex items-center gap-1">
             <iconify-icon width="18" icon="icon-park-outline:font-search" ></iconify-icon>
-            <span>629 words</span>
+            <span>310 words</span>
           </span>
           
         </section>
@@ -249,12 +249,12 @@
   </header>
   <!-- content -->
   <article class="post-content prose m-auto slide-enter-content dark:prose-invert">
-    <p>bitwarden是一款非常方便的开源密码管理软件（前端加上后端），在mac、ios、安卓、windows都有涉及，可以在全平台使用，如果自己拥有nas或者一台vps即可搭建自己的bitwarden密码服务器。<br>它的官方网址是<img src="http://bitwarden.com/" alt="bitwarden.com">，但是在百度上会搜索到一个叫<a target="_blank" rel="noopener" href="http://www.bitwarden.pro的介绍界面,点击登录会进入另一个域名,不清楚是否是官方的,要自己注意./">www.bitwarden.pro的介绍界面，点击登录会进入另一个域名，不清楚是否是官方的，要自己注意。</a></p>
-<p>之前在腾讯云开发CloudBase中上架过bitwarden的一个应用，听说bug太多然后下架了，现在也没有重新上架回去，但是现在可以在腾讯云开源软件中心能找到<a target="_blank" rel="noopener" href="https://app.cloud.tencent.com/">https://app.cloud.tencent.com/</a>，所以我们直接开箱即用即可，费用大概是每天0.75元左右，一个月就是10块左右大概（几个密码能占多少空间，多少流量，主要收费项是弹性容器，按每小时0.03元）<br>完成后点击使用就可以打开界面了，然后在里面创建账号啥的都可以了，浏览器端插件和手机端软件要在登录时的左上角设置中设置服务器rul，不设置默认使用的是官方的密码存储库。</p>
-<p>维护<br>在使用bitwarden时，我们可以看到服务器链接，但是如果有人知道你的服务器链接来搞破坏，我们就必须设置一些方法应对。这是环境变量就得使用上了，但是在开源软件中心里是没有设置这些的，我们需要去资源里进行设置<br>在环境变量设置自己的设置即可，环境变量表在下方有<br><code>SIGNUP_ALLOWED</code>：是否允许注册<br><code>INVITATIONS_ALLOWED</code>: 是否允许组织邀请注册<br><code>ADMIN_TOKEN</code>：用户管理界面 (&#x2F;admin)，可用于删除用户及邀请用户注册<br><code>ROCKET_TLS</code>：ssl 证书信息，同时需要配置 -v &#x2F;path&#x2F;to&#x2F;host&#x2F;ssl&#x2F;:&#x2F;path&#x2F;to&#x2F;docker&#x2F;ssl&#x2F;卷，前者为宿主机ssl证书的位置，后者为容器证书位置<br><code>DOMAIN</code>：域名<br><code>LOG_FILE、LOG_LEVEL、EXTENDED_LOGGING</code>：日志保存文件路径以及日志等级定义<br><code>DATA_FOLDER</code>：docker容器数据保存文件夹（默认为 &#x2F;data），除了定义这个文件夹之外，还可以定义附件、图标缓存、数据库等参数<br><code>DATABASE_URL</code>：数据库路径<br><code>ATTACHMENT_FOLDER</code>：附件路径<br><code>ICON_CACHE_FOLDER</code>：图标缓存路径</p>
-<blockquote>
-<p>引用：<a target="_blank" rel="noopener" href="https://www.10101.io/2019/11/24/self-hosted-bitwarden">https://www.10101.io/2019/11/24/self-hosted-bitwarden</a></p>
-</blockquote>
+    <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_final_url</span>(<span class="params">short_url</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 允许重定向</span></span><br><span class="line">        response = requests.head(short_url, allow_redirects=<span class="literal">True</span>)</span><br><span class="line">        <span class="comment"># 返回长链接</span></span><br><span class="line">        <span class="keyword">return</span> response.url</span><br><span class="line">    <span class="keyword">except</span> requests.exceptions.RequestException <span class="keyword">as</span> e:</span><br><span class="line">        <span class="comment"># 处理异常</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;请求异常: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> name == <span class="string">&quot;main&quot;</span>:</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) == <span class="number">1</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;请输入参数&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:        </span><br><span class="line">        short_url=sys.argv[<span class="number">2</span>]</span><br><span class="line">        final_url = get_final_url(short_url)</span><br><span class="line">        <span class="keyword">if</span> final_url:            </span><br><span class="line">            mark_index = final_url.find(<span class="string">&quot;?&quot;</span>)</span><br><span class="line">            <span class="keyword">if</span> mark_index != -<span class="number">1</span>:           </span><br><span class="line">              cleaned_url = final_url[:mark_index]</span><br><span class="line">              <span class="built_in">print</span>(cleaned_url)</span><br><span class="line">            <span class="keyword">else</span>:            </span><br><span class="line">              cleaned_url = url</span><br><span class="line">              <span class="built_in">print</span>(cleaned_url)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;无法获取最终URL&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>使用例：例如你复制到 bilibili 的的链接为<br><code>【关于像素工厂你绝对有可能不知道的冷知识！-哔哩哔哩】 https://b23.tv/NnNrauX</code></p>
+<p>那么使用方法就是 <code>python custom.py 【关于像素工厂你绝对有可能不知道的冷知识！-哔哩哔哩】 https://b23.tv/NnNrauX</code></p>
+<p>短链接跳转主要是 http 301&#x2F;302，将用户重定向至另一个网址。主流语言的 httpclient 允许允许跳转后即可获得最终的长链接。</p>
+<p>在此可以提供一个 31 行的 python 小程序小程序，可以将 b 站站的短链接转换成长链接，直接作为命令行的参数输入即可</p>
+<p>目前已知知乎分享和 bilibili 短链短链分享会携带跟踪代码，不能分享至tg</p>
 
   </article>
   <!-- tag -->
@@ -262,7 +262,11 @@
     
       
         <span class="bg-gray-100 dark:bg-gray-700 px-2 py-1 m-1 text-sm rounded-md transition-colors hover:bg-gray-200">
-          <a href="/tags/%E8%85%BE%E8%AE%AF%E4%BA%91/">腾讯云</a>
+          <a href="/tags/python/">python</a>
+        </span>
+      
+        <span class="bg-gray-100 dark:bg-gray-700 px-2 py-1 m-1 text-sm rounded-md transition-colors hover:bg-gray-200">
+          <a href="/tags/requests/">requests</a>
         </span>
       
     
@@ -271,16 +275,16 @@
   <div class="flex justify-between mt-12 pt-6 border-t border-gray-200">
     <div>
       
-        <a href="/blog/mysql%E4%BE%BF%E6%90%BA%E7%89%88%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
+        <a href="/blog/%E5%9C%A8termux%E4%B8%8A%E5%AE%89%E8%A3%85alist.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
           <iconify-icon width="20" icon="ri:arrow-left-s-line" data-inline="false"></iconify-icon>
-          mysql便携版使用方式
+          在termux上安装alist并配置aria2下载
         </a>
       
     </div>
     <div>
       
-        <a href="/blog/%E5%9C%A8termux%E4%B8%8A%E5%AE%89%E8%A3%85alist.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
-          在termux上安装alist并配置aria2下载
+        <a href="/blog/VSCode%20%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7%E5%92%8C%E5%BF%AB%E6%8D%B7%E9%94%AE.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
+          VSCode 的一些小技巧和快捷键
           <iconify-icon width="20" icon="ri:arrow-right-s-line" data-inline="false"></iconify-icon>
         </a>
       

@@ -19,7 +19,7 @@
 
 
 
-<title>在腾讯云开源软件中心搭建bitwarden服务器 | 一个小站啦</title>
+<title>docker 可视化图形面板 | 一个小站啦</title>
 
 
 
@@ -158,7 +158,7 @@
         </h2>
       </a>
       <div id="header-title" class="opacity-0 md:ml-2 md:mt-[0.1rem] text-xs font-medium whitespace-nowrap overflow-hidden overflow-ellipsis">
-        在腾讯云开源软件中心搭建bitwarden服务器
+        docker 可视化图形面板
       </div>
       <div class="flex-1"></div>
       <div class="flex items-center gap-3">
@@ -219,28 +219,32 @@
 
 <!-- toc -->
 
+  <!-- tocbot -->
+<nav class="post-toc toc text-sm w-48 relative top-32 right-0 opacity-70 hidden lg:block" style="position: fixed !important;"></nav>
+
+
 <section class="px-6 max-w-prose mx-auto md:px-0">
   <!-- header -->
   <header class="overflow-hidden pt-6 pb-6 md:pt-12">
     <div class="pt-4 md:pt-6">
       <h1 id="article-title" class="text-[2rem] font-bold leading-snug mb-4 md:mb-6 md:text-[2.6rem]">
-        在腾讯云开源软件中心搭建bitwarden服务器
+        docker 可视化图形面板
       </h1>
       <div>
         <section class="flex items-center gap-3 text-sm">
           <span class="flex items-center gap-1">
             <iconify-icon width="18" icon="carbon-calendar" ></iconify-icon>
-            <time>2024-07-28</time>
+            <time>2023-12-17</time>
           </span>
           <span class="text-gray-400">·</span>
           <span class="flex items-center gap-1">
             <iconify-icon width="18" icon="ic:round-access-alarm" ></iconify-icon>
-            <span>2 min</span>
+            <span>1 min</span>
           </span>
           <span class="text-gray-400">·</span>
           <span class="flex items-center gap-1">
             <iconify-icon width="18" icon="icon-park-outline:font-search" ></iconify-icon>
-            <span>629 words</span>
+            <span>294 words</span>
           </span>
           
         </section>
@@ -249,11 +253,19 @@
   </header>
   <!-- content -->
   <article class="post-content prose m-auto slide-enter-content dark:prose-invert">
-    <p>bitwarden是一款非常方便的开源密码管理软件（前端加上后端），在mac、ios、安卓、windows都有涉及，可以在全平台使用，如果自己拥有nas或者一台vps即可搭建自己的bitwarden密码服务器。<br>它的官方网址是<img src="http://bitwarden.com/" alt="bitwarden.com">，但是在百度上会搜索到一个叫<a target="_blank" rel="noopener" href="http://www.bitwarden.pro的介绍界面,点击登录会进入另一个域名,不清楚是否是官方的,要自己注意./">www.bitwarden.pro的介绍界面，点击登录会进入另一个域名，不清楚是否是官方的，要自己注意。</a></p>
-<p>之前在腾讯云开发CloudBase中上架过bitwarden的一个应用，听说bug太多然后下架了，现在也没有重新上架回去，但是现在可以在腾讯云开源软件中心能找到<a target="_blank" rel="noopener" href="https://app.cloud.tencent.com/">https://app.cloud.tencent.com/</a>，所以我们直接开箱即用即可，费用大概是每天0.75元左右，一个月就是10块左右大概（几个密码能占多少空间，多少流量，主要收费项是弹性容器，按每小时0.03元）<br>完成后点击使用就可以打开界面了，然后在里面创建账号啥的都可以了，浏览器端插件和手机端软件要在登录时的左上角设置中设置服务器rul，不设置默认使用的是官方的密码存储库。</p>
-<p>维护<br>在使用bitwarden时，我们可以看到服务器链接，但是如果有人知道你的服务器链接来搞破坏，我们就必须设置一些方法应对。这是环境变量就得使用上了，但是在开源软件中心里是没有设置这些的，我们需要去资源里进行设置<br>在环境变量设置自己的设置即可，环境变量表在下方有<br><code>SIGNUP_ALLOWED</code>：是否允许注册<br><code>INVITATIONS_ALLOWED</code>: 是否允许组织邀请注册<br><code>ADMIN_TOKEN</code>：用户管理界面 (&#x2F;admin)，可用于删除用户及邀请用户注册<br><code>ROCKET_TLS</code>：ssl 证书信息，同时需要配置 -v &#x2F;path&#x2F;to&#x2F;host&#x2F;ssl&#x2F;:&#x2F;path&#x2F;to&#x2F;docker&#x2F;ssl&#x2F;卷，前者为宿主机ssl证书的位置，后者为容器证书位置<br><code>DOMAIN</code>：域名<br><code>LOG_FILE、LOG_LEVEL、EXTENDED_LOGGING</code>：日志保存文件路径以及日志等级定义<br><code>DATA_FOLDER</code>：docker容器数据保存文件夹（默认为 &#x2F;data），除了定义这个文件夹之外，还可以定义附件、图标缓存、数据库等参数<br><code>DATABASE_URL</code>：数据库路径<br><code>ATTACHMENT_FOLDER</code>：附件路径<br><code>ICON_CACHE_FOLDER</code>：图标缓存路径</p>
+    <h2 id="Portainer"><a href="#Portainer" class="headerlink" title="Portainer"></a>Portainer</h2><p>--<br>算是知名度比较高的一款容器管理平台了。<br>官网：<a target="_blank" rel="noopener" href="https://www.portainer.io/">https://www.portainer.io/</a><br>汉化：<a target="_blank" rel="noopener" href="https://www.quchao.net/Portainer-CN.html">https://www.quchao.net/Portainer-CN.html</a><br>演示： <a target="_blank" rel="noopener" href="http://demo.portainer.io/">http://demo.portainer.io/</a><br>用户名: admin<br>密码: tryportainer</p>
+<h2 id="Rancher"><a href="#Rancher" class="headerlink" title="Rancher"></a>Rancher</h2><p>支持 k8s&#x2F;ks3 据说功能强大，也重量级，支持中文<br>官网： <a target="_blank" rel="noopener" href="https://www.rancher.cn/">https://www.rancher.cn/</a></p>
+<h2 id="DockStation"><a href="#DockStation" class="headerlink" title="DockStation"></a>DockStation</h2><p>一款桌面应用程序；支持Linux、Mac、Windows操作系统！<br>官网：<a target="_blank" rel="noopener" href="https://dockstation.io/">https://dockstation.io/</a></p>
+<h2 id="Cockpit"><a href="#Cockpit" class="headerlink" title="Cockpit"></a>Cockpit</h2><p>主要管理Linux 主机 顺便 管理docker<br>地址：<a target="_blank" rel="noopener" href="https://cockpit-project.org/">https://cockpit-project.org/</a></p>
+<h2 id="Kitematic"><a href="#Kitematic" class="headerlink" title="Kitematic"></a>Kitematic</h2><p>在Mac 和 Windows上简单易用的管理容器！<br>官网：<a target="_blank" rel="noopener" href="https://kitematic.com/">https://kitematic.com/</a></p>
+<h2 id="EasyDockerWeb"><a href="#EasyDockerWeb" class="headerlink" title="EasyDockerWeb"></a>EasyDockerWeb</h2><p>某大佬整的一个简单管理Docker容器的面板！记住是简单！<br>地址：<a target="_blank" rel="noopener" href="https://github.com/qfdk/EasyDockerWeb">https://github.com/qfdk/EasyDockerWeb</a></p>
+<h2 id="Fast-Os-Docker"><a href="#Fast-Os-Docker" class="headerlink" title="Fast Os Docker"></a>Fast Os Docker</h2><p>Docker的图形化管理工具，基本能满足中小型单位对容器管理的需求。<br>地址：<a target="_blank" rel="noopener" href="https://hub.docker.com/r/wangbinxingkong/fast">https://hub.docker.com/r/wangbinxingkong/fast</a></p>
+<h3 id="Crane"><a href="#Crane" class="headerlink" title="Crane"></a>Crane</h3><p>Crane是基于swarmkit的容器管理平台！已经开源！<br>地址：<a target="_blank" rel="noopener" href="https://michaelsauter.github.io/crane/">https://michaelsauter.github.io/crane/</a></p>
+<h2 id="shipyard"><a href="#shipyard" class="headerlink" title="shipyard"></a><del>shipyard</del></h2><p>作者已经停止维护该项目！<br>地址：<a target="_blank" rel="noopener" href="https://github.com/shipyard/shipyard">https://github.com/shipyard/shipyard</a></p>
+<h2 id="dockerUI"><a href="#dockerUI" class="headerlink" title="dockerUI"></a><del>dockerUI</del></h2><p>作者已经停止维护该项目！<br>地址：<a target="_blank" rel="noopener" href="https://github.com/kevana/ui-for-docker">https://github.com/kevana/ui-for-docker</a></p>
+<h2 id="Docker-Compose-UI"><a href="#Docker-Compose-UI" class="headerlink" title="Docker Compose UI"></a><del>Docker Compose UI</del></h2><p>作者已经停止维护该项目！<br>地址：<a target="_blank" rel="noopener" href="https://github.com/francescou/docker-compose-ui">https://github.com/francescou/docker-compose-ui</a></p>
 <blockquote>
-<p>引用：<a target="_blank" rel="noopener" href="https://www.10101.io/2019/11/24/self-hosted-bitwarden">https://www.10101.io/2019/11/24/self-hosted-bitwarden</a></p>
+<p>转载自：<a target="_blank" rel="noopener" href="https://51.ruyo.net/16564.html">https://51.ruyo.net/16564.html</a></p>
 </blockquote>
 
   </article>
@@ -262,7 +274,7 @@
     
       
         <span class="bg-gray-100 dark:bg-gray-700 px-2 py-1 m-1 text-sm rounded-md transition-colors hover:bg-gray-200">
-          <a href="/tags/%E8%85%BE%E8%AE%AF%E4%BA%91/">腾讯云</a>
+          <a href="/tags/docker/">docker</a>
         </span>
       
     
@@ -271,16 +283,16 @@
   <div class="flex justify-between mt-12 pt-6 border-t border-gray-200">
     <div>
       
-        <a href="/blog/mysql%E4%BE%BF%E6%90%BA%E7%89%88%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
+        <a href="/blog/VSCode%20%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7%E5%92%8C%E5%BF%AB%E6%8D%B7%E9%94%AE.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
           <iconify-icon width="20" icon="ri:arrow-left-s-line" data-inline="false"></iconify-icon>
-          mysql便携版使用方式
+          VSCode 的一些小技巧和快捷键
         </a>
       
     </div>
     <div>
       
-        <a href="/blog/%E5%9C%A8termux%E4%B8%8A%E5%AE%89%E8%A3%85alist.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
-          在termux上安装alist并配置aria2下载
+        <a href="/blog/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
+          git常用命令
           <iconify-icon width="20" icon="ri:arrow-right-s-line" data-inline="false"></iconify-icon>
         </a>
       
