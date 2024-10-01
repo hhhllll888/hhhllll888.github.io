@@ -19,7 +19,7 @@
 
 
 
-<title>linux配置usb网卡相关命令 | 一个小站啦</title>
+<title>manjaro安装tigervnc | 一个小站啦</title>
 
 
 
@@ -158,7 +158,7 @@
         </h2>
       </a>
       <div id="header-title" class="opacity-0 md:ml-2 md:mt-[0.1rem] text-xs font-medium whitespace-nowrap overflow-hidden overflow-ellipsis">
-        linux配置usb网卡相关命令
+        manjaro安装tigervnc
       </div>
       <div class="flex-1"></div>
       <div class="flex items-center gap-3">
@@ -224,13 +224,13 @@
   <header class="overflow-hidden pt-6 pb-6 md:pt-12">
     <div class="pt-4 md:pt-6">
       <h1 id="article-title" class="text-[2rem] font-bold leading-snug mb-4 md:mb-6 md:text-[2.6rem]">
-        linux配置usb网卡相关命令
+        manjaro安装tigervnc
       </h1>
       <div>
         <section class="flex items-center gap-3 text-sm">
           <span class="flex items-center gap-1">
             <iconify-icon width="18" icon="carbon-calendar" ></iconify-icon>
-            <time>2024-07-28</time>
+            <time>2024-10-01</time>
           </span>
           <span class="text-gray-400">·</span>
           <span class="flex items-center gap-1">
@@ -240,7 +240,7 @@
           <span class="text-gray-400">·</span>
           <span class="flex items-center gap-1">
             <iconify-icon width="18" icon="icon-park-outline:font-search" ></iconify-icon>
-            <span>216 words</span>
+            <span>118 words</span>
           </span>
           
         </section>
@@ -249,12 +249,13 @@
   </header>
   <!-- content -->
   <article class="post-content prose m-auto slide-enter-content dark:prose-invert">
-    <p>查看所有usb <code>lsusb</code><br>查看所有接口 <code>ip a</code><br>查看wifi网卡扫描到的wifi <code>sudo iw dev wlan0 scan | grep SSID</code><br>安装networkmanager包 <code>sudo pacman -S networkmanager</code><br>使用networkmanager连接wifi <code>sudo  nmcli device wifi connect wifi名称 password wifi密码</code><br>打开无线网驱动 <code>ip link set wlp3s0 up</code><br>如果网络管理器 (NetworkManager) 中禁用了 wifi radio，请启用此功能：<br><code>nmcli radio wifi on</code></p>
-<p>如果出现<code>Error: Connection activation failed: Secrets were required, but not provided.</code><br>或 <code>Error: Connection activation failed: 没有</code><br>使用 <code>nmcli c</code> 查看配置<br>使用 <code>nmcli c delete OpenWrt</code> 删除你的配置名</p>
-<p>如果要配置静态ip登录wifi<br><code>nmcli connection modify Office ipv4.method manual ipv4.addresses 192.0.2.1/24 ipv4.gateway 192.0.2.254 ipv4.dns 192.0.2.200 ipv4.dns-search example.com</code><br>重新激活连接 <code>nmcli connection up _Office_</code></p>
-<blockquote>
-<p>引用： <a target="_blank" rel="noopener" href="https://docs.redhat.com/zh_hans/documentation/red_hat_enterprise_linux/8/html/configuring_and_managing_networking/proc_connecting-to-a-wifi-network-by-using-nmcli_assembly_managing-wifi-connections">https://docs.redhat.com/zh_hans/documentation/red_hat_enterprise_linux/8/html/configuring_and_managing_networking/proc_connecting-to-a-wifi-network-by-using-nmcli_assembly_managing-wifi-connections</a><br>引用：usb网卡的设置： <a target="_blank" rel="noopener" href="https://www.wyr.me/post/623">https://www.wyr.me/post/623</a></p>
-</blockquote>
+    <p>先安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu</span><br><span class="line">sudo pacman -S tigervnc</span><br></pre></td></tr></table></figure>
+<p>然后使用 <code>vncpasswd</code> 为当前用户设置密码，密码文件会在&#x2F;home&#x2F;&lt;你的用户名&gt;&#x2F;.config&#x2F;Tigervnc&#x2F;passwd<br>然后在&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;vncserver@.service 这个位置为 vnc 的模版案例，如果要登录多个用户需要将</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/systemd/system/vncserver@.service /etc/systemd/system/vncserver@:1.service</span><br></pre></td></tr></table></figure>
+<p>然后修改用户名下的.config&#x2F;Tigervnc&#x2F;config 文件，没有就创建</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">session=lxqt</span><br><span class="line">geometry=1920x1080</span><br></pre></td></tr></table></figure>
+<p>即可</p>
 
   </article>
   <!-- tag -->
@@ -271,16 +272,11 @@
   <div class="flex justify-between mt-12 pt-6 border-t border-gray-200">
     <div>
       
-        <a href="/blog/manjaro%E5%AE%89%E8%A3%85tigervnc.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
-          <iconify-icon width="20" icon="ri:arrow-left-s-line" data-inline="false"></iconify-icon>
-          manjaro安装tigervnc
-        </a>
-      
     </div>
     <div>
       
-        <a href="/blog/%E5%AE%89%E8%A3%85%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%9C%89%E6%84%9F.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
-          安装双系统有感
+        <a href="/blog/linux%E9%85%8D%E7%BD%AEusb%E7%BD%91%E5%8D%A1%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
+          linux配置usb网卡相关命令
           <iconify-icon width="20" icon="ri:arrow-right-s-line" data-inline="false"></iconify-icon>
         </a>
       
