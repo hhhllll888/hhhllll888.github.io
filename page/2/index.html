@@ -109,7 +109,6 @@
       }
     }
 
-
     // toggle dark mode
     function toggleDark() {
       let isDark = document.documentElement.classList.contains("dark");
@@ -124,7 +123,6 @@
       }
       toggleGiscusTheme();
     }
-    $("#toggle-dark").click(toggleDark);
 
     // listen dark mode change
     window
@@ -140,6 +138,46 @@
           toggleGiscusTheme();
         }
       });
+
+    $("#toggle-dark").click((event) => {
+      const isAppearanceTransition = document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      if (!isAppearanceTransition) {
+        toggleDark()
+        return
+      }
+      const x = event.clientX
+      const y = event.clientY
+      const endRadius = Math.hypot(
+        Math.max(x, innerWidth - x),
+        Math.max(y, innerHeight - y),
+      )
+      const transition = document.startViewTransition(async () => {
+        toggleDark()
+      })
+
+      transition.ready
+        .then(() => {
+          const isDark = document.documentElement.classList.contains("dark")
+          const clipPath = [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${endRadius}px at ${x}px ${y}px)`,
+          ]
+          document.documentElement.animate(
+            {
+              clipPath: isDark
+                ? [...clipPath].reverse()
+                : clipPath,
+            },
+            {
+              duration: 400,
+              easing: 'ease-out',
+              pseudoElement: isDark
+                ? '::view-transition-old(root)'
+                : '::view-transition-new(root)',
+            },
+          )
+        })
+    });
   });
 </script>
 
@@ -227,7 +265,67 @@
         <span class="text-9xl opacity-10 absolute -left-11 -top-6 font-bold">2023</span>
       </div>
     
-    <a style="--stagger:0" href="/blog/arch%E5%AE%89%E8%A3%85.html" data-animate>
+    <a style="--stagger:0" href="/blog/docker%E5%AE%89%E8%A3%85portainer%E9%9D%A2%E6%9D%BF%EF%BC%8C%E5%B9%B6%E6%B1%89%E5%8C%96.html" data-animate>
+      <header>
+        <h2 class="font-bold text-xl">
+          docker安装portainer面板，并汉化
+        </h2>
+      </header>
+      <section class="text-gray-400 my-2 text-sm time">
+        <p class="line-clamp-4">
+          
+        </p>
+        <p class="line-clamp-4">
+          10月 27
+          ·
+          2 min
+        </p>
+      </section>
+    </a>
+  
+    
+    
+    <a style="--stagger:1" href="/blog/docker%20%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E5%BD%A2%E9%9D%A2%E6%9D%BF.html" data-animate>
+      <header>
+        <h2 class="font-bold text-xl">
+          docker 可视化图形面板
+        </h2>
+      </header>
+      <section class="text-gray-400 my-2 text-sm time">
+        <p class="line-clamp-4">
+          
+        </p>
+        <p class="line-clamp-4">
+          10月 27
+          ·
+          1 min
+        </p>
+      </section>
+    </a>
+  
+    
+    
+    <a style="--stagger:2" href="/blog/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4.html" data-animate>
+      <header>
+        <h2 class="font-bold text-xl">
+          git常用命令
+        </h2>
+      </header>
+      <section class="text-gray-400 my-2 text-sm time">
+        <p class="line-clamp-4">
+          
+        </p>
+        <p class="line-clamp-4">
+          10月 27
+          ·
+          1 min
+        </p>
+      </section>
+    </a>
+  
+    
+    
+    <a style="--stagger:3" href="/blog/arch%E5%AE%89%E8%A3%85.html" data-animate>
       <header>
         <h2 class="font-bold text-xl">
           arch安装

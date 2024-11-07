@@ -109,7 +109,6 @@
       }
     }
 
-
     // toggle dark mode
     function toggleDark() {
       let isDark = document.documentElement.classList.contains("dark");
@@ -124,7 +123,6 @@
       }
       toggleGiscusTheme();
     }
-    $("#toggle-dark").click(toggleDark);
 
     // listen dark mode change
     window
@@ -140,6 +138,46 @@
           toggleGiscusTheme();
         }
       });
+
+    $("#toggle-dark").click((event) => {
+      const isAppearanceTransition = document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      if (!isAppearanceTransition) {
+        toggleDark()
+        return
+      }
+      const x = event.clientX
+      const y = event.clientY
+      const endRadius = Math.hypot(
+        Math.max(x, innerWidth - x),
+        Math.max(y, innerHeight - y),
+      )
+      const transition = document.startViewTransition(async () => {
+        toggleDark()
+      })
+
+      transition.ready
+        .then(() => {
+          const isDark = document.documentElement.classList.contains("dark")
+          const clipPath = [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${endRadius}px at ${x}px ${y}px)`,
+          ]
+          document.documentElement.animate(
+            {
+              clipPath: isDark
+                ? [...clipPath].reverse()
+                : clipPath,
+            },
+            {
+              duration: 400,
+              easing: 'ease-out',
+              pseudoElement: isDark
+                ? '::view-transition-old(root)'
+                : '::view-transition-new(root)',
+            },
+          )
+        })
+    });
   });
 </script>
 
@@ -229,10 +267,34 @@
     
     
       <div class="relative pointer-events-none">
+        <span class="text-9xl opacity-10 absolute -left-11 -top-6 font-bold">2024</span>
+      </div>
+    
+    <a style="--stagger:0" href="/blog/%E5%9C%A8termux%E4%B8%8A%E6%90%AD%E5%BB%BA%E7%A7%81%E4%BA%BA%E9%9F%B3%E4%B9%90%E7%BD%91%E7%AB%99.html" data-animate>
+      <header>
+        <h2 class="font-bold text-xl">
+          在termux上搭建私人音乐网站
+        </h2>
+      </header>
+      <section class="text-gray-400 my-2 text-sm time">
+        <p class="line-clamp-4">
+          
+        </p>
+        <p class="line-clamp-4">
+          11月 07
+          ·
+          1 min
+        </p>
+      </section>
+    </a>
+  
+    
+    
+      <div class="relative pointer-events-none">
         <span class="text-9xl opacity-10 absolute -left-11 -top-6 font-bold">2023</span>
       </div>
     
-    <a style="--stagger:0" href="/blog/%E5%9C%A8termux%E4%B8%8A%E5%AE%89%E8%A3%85alist.html" data-animate>
+    <a style="--stagger:1" href="/blog/%E5%9C%A8termux%E4%B8%8A%E5%AE%89%E8%A3%85alist.html" data-animate>
       <header>
         <h2 class="font-bold text-xl">
           在termux上安装alist并配置aria2下载

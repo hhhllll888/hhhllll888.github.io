@@ -109,7 +109,6 @@
       }
     }
 
-
     // toggle dark mode
     function toggleDark() {
       let isDark = document.documentElement.classList.contains("dark");
@@ -124,7 +123,6 @@
       }
       toggleGiscusTheme();
     }
-    $("#toggle-dark").click(toggleDark);
 
     // listen dark mode change
     window
@@ -140,6 +138,46 @@
           toggleGiscusTheme();
         }
       });
+
+    $("#toggle-dark").click((event) => {
+      const isAppearanceTransition = document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      if (!isAppearanceTransition) {
+        toggleDark()
+        return
+      }
+      const x = event.clientX
+      const y = event.clientY
+      const endRadius = Math.hypot(
+        Math.max(x, innerWidth - x),
+        Math.max(y, innerHeight - y),
+      )
+      const transition = document.startViewTransition(async () => {
+        toggleDark()
+      })
+
+      transition.ready
+        .then(() => {
+          const isDark = document.documentElement.classList.contains("dark")
+          const clipPath = [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${endRadius}px at ${x}px ${y}px)`,
+          ]
+          document.documentElement.animate(
+            {
+              clipPath: isDark
+                ? [...clipPath].reverse()
+                : clipPath,
+            },
+            {
+              duration: 400,
+              easing: 'ease-out',
+              pseudoElement: isDark
+                ? '::view-transition-old(root)'
+                : '::view-transition-new(root)',
+            },
+          )
+        })
+    });
   });
 </script>
 
@@ -271,6 +309,11 @@
   <!-- prev and next -->
   <div class="flex justify-between mt-12 pt-6 border-t border-gray-200">
     <div>
+      
+        <a href="/blog/%E6%AD%A3%E5%88%99cookie%E5%8C%B9%E9%85%8D%E5%8F%AF%E8%83%BD%E9%9C%80%E8%A6%81%E7%94%A8%E5%88%B0%E7%9A%84%E8%A1%A8%E8%BE%BE%E5%BC%8F.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
+          <iconify-icon width="20" icon="ri:arrow-left-s-line" data-inline="false"></iconify-icon>
+          正则cookie匹配可能需要用到的表达式
+        </a>
       
     </div>
     <div>
