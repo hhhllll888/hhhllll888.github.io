@@ -19,7 +19,7 @@
 
 
 
-<title>xss.haozi.me解答及答案 | 一个小站啦</title>
+<title>manjaro安装tigervnc | 一个小站啦</title>
 
 
 
@@ -196,7 +196,7 @@
         </h2>
       </a>
       <div id="header-title" class="opacity-0 md:ml-2 md:mt-[0.1rem] text-xs font-medium whitespace-nowrap overflow-hidden overflow-ellipsis">
-        xss.haozi.me解答及答案
+        manjaro安装tigervnc
       </div>
       <div class="flex-1"></div>
       <div class="flex items-center gap-3">
@@ -263,32 +263,28 @@
 
 <!-- toc -->
 
-  <!-- tocbot -->
-<nav class="post-toc toc text-sm w-48 relative top-32 right-0 opacity-70 hidden lg:block" style="position: fixed !important;"></nav>
-
-
 <section class="px-6 max-w-prose mx-auto md:px-0">
   <!-- header -->
   <header class="overflow-hidden pt-6 pb-6 md:pt-12">
     <div class="pt-4 md:pt-6">
       <h1 id="article-title" class="text-[2rem] font-bold leading-snug mb-4 md:mb-6 md:text-[2.6rem]">
-        xss.haozi.me解答及答案
+        manjaro安装tigervnc
       </h1>
       <div>
         <section class="flex items-center gap-3 text-sm">
           <span class="flex items-center gap-1">
             <iconify-icon width="18" icon="carbon-calendar" ></iconify-icon>
-            <time>2025-02-14</time>
+            <time>2024-10-01</time>
           </span>
           <span class="text-gray-400">·</span>
           <span class="flex items-center gap-1">
             <iconify-icon width="18" icon="ic:round-access-alarm" ></iconify-icon>
-            <span>5 min</span>
+            <span>1 min</span>
           </span>
           <span class="text-gray-400">·</span>
           <span class="flex items-center gap-1">
             <iconify-icon width="18" icon="icon-park-outline:font-search" ></iconify-icon>
-            <span>1.3k words</span>
+            <span>118 words</span>
           </span>
           
         </section>
@@ -297,54 +293,13 @@
   </header>
   <!-- content -->
   <article class="post-content prose m-auto slide-enter-content dark:prose-invert">
-    <p>0x00— 最简单，没什么说的<br>0x01— <code>&lt;textarea&gt;</code> 标签中的攻击<br>0x02— <code>&lt;input&gt;</code> 标签中 value 属性的攻击<br>0x03— <code>/[()]/g</code> 的正则匹配避免<br>0x04—html 实体攻击 1<br>0x05— 注释应用 1<br>0x06— 正则应用 1<br>0x07— 非闭合标签<br>0x08— 标签应用<br>0x09—script 属性应用<br>0x0A—url 漏洞攻击（谷歌浏览器不一定能用）<br>0x0B— 外部调用攻击<br>0x0C— 正则匹配攻击<br>0x0D— 注释应用 2<br>0x0E— 特殊字符大小写转义攻击<br>0x0F—html 实体攻击 2<br>0x10— 最简单 2<br>0x11— 转义符应用<br>0x12— 转义符绕过加单行注释避免</p>
-<h1 id="解析和答案"><a href="#解析和答案" class="headerlink" title="解析和答案"></a>解析和答案</h1><h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>没有</p>
-<h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h2><p><code>将&lt;textarea&gt;标签闭合即可</code></p>
-<h2 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h2><p><code>将&lt;input&gt;中的value属性和input标签闭合</code></p>
-<h3 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h3><p><code>&quot;&gt;&lt;script&gt;alert(1)&lt;/script&gt;</code><br>或使用 input 标签的 onmouseover 属性<br><code>&quot; onmouseover=&quot;alert(1)&quot;&gt;</code><br>或使用 input 标签中的 onclick 属性<br><code>&quot; onclick=&quot;alert(1)&quot;&gt;</code></p>
-<h2 id="0x03"><a href="#0x03" class="headerlink" title="0x03"></a>0x03</h2><p><code>/[()]/g</code> 的正则意思就是匹配 <code>(</code> 或 <code>)</code> 所有这些符号下面的函数就是将这些符号替换为空字符串<br>&#x3D;&#x3D;但是&#x3D;&#x3D;：在命令行中你可以使用 </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert`1`</span><br></pre></td></tr></table></figure>
-<p>来代替 <code>()</code></p>
-<h2 id="0x04"><a href="#0x04" class="headerlink" title="0x04"></a>0x04</h2><p>上一个题目你用了反引号，这次给你限制了<br>我们可以直接用 unicode 编码，直接跳过正则匹配<br>其中 <code>()</code> 的 unicode 编码在 html 实体中 10 进制为 <code>&amp;#40;&amp;#41;</code><br>&#x3D;&#x3D;并且&#x3D;&#x3D;：不能在标签中使用，例如<br><code>&lt;script&gt;alert&amp;#40;&quot;1&quot;&amp;#41;&lt;/script&gt;</code><br>标签中不会进行渲染，所以必须用在属性当中<br>例如 onmouseover</p>
-<p>svg 标签中也可使用<br><code>&lt;svg&gt;&lt;script&gt;alert&amp;#40;&quot;1&quot;&amp;#41;&lt;/script&gt;&lt;/svg&gt;</code></p>
-<h2 id="0x05"><a href="#0x05" class="headerlink" title="0x05"></a>0x05</h2><p>直接把你所写的内容全部注释了<br>我们都知道 html 的多行注释是 <code>&lt;!--</code> <code>--&gt;</code></p>
-<blockquote>
-<p>ps：但是同样有个冷门的方法就是 <code>&lt;!--</code> <code>--!&gt;</code> 同样可以使用注释，那么我们可以防止正则被匹配逃逸出来</p>
-</blockquote>
-<h2 id="0x06"><a href="#0x06" class="headerlink" title="0x06"></a>0x06</h2><p><code>auto|on.*=|&gt;/ig</code><br>意思可以看成两个<br>ig 进行全局匹配加上匹配大小写<br><code>auto|on.*</code> 匹配所有 onmouseover 这种属性<br>但是突破点是在 <code>.*</code> 上，这个匹配不匹配换行符所以可以使用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">onmouseover</span><br><span class="line">=&quot;alert(1)&quot;</span><br></pre></td></tr></table></figure>
-<p>绕过</p>
-<h2 id="0x07"><a href="#0x07" class="headerlink" title="0x07"></a>0x07</h2><p><code>/&lt;\/?[^&gt;]+&gt;/gi</code><br>这个正则就是直接匹配所有 html 标签，所有类似 <code>&lt;&gt;</code>，<code>&lt;/script&gt;</code>，都会被替换成空，但是浏览器编译器可以不使用严格模式下，可以不闭合标签就可直接使用<br><code>&lt;body onload=“alert(1)”</code></p>
-<h2 id="0x08"><a href="#0x08" class="headerlink" title="0x08"></a>0x08</h2><p><code>&lt;\/style&gt;/ig</code> 直接匹配 <code>&lt;/style&gt;</code> 标签，但是。。<br>在 JavaScript 解析器中有好几个不严谨的地方</p>
-<ol>
-<li><code>&lt;sytle &gt;</code> 如果后面加空格同样可以渲染</li>
-<li><code>&lt;sytle/&gt;</code> 后面添加 <code>/</code> 同样可以渲染</li>
-</ol>
-<h2 id="0x09"><a href="#0x09" class="headerlink" title="0x09"></a>0x09</h2><p>直接看 <code>/^https?:\/\/www\.segmentfault\.com/</code> 这个正则，<br>这个就是直接匹配<br><code>https://www.segmentfault.com</code> 和<br><code>http://www.segmentfault.com</code><br>这两种情况的<br>但是没有限制在后面添加内容，可以直接闭合里面的标签攻击</p>
-<h2 id="0x0A"><a href="#0x0A" class="headerlink" title="0x0A"></a>0x0A</h2><p>在上一题基础上，但是我们不能直接闭合里面的标签了，会把 <code>&quot;</code> 直接转换成其他符号，那么我们就不能使用这个来闭合攻击<br>可以使用 url 基础中的一个非常不重要的一个方法<br><code>http://122313213:12313213@213123.com</code> 其中@前的是认证信息，及 http 认证的用户和密码，但是一个网站没有任何用户密码登录限制这个@前的所有东西不会应用上，等于直接访问： <code>http://213123.com</code></p>
-<blockquote>
-<p>PS：谷歌用不了，火狐可以，</p>
-</blockquote>
-<h2 id="0x0B"><a href="#0x0B" class="headerlink" title="0x0B"></a>0x0B</h2><p>JavaScript 编译器无视大小写，标签可以大小写，url 可以大小写</p>
-<h2 id="0x0C"><a href="#0x0C" class="headerlink" title="0x0C"></a>0x0C</h2><blockquote>
-<p>PS： 所有这种匹配一堆字符的，可以通过双写来替换及&#x2F;script&#x2F;ig<br>能替换 script，但是替换不了 scscriptript</p>
-</blockquote>
-<h2 id="0x0D"><a href="#0x0D" class="headerlink" title="0x0D"></a>0x0D</h2><blockquote>
-<p>PS：我们都知道 javascript 中注释有</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 多行html注释 --&gt;</span><br><span class="line">&lt;!-- 多行html注释 --!&gt;</span><br><span class="line">//单行JavaScript注释</span><br><span class="line">/* 多行JavaScript注释*/</span><br></pre></td></tr></table></figure>
-
-<p>但是，其实其中你可以将 <code>--&gt;</code> 当作单行注释使用</p>
-<h2 id="0x0E"><a href="#0x0E" class="headerlink" title="0x0E"></a>0x0E</h2><p>因为 html 标签中必须要保证 <code>&lt;a</code> 尖括号后面必须要有英文，不然不算一个标签。又进行了大写转义，所以只能使用特殊字符了</p>
-<blockquote>
-<p>PS：其中 <code>ſ</code> 这个字符是古英文 <code>s</code>，所以可以使用大写转义成大写的 <code>S</code>，如果代码中有大写转义，并且判断 <code>[a-zA-Z]</code> 中的必须使用这个字符<br>还有一种字符是 <code>ı</code> 这个字符可以转义成大写的 <code>I</code></p>
-</blockquote>
-<h2 id="0x0F"><a href="#0x0F" class="headerlink" title="0x0F"></a>0x0F</h2><p>虽然转义成 html 实体了，但是输入的内容还在 input 属性内，等于没有转义<br>直接闭合 <code>console.error()</code> 语句，然后后面加上 <code>;</code> 让 JavaScript 区分语句，后面加上攻击语句即可</p>
-<h2 id="0x10"><a href="#0x10" class="headerlink" title="0x10"></a>0x10</h2><p>直接写入 <code>windows.data</code>？，这个没有难度，赋值语句右边也可以执行，直接写攻击语句就可以</p>
-<h2 id="0x11"><a href="#0x11" class="headerlink" title="0x11"></a>0x11</h2><p>这题和下面题目都有点绕，</p>
-<h2 id="0x12"><a href="#0x12" class="headerlink" title="0x12"></a>0x12</h2><blockquote>
-<p>PS：&#x2F;&#x2F;后面有东西，一直注释到后面的标签结尾<br><code>&lt;script&gt;console.log(&quot;\\&quot;);alert(1);//&quot;);&lt;/script&gt;</code> 如果你把这段代码放浏览器里，你会发现其中的 <code>//&quot;);</code> 被注释掉了，<br>也就是单行注释放在标签中可以把标签之前的所有内容当成注释解析</p>
-</blockquote>
+    <p>先安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu</span><br><span class="line">sudo pacman -S tigervnc</span><br></pre></td></tr></table></figure>
+<p>然后使用 <code>vncpasswd</code> 为当前用户设置密码，密码文件会在&#x2F;home&#x2F;&lt;你的用户名&gt;&#x2F;.config&#x2F;Tigervnc&#x2F;passwd<br>然后在&#x2F;etc&#x2F;systemd&#x2F;system&#x2F;vncserver@.service 这个位置为 vnc 的模版案例，如果要登录多个用户需要将</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/systemd/system/vncserver@.service /etc/systemd/system/vncserver@:1.service</span><br></pre></td></tr></table></figure>
+<p>然后修改用户名下的.config&#x2F;Tigervnc&#x2F;config 文件，没有就创建</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">session=lxqt</span><br><span class="line">geometry=1920x1080</span><br></pre></td></tr></table></figure>
+<p>即可</p>
 
   </article>
   <!-- tag -->
@@ -352,7 +307,7 @@
     
       
         <span class="bg-gray-100 dark:bg-gray-700 px-2 py-1 m-1 text-sm rounded-md transition-colors hover:bg-gray-200">
-          <a href="/tags/xss/">xss</a>
+          <a href="/tags/linux/">linux</a>
         </span>
       
     
@@ -361,11 +316,16 @@
   <div class="flex justify-between mt-12 pt-6 border-t border-gray-200">
     <div>
       
+        <a href="/blog/%E6%AD%A3%E5%88%99cookie%E5%8C%B9%E9%85%8D%E5%8F%AF%E8%83%BD%E9%9C%80%E8%A6%81%E7%94%A8%E5%88%B0%E7%9A%84%E8%A1%A8%E8%BE%BE%E5%BC%8F.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
+          <iconify-icon width="20" icon="ri:arrow-left-s-line" data-inline="false"></iconify-icon>
+          正则cookie匹配可能需要用到的表达式
+        </a>
+      
     </div>
     <div>
       
-        <a href="/blog/xss%E7%9B%B8%E5%85%B3%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
-          xss相关使用方法
+        <a href="/blog/linux%E9%85%8D%E7%BD%AEusb%E7%BD%91%E5%8D%A1%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
+          linux配置usb网卡相关命令
           <iconify-icon width="20" icon="ri:arrow-right-s-line" data-inline="false"></iconify-icon>
         </a>
       

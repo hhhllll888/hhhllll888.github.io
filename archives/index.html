@@ -19,7 +19,7 @@
 
 
 
-<title>bilibili短链接去除跟踪链接 | 一个小站啦</title>
+<title>归档 | 一个小站啦</title>
 
 
 
@@ -196,7 +196,7 @@
         </h2>
       </a>
       <div id="header-title" class="opacity-0 md:ml-2 md:mt-[0.1rem] text-xs font-medium whitespace-nowrap overflow-hidden overflow-ellipsis">
-        bilibili短链接去除跟踪链接
+        
       </div>
       <div class="flex-1"></div>
       <div class="flex items-center gap-3">
@@ -254,189 +254,332 @@
 </div>
 
   <main class="pt-14">
-    <!-- css -->
-
-<link rel="stylesheet" href="/lib/fancybox/fancybox.min.css">
-
-
-<link rel="stylesheet" href="/lib/tocbot/tocbot.min.css">
-
-<!-- toc -->
-
-<section class="px-6 max-w-prose mx-auto md:px-0">
-  <!-- header -->
-  <header class="overflow-hidden pt-6 pb-6 md:pt-12">
-    <div class="pt-4 md:pt-6">
-      <h1 id="article-title" class="text-[2rem] font-bold leading-snug mb-4 md:mb-6 md:text-[2.6rem]">
-        bilibili短链接去除跟踪链接
+    <section class="px-6 max-w-prose mx-auto gap-12 grid grid-cols-1">
+  <div class="flex flex-col h-48 items-center justify-center">
+    
+      <h1 class="site-title text-4xl leading-relaxed">
+        一个小站啦
       </h1>
-      <div>
-        <section class="flex items-center gap-3 text-sm">
-          <span class="flex items-center gap-1">
-            <iconify-icon width="18" icon="carbon-calendar" ></iconify-icon>
-            <time>2025-02-14</time>
-          </span>
-          <span class="text-gray-400">·</span>
-          <span class="flex items-center gap-1">
-            <iconify-icon width="18" icon="ic:round-access-alarm" ></iconify-icon>
-            <span>1 min</span>
-          </span>
-          <span class="text-gray-400">·</span>
-          <span class="flex items-center gap-1">
-            <iconify-icon width="18" icon="icon-park-outline:font-search" ></iconify-icon>
-            <span>310 words</span>
-          </span>
-          
-        </section>
+      <p class="text-gray-500 mt-2">
+        没什么可写的
+      </p>
+    
+  </div>
+  
+  
+    
+    
+      <div class="relative pointer-events-none">
+        <span class="text-9xl opacity-10 absolute -left-11 -top-6 font-bold">2025</span>
       </div>
-    </div>
-  </header>
-  <!-- content -->
-  <article class="post-content prose m-auto slide-enter-content dark:prose-invert">
-    <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_final_url</span>(<span class="params">short_url</span>):</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># 允许重定向</span></span><br><span class="line">        response = requests.head(short_url, allow_redirects=<span class="literal">True</span>)</span><br><span class="line">        <span class="comment"># 返回长链接</span></span><br><span class="line">        <span class="keyword">return</span> response.url</span><br><span class="line">    <span class="keyword">except</span> requests.exceptions.RequestException <span class="keyword">as</span> e:</span><br><span class="line">        <span class="comment"># 处理异常</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;请求异常: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> name == <span class="string">&quot;main&quot;</span>:</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) == <span class="number">1</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;请输入参数&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:        </span><br><span class="line">        short_url=sys.argv[<span class="number">2</span>]</span><br><span class="line">        final_url = get_final_url(short_url)</span><br><span class="line">        <span class="keyword">if</span> final_url:            </span><br><span class="line">            mark_index = final_url.find(<span class="string">&quot;?&quot;</span>)</span><br><span class="line">            <span class="keyword">if</span> mark_index != -<span class="number">1</span>:           </span><br><span class="line">              cleaned_url = final_url[:mark_index]</span><br><span class="line">              <span class="built_in">print</span>(cleaned_url)</span><br><span class="line">            <span class="keyword">else</span>:            </span><br><span class="line">              cleaned_url = url</span><br><span class="line">              <span class="built_in">print</span>(cleaned_url)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;无法获取最终URL&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p>使用例：例如你复制到 bilibili 的的链接为<br><code>【关于像素工厂你绝对有可能不知道的冷知识！-哔哩哔哩】 https://b23.tv/NnNrauX</code></p>
-<p>那么使用方法就是 <code>python custom.py 【关于像素工厂你绝对有可能不知道的冷知识！-哔哩哔哩】 https://b23.tv/NnNrauX</code></p>
-<p>短链接跳转主要是 http 301&#x2F;302，将用户重定向至另一个网址。主流语言的 httpclient 允许允许跳转后即可获得最终的长链接。</p>
-<p>在此可以提供一个 31 行的 python 小程序小程序，可以将 b 站站的短链接转换成长链接，直接作为命令行的参数输入即可</p>
-<p>目前已知知乎分享和 bilibili 短链短链分享会携带跟踪代码，不能分享至 tg</p>
-
-  </article>
-  <!-- tag -->
-  <div class="mt-12 pt-6 border-t border-gray-200">
     
-      
-        <span class="bg-gray-100 dark:bg-gray-700 px-2 py-1 m-1 text-sm rounded-md transition-colors hover:bg-gray-200">
-          <a href="/tags/python/">python</a>
-        </span>
-      
-        <span class="bg-gray-100 dark:bg-gray-700 px-2 py-1 m-1 text-sm rounded-md transition-colors hover:bg-gray-200">
-          <a href="/tags/requests/">requests</a>
-        </span>
-      
+    <a style="--stagger:0" href="/blog/xss.haozi.me%E8%A7%A3%E7%AD%94%E5%8F%8A%E7%AD%94%E6%A1%88.html" data-animate>
+      <header>
+        <h2 class="font-bold text-xl">
+          xss.haozi.me解答及答案
+        </h2>
+      </header>
+      <section class="text-gray-400 my-2 text-sm time">
+        <p class="line-clamp-4">
+          
+        </p>
+        <p class="line-clamp-4">
+          2月 14
+          ·
+          5 min
+        </p>
+      </section>
+    </a>
+  
     
-  </div>
-  <!-- prev and next -->
-  <div class="flex justify-between mt-12 pt-6 border-t border-gray-200">
-    <div>
-      
-        <a href="/blog/%E5%9C%A8termux%E4%B8%8A%E6%90%AD%E5%BB%BA%E7%A7%81%E4%BA%BA%E9%9F%B3%E4%B9%90%E7%BD%91%E7%AB%99.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
-          <iconify-icon width="20" icon="ri:arrow-left-s-line" data-inline="false"></iconify-icon>
+    
+    <a style="--stagger:1" href="/blog/xss%E7%9B%B8%E5%85%B3%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95.html" data-animate>
+      <header>
+        <h2 class="font-bold text-xl">
+          xss相关使用方法
+        </h2>
+      </header>
+      <section class="text-gray-400 my-2 text-sm time">
+        <p class="line-clamp-4">
+          
+        </p>
+        <p class="line-clamp-4">
+          2月 14
+          ·
+          1 min
+        </p>
+      </section>
+    </a>
+  
+    
+    
+    <a style="--stagger:2" href="/blog/%E5%B8%B8%E8%A7%81xss%E6%94%BB%E5%87%BB%E8%AF%AD%E5%8F%A5.html" data-animate>
+      <header>
+        <h2 class="font-bold text-xl">
+          常见xss攻击语句
+        </h2>
+      </header>
+      <section class="text-gray-400 my-2 text-sm time">
+        <p class="line-clamp-4">
+          
+        </p>
+        <p class="line-clamp-4">
+          2月 14
+          ·
+          1 min
+        </p>
+      </section>
+    </a>
+  
+    
+    
+      <div class="relative pointer-events-none">
+        <span class="text-9xl opacity-10 absolute -left-11 -top-6 font-bold">2024</span>
+      </div>
+    
+    <a style="--stagger:3" href="/blog/%E5%9C%A8termux%E4%B8%8A%E5%AE%89%E8%A3%85alist.html" data-animate>
+      <header>
+        <h2 class="font-bold text-xl">
+          在termux上安装alist
+        </h2>
+      </header>
+      <section class="text-gray-400 my-2 text-sm time">
+        <p class="line-clamp-4">
+          
+        </p>
+        <p class="line-clamp-4">
+          11月 18
+          ·
+          22 min
+        </p>
+      </section>
+    </a>
+  
+    
+    
+    <a style="--stagger:4" href="/blog/%E5%9C%A8termux%E4%B8%8A%E6%90%AD%E5%BB%BA%E7%A7%81%E4%BA%BA%E9%9F%B3%E4%B9%90%E7%BD%91%E7%AB%99.html" data-animate>
+      <header>
+        <h2 class="font-bold text-xl">
           在 termux 上搭建私人音乐网站
-        </a>
-      
-    </div>
-    <div>
-      
-        <a href="/blog/docker%E5%AE%89%E8%A3%85portainer%E9%9D%A2%E6%9D%BF%EF%BC%8C%E5%B9%B6%E6%B1%89%E5%8C%96.html" class="text-sm text-gray-400 hover:text-gray-500 flex justify-center">
-          docker安装portainer面板，并汉化
-          <iconify-icon width="20" icon="ri:arrow-right-s-line" data-inline="false"></iconify-icon>
-        </a>
-      
-    </div>
-  </div>
-  <!-- comment -->
-  <div class="article-comments mt-12">
+        </h2>
+      </header>
+      <section class="text-gray-400 my-2 text-sm time">
+        <p class="line-clamp-4">
+          
+        </p>
+        <p class="line-clamp-4">
+          11月 07
+          ·
+          1 min
+        </p>
+      </section>
+    </a>
+  
     
-
-  </div>
+    
+    <a style="--stagger:5" href="/blog/bilibili%E7%9F%AD%E9%93%BE%E6%8E%A5%E5%8E%BB%E9%99%A4%E8%B7%9F%E8%B8%AA%E9%93%BE%E6%8E%A5.html" data-animate>
+      <header>
+        <h2 class="font-bold text-xl">
+          bilibili短链接去除跟踪链接
+        </h2>
+      </header>
+      <section class="text-gray-400 my-2 text-sm time">
+        <p class="line-clamp-4">
+          
+        </p>
+        <p class="line-clamp-4">
+          10月 27
+          ·
+          1 min
+        </p>
+      </section>
+    </a>
+  
+    
+    
+    <a style="--stagger:6" href="/blog/docker%E5%AE%89%E8%A3%85portainer%E9%9D%A2%E6%9D%BF%EF%BC%8C%E5%B9%B6%E6%B1%89%E5%8C%96.html" data-animate>
+      <header>
+        <h2 class="font-bold text-xl">
+          docker安装portainer面板，并汉化
+        </h2>
+      </header>
+      <section class="text-gray-400 my-2 text-sm time">
+        <p class="line-clamp-4">
+          
+        </p>
+        <p class="line-clamp-4">
+          10月 27
+          ·
+          2 min
+        </p>
+      </section>
+    </a>
+  
+    
+    
+    <a style="--stagger:7" href="/blog/%E5%85%B3%E4%BA%8Evscode%E8%BF%9E%E6%8E%A5termux%E5%BC%80%E5%8F%91.html" data-animate>
+      <header>
+        <h2 class="font-bold text-xl">
+          关于vscode连接termux开发
+        </h2>
+      </header>
+      <section class="text-gray-400 my-2 text-sm time">
+        <p class="line-clamp-4">
+          
+        </p>
+        <p class="line-clamp-4">
+          10月 11
+          ·
+          1 min
+        </p>
+      </section>
+    </a>
+  
+    
+    
+    <a style="--stagger:8" href="/blog/%E6%AD%A3%E5%88%99cookie%E5%8C%B9%E9%85%8D%E5%8F%AF%E8%83%BD%E9%9C%80%E8%A6%81%E7%94%A8%E5%88%B0%E7%9A%84%E8%A1%A8%E8%BE%BE%E5%BC%8F.html" data-animate>
+      <header>
+        <h2 class="font-bold text-xl">
+          正则cookie匹配可能需要用到的表达式
+        </h2>
+      </header>
+      <section class="text-gray-400 my-2 text-sm time">
+        <p class="line-clamp-4">
+          
+        </p>
+        <p class="line-clamp-4">
+          10月 02
+          ·
+          1 min
+        </p>
+      </section>
+    </a>
+  
+    
+    
+    <a style="--stagger:9" href="/blog/manjaro%E5%AE%89%E8%A3%85tigervnc.html" data-animate>
+      <header>
+        <h2 class="font-bold text-xl">
+          manjaro安装tigervnc
+        </h2>
+      </header>
+      <section class="text-gray-400 my-2 text-sm time">
+        <p class="line-clamp-4">
+          
+        </p>
+        <p class="line-clamp-4">
+          10月 01
+          ·
+          1 min
+        </p>
+      </section>
+    </a>
+  
+    
+    
+    <a style="--stagger:10" href="/blog/linux%E9%85%8D%E7%BD%AEusb%E7%BD%91%E5%8D%A1%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4.html" data-animate>
+      <header>
+        <h2 class="font-bold text-xl">
+          linux配置usb网卡相关命令
+        </h2>
+      </header>
+      <section class="text-gray-400 my-2 text-sm time">
+        <p class="line-clamp-4">
+          
+        </p>
+        <p class="line-clamp-4">
+          7月 28
+          ·
+          1 min
+        </p>
+      </section>
+    </a>
+  
+    
+    
+    <a style="--stagger:11" href="/blog/mysql%E4%BE%BF%E6%90%BA%E7%89%88%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F.html" data-animate>
+      <header>
+        <h2 class="font-bold text-xl">
+          mysql便携版使用方式
+        </h2>
+      </header>
+      <section class="text-gray-400 my-2 text-sm time">
+        <p class="line-clamp-4">
+          
+        </p>
+        <p class="line-clamp-4">
+          7月 28
+          ·
+          1 min
+        </p>
+      </section>
+    </a>
+  
+    
+    
+    <a style="--stagger:12" href="/blog/%E5%AE%89%E8%A3%85%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%9C%89%E6%84%9F.html" data-animate>
+      <header>
+        <h2 class="font-bold text-xl">
+          启发
+        </h2>
+      </header>
+      <section class="text-gray-400 my-2 text-sm time">
+        <p class="line-clamp-4">
+          
+        </p>
+        <p class="line-clamp-4">
+          7月 28
+          ·
+          5 min
+        </p>
+      </section>
+    </a>
+  
+    
+    
+      <div class="relative pointer-events-none">
+        <span class="text-9xl opacity-10 absolute -left-11 -top-6 font-bold">2023</span>
+      </div>
+    
+    <a style="--stagger:13" href="/blog/docker%20%E5%8F%AF%E8%A7%86%E5%8C%96%E5%9B%BE%E5%BD%A2%E9%9D%A2%E6%9D%BF.html" data-animate>
+      <header>
+        <h2 class="font-bold text-xl">
+          docker 可视化图形面板
+        </h2>
+      </header>
+      <section class="text-gray-400 my-2 text-sm time">
+        <p class="line-clamp-4">
+          
+        </p>
+        <p class="line-clamp-4">
+          10月 27
+          ·
+          1 min
+        </p>
+      </section>
+    </a>
+  
+    
+    
+    <a style="--stagger:14" href="/blog/VSCode%20%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%8A%80%E5%B7%A7%E5%92%8C%E5%BF%AB%E6%8D%B7%E9%94%AE.html" data-animate>
+      <header>
+        <h2 class="font-bold text-xl">
+          VSCode 的一些小技巧和快捷键
+        </h2>
+      </header>
+      <section class="text-gray-400 my-2 text-sm time">
+        <p class="line-clamp-4">
+          
+        </p>
+        <p class="line-clamp-4">
+          10月 27
+          ·
+          8 min
+        </p>
+      </section>
+    </a>
+  
 </section>
-<!-- js inspect -->
-
-<script src="/lib/clipboard.min.js"></script>
-
-
-<script async src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    "HTML-CSS": {
-        preferredFont: "TeX",
-        availableFonts: ["STIX","TeX"],
-        linebreaks: { automatic:true },
-        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
-    },
-    tex2jax: {
-        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
-        processEscapes: true,
-        ignoreClass: "tex2jax_ignore|dno",
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-        equationNumbers: { autoNumber: "AMS" },
-        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
-        Macros: { href: "{}" }
-    },
-    messageStyle: "none"
-  });
-</script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-  });
-</script>
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-<script>
-  $(document).ready(() => {
-    const maraidConfig = {
-      theme: "dark",
-      logLevel: 3,
-      flowchart: { curve: "linear" },
-      gantt: { axisFormat: "%m/%d/%Y" },
-      sequence: { actorMargin: 50 },
-    };
-    mermaid.initialize(maraidConfig);
-  });
-</script>
-
-
-
-<script src="/lib/fancybox/fancybox.umd.min.js"></script>
-
-<script>
-  $(document).ready(() => {
-    $('.post-content').each(function(i){
-      $(this).find('img').each(function(){
-        if ($(this).parent().hasClass('fancybox') || $(this).parent().is('a')) return;
-        var alt = this.alt;
-        if (alt) $(this).after('<span class="fancybox-alt">' + alt + '</span>');
-        $(this).wrap('<a class="fancybox-img" href="' + this.src + '" data-fancybox=\"gallery\" data-caption="' + alt + '"></a>')
-      });
-      $(this).find('.fancybox').each(function(){
-        $(this).attr('rel', 'article' + i);
-      });
-    });
-
-    Fancybox.bind('[data-fancybox="gallery"]', {
-        // options
-    })
-  })
-</script>
-
-<!-- tocbot begin -->
-
-<script src="/lib/tocbot/tocbot.min.js"></script>
-
-<script>
-  $(document).ready(() => {
-      tocbot.init({
-        // Where to render the table of contents.
-        tocSelector: '.post-toc',
-        // Where to grab the headings to build the table of contents.
-        contentSelector: '.post-content',
-        // Which headings to grab inside of the contentSelector element.
-        headingSelector: 'h1, h2, h3',
-        // For headings inside relative or absolute positioned containers within content.
-        hasInnerContainers: true,
-    });
-  })
-</script>
-<!-- tocbot end -->
-
 
   </main>
   <footer class="flex flex-col h-40 items-center justify-center text-gray-400 text-sm">
